@@ -1,296 +1,780 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Arun Singh Thakur - AI Engineer Portfolio showcasing work, life, and thoughts." />
-  <meta name="author" content="Arun Singh Thakur" />
-  <link rel="icon" href="favicon.ico" />
-  <title>Arun Singh Thakur - AI Engineer</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arun Singh Thakur - AI Engineer</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #000000;
+            --secondary-color: #333333;
+            --accent-color: #ffffff;
+            --text-primary: #ffffff;
+            --text-secondary: rgba(255, 255, 255, 0.8);
+            --glass-bg: rgba(0, 0, 0, 0.3);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --japanese-red: #a71919;
+        }
 
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
-  <style>
-    /* Root theme variables */
-    :root {
-      --primary-color: #667eea;
-      --secondary-color: #764ba2;
-      --accent-color: #f093fb;
-      --text-primary: #ffffff;
-      --text-secondary: rgba(255, 255, 255, 0.8);
-      --glass-bg: rgba(255, 255, 255, 0.1);
-      --glass-border: rgba(255, 255, 255, 0.2);
-    }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    *, *::before, *::after {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+        body {
+            font-family: 'Noto Sans JP', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: 
+                linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.85)),
+                url('https://images.unsplash.com/photo-1551649001-7a2482d98d09?q=80&w=3000') no-repeat center center fixed;
+            background-size: cover;
+            min-height: 100vh;
+            color: var(--text-primary);
+            overflow: hidden;
+            position: relative;
+        }
 
-    html {
-      scroll-behavior: smooth;
-    }
+        /* Japanese pattern overlay */
+        .japanese-pattern {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/></svg>');
+            background-size: 40px 40px;
+            z-index: -1;
+            opacity: 0.5;
+        }
 
-    body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      background: linear-gradient(135deg, #667eea, #764ba2);
-      color: var(--text-primary);
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
+        /* Mount Fuji background */
+        .fuji-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                url('https://images.unsplash.com/photo-1542051841857-5f90071e7989?q=80&w=3000') no-repeat center center fixed;
+            background-size: cover;
+            filter: grayscale(100%) brightness(0.7);
+            z-index: -2;
+            opacity: 0.6;
+        }
 
-    /* Background animation */
-    .bg-animation {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      z-index: -1;
-      opacity: 0.1;
-    }
+        /* Matte texture overlay */
+        .matte-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200"><filter id="g"><feTurbulence baseFrequency="0.01" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23g)" opacity="0.15"/></svg>');
+            z-index: -1;
+            opacity: 0.3;
+        }
 
-    .floating-shapes {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-    }
+        /* Glass morphism container */
+        .glass {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
 
-    .shape {
-      position: absolute;
-      background: linear-gradient(45deg, var(--accent-color), var(--primary-color));
-      border-radius: 50%;
-      animation: float 6s ease-in-out infinite;
-    }
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+            padding: 15px 30px;
+        }
 
-    .shape:nth-child(1) { width: 80px; height: 80px; top: 20%; left: 10%; animation-delay: 0s; }
-    .shape:nth-child(2) { width: 120px; height: 120px; top: 60%; right: 10%; animation-delay: 2s; }
-    .shape:nth-child(3) { width: 60px; height: 60px; bottom: 20%; left: 20%; animation-delay: 4s; }
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
 
-    @keyframes float {
-      0%, 100% { transform: translateY(0) rotate(0deg); }
-      50% { transform: translateY(-20px) rotate(180deg); }
-    }
+        nav a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+        }
 
-    .glass {
-      background: var(--glass-bg);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 1px solid var(--glass-border);
-      border-radius: 20px;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-    }
+        nav a:hover {
+            color: var(--japanese-red);
+            transform: translateY(-2px);
+        }
 
-    /* Navigation */
-    nav {
-      position: fixed;
-      top: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 1000;
-      padding: 15px 30px;
-    }
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: var(--japanese-red);
+            transition: all 0.3s ease;
+        }
 
-    nav ul {
-      display: flex;
-      list-style: none;
-      gap: 30px;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
+        nav a:hover::after {
+            width: 100%;
+        }
 
-    nav a {
-      color: var(--text-primary);
-      text-decoration: none;
-      font-weight: 500;
-      transition: all 0.3s ease;
-      position: relative;
-    }
+        /* Main container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 100px 20px 50px;
+            height: calc(100vh - 150px);
+            overflow: hidden;
+            position: relative;
+        }
 
-    nav a:hover {
-      color: var(--accent-color);
-      transform: translateY(-2px);
-    }
+        /* Home section with quote */
+        .home {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            text-align: center;
+            padding: 60px 40px;
+        }
 
-    nav a::after {
-      content: '';
-      position: absolute;
-      width: 0;
-      height: 2px;
-      bottom: -5px;
-      left: 50%;
-      background: var(--accent-color);
-      transition: all 0.3s ease;
-      transform: translateX(-50%);
-    }
+        .quote-hindi {
+            font-size: 5rem;
+            font-weight: 700;
+            margin-bottom: 30px;
+            color: var(--text-primary);
+            line-height: 1.2;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+            position: relative;
+            padding: 20px;
+            max-width: 900px;
+        }
 
-    nav a:hover::after {
-      width: 100%;
-    }
+        .quote-english {
+            font-size: 1.8rem;
+            color: var(--text-secondary);
+            font-weight: 300;
+            font-style: italic;
+            margin-bottom: 50px;
+            letter-spacing: 1px;
+        }
 
-    /* Layout */
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 100px 20px 50px;
-    }
+        /* Section styling */
+        .section {
+            height: 100%;
+            padding: 60px 40px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            transform: translateY(100%);
+            transition: transform 0.8s cubic-bezier(0.22, 0.61, 0.36, 1);
+            overflow-y: auto;
+            display: none;
+        }
 
-    section {
-      margin-bottom: 80px;
-      padding: 60px 40px;
-      position: relative;
-    }
+        .section.active {
+            transform: translateY(0);
+            display: block;
+        }
 
-    section h2 {
-      font-size: 3rem;
-      text-align: center;
-      margin-bottom: 40px;
-      background: linear-gradient(135deg, var(--text-primary), var(--accent-color));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
+        .section h2 {
+            font-size: 3rem;
+            margin-bottom: 40px;
+            text-align: center;
+            color: var(--text-primary);
+            position: relative;
+            padding-bottom: 20px;
+        }
 
-    /* Home */
-    .home {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      min-height: 80vh;
-      text-align: center;
-    }
+        .section h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: var(--japanese-red);
+        }
 
-    .quote-hindi {
-      font-size: 4rem;
-      font-weight: 700;
-      margin-bottom: 30px;
-      background: linear-gradient(135deg, var(--text-primary), var(--accent-color));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: glow 2s ease-in-out infinite alternate;
-    }
+        /* Close button for sections */
+        .close-section {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
 
-    .quote-english {
-      font-size: 1.2rem;
-      font-style: italic;
-      color: var(--text-secondary);
-    }
+        .close-section:hover {
+            color: var(--japanese-red);
+            transform: rotate(90deg);
+        }
 
-    @keyframes glow {
-      from { filter: brightness(1); }
-      to { filter: brightness(1.2); }
-    }
+        /* Download Resume Section */
+        .download-section {
+            text-align: center;
+            margin-top: 40px;
+        }
 
-    /* Resume */
-    .download-section {
-      text-align: center;
-    }
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            background: var(--japanese-red);
+            color: white;
+            padding: 20px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            border: 2px solid transparent;
+        }
 
-    .download-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 15px;
-      background: linear-gradient(135deg, var(--accent-color), var(--primary-color));
-      color: white;
-      padding: 20px 40px;
-      border-radius: 50px;
-      text-decoration: none;
-      font-size: 1.2rem;
-      font-weight: 600;
-      transition: all 0.3s ease;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-    }
+        .download-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            background: transparent;
+            border-color: var(--japanese-red);
+            color: var(--japanese-red);
+        }
 
-    .download-btn:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-    }
+        /* Work Section */
+        .work-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
 
-    /* Fade-in animation */
-    .fade-in {
-      opacity: 0;
-      transform: translateY(30px);
-      animation: fadeInUp 0.8s ease forwards;
-    }
+        .work-item {
+            padding: 30px;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border-left: 4px solid var(--japanese-red);
+        }
 
-    @keyframes fadeInUp {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
+        .work-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+        }
 
-    .fade-in:nth-child(1) { animation-delay: 0.1s; }
-    .fade-in:nth-child(2) { animation-delay: 0.2s; }
+        .work-item h3 {
+            color: var(--japanese-red);
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
 
-    /* Responsive */
-    @media (max-width: 768px) {
-      .quote-hindi {
-        font-size: 2.5rem;
-      }
+        .work-item h4 {
+            color: var(--text-primary);
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+        }
 
-      .section h2 {
-        font-size: 2.2rem;
-      }
+        .work-item p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
 
-      nav ul {
-        gap: 15px;
-      }
+        /* Life Section */
+        .life-content {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
 
-      .container {
-        padding: 80px 15px 30px;
-      }
-    }
-  </style>
+        .life-content p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+        }
+
+        .life-highlights {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .highlight-card {
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .highlight-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .highlight-card i {
+            font-size: 3rem;
+            color: var(--japanese-red);
+            margin-bottom: 20px;
+        }
+
+        .highlight-card h3 {
+            color: var(--text-primary);
+            margin-bottom: 15px;
+        }
+
+        .highlight-card p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        /* Balance Section */
+        .balance-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .balance-item {
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .balance-item:hover {
+            transform: scale(1.02);
+        }
+
+        .balance-item i {
+            font-size: 4rem;
+            color: var(--japanese-red);
+            margin-bottom: 25px;
+        }
+
+        .balance-item h3 {
+            color: var(--text-primary);
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+
+        .balance-item p {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            font-size: 1.1rem;
+        }
+
+        /* Articles Section */
+        .articles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .article-card {
+            padding: 30px;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .article-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+            border-color: var(--japanese-red);
+        }
+
+        .article-date {
+            color: var(--japanese-red);
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+
+        .article-card h3 {
+            color: var(--text-primary);
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+
+        .article-card p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .read-more {
+            color: var(--japanese-red);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .read-more:hover {
+            color: var(--text-primary);
+            gap: 10px;
+        }
+
+        /* Japanese elements */
+        .japanese-divider {
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--japanese-red), transparent);
+            width: 80%;
+            margin: 30px auto;
+            opacity: 0.5;
+        }
+
+        .japanese-symbol {
+            font-family: 'Noto Sans JP', sans-serif;
+            position: absolute;
+            font-size: 12rem;
+            opacity: 0.03;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .quote-hindi {
+                font-size: 3rem;
+            }
+
+            .quote-english {
+                font-size: 1.3rem;
+            }
+
+            .section h2 {
+                font-size: 2.2rem;
+            }
+
+            nav ul {
+                gap: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .container {
+                padding: 100px 15px 30px;
+            }
+
+            .work-grid,
+            .articles-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            nav {
+                padding: 10px 15px;
+                width: 100%;
+            }
+            
+            nav ul {
+                justify-content: center;
+            }
+        }
+
+        /* Loading animation */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in:nth-child(1) { animation-delay: 0.1s; }
+        .fade-in:nth-child(2) { animation-delay: 0.2s; }
+        .fade-in:nth-child(3) { animation-delay: 0.3s; }
+        .fade-in:nth-child(4) { animation-delay: 0.4s; }
+    </style>
 </head>
 <body>
-  <!-- Background -->
-  <div class="bg-animation">
-    <div class="floating-shapes">
-      <div class="shape"></div>
-      <div class="shape"></div>
-      <div class="shape"></div>
+    <!-- Background elements -->
+    <div class="fuji-bg"></div>
+    <div class="matte-overlay"></div>
+    <div class="japanese-pattern"></div>
+
+    <!-- Navigation -->
+    <nav class="glass">
+        <ul>
+            <li><a href="#" data-target="home">Home</a></li>
+            <li><a href="#" data-target="resume">Resume</a></li>
+            <li><a href="#" data-target="work">Work</a></li>
+            <li><a href="#" data-target="life">Life</a></li>
+            <li><a href="#" data-target="balance">Balance</a></li>
+            <li><a href="#" data-target="articles">Articles</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <!-- Home Section -->
+        <section id="home" class="home fade-in active">
+            <div class="japanese-symbol" style="top: 20%; left: 10%;">禅</div>
+            <div class="japanese-symbol" style="bottom: 20%; right: 10%;">道</div>
+            
+            <div class="quote-hindi">zinda ho toh zinda nazar aana zaroori hai</div>
+            <div class="quote-english">If you are alive, it is important to look alive</div>
+            
+            <div class="japanese-divider"></div>
+            
+            <div class="quote-english" style="font-size: 1.5rem; max-width: 700px;">
+                Arun Singh Thakur - AI Engineer crafting intelligent systems that bridge technology and human experience
+            </div>
+        </section>
+
+        <!-- Download Resume Section -->
+        <section id="resume" class="section glass fade-in">
+            <button class="close-section"><i class="fas fa-times"></i></button>
+            <h2>Resume</h2>
+            <div class="download-section">
+                <a href="arun_ai-engineer_resume.pdf" class="download-btn" download>
+                    <i class="fas fa-download"></i>
+                    Download Resume
+                </a>
+            </div>
+            
+            <div class="japanese-divider"></div>
+            
+            <div style="max-width: 800px; margin: 0 auto; text-align: center;">
+                <h3 style="margin-bottom: 20px; color: var(--japanese-red);">Professional Summary</h3>
+                <p style="font-size: 1.1rem; line-height: 1.8; color: var(--text-secondary);">
+                    AI Engineer with expertise in developing agentic systems, multimodal RAG implementations, 
+                    and fine-tuning LLMs for enterprise solutions. Proven ability to design and deploy 
+                    AI-powered systems that solve complex business challenges across diverse industries.
+                </p>
+            </div>
+        </section>
+
+        <!-- Work Section -->
+        <section id="work" class="section glass fade-in">
+            <button class="close-section"><i class="fas fa-times"></i></button>
+            <h2>Work</h2>
+            <div class="work-grid">
+                <div class="work-item glass">
+                    <h3>Braiyt MENA</h3>
+                    <h4>AI Engineer</h4>
+                    <p>Dubai, UAE</p>
+                    <p>Developed Agentic AI chatbots, autonomous inventory agents, and Agent Hub platform. Built AI-powered solutions for law enforcement, inventory management, and business intelligence.</p>
+                </div>
+                
+                <div class="work-item glass">
+                    <h3>Fixity Technologies</h3>
+                    <h4>AI Engineer</h4>
+                    <p>Bangalore, India</p>
+                    <p>Engineered assignment generators, fine-tuned LLMs, developed multimodal RAG systems, and built intelligent educational content creation pipelines.</p>
+                </div>
+                
+                <div class="work-item glass">
+                    <h3>Genpact</h3>
+                    <h4>Data Science Intern</h4>
+                    <p>Bangalore, India</p>
+                    <p>Worked on data science projects and gained hands-on experience in machine learning and data analysis.</p>
+                </div>
+                
+                <div class="work-item glass">
+                    <h3>Google Developer Student Club</h3>
+                    <h4>Technical Lead & AI Lead</h4>
+                    <p>NIIT University</p>
+                    <p>Led technical initiatives and AI projects, mentored students, and organized workshops and events for the developer community.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Life Section -->
+        <section id="life" class="section glass fade-in">
+            <button class="close-section"><i class="fas fa-times"></i></button>
+            <h2>Life</h2>
+            <div class="life-content">
+                <p>Life is a beautiful journey of continuous learning and growth. From the classrooms of NIIT University to the bustling tech hubs of Bangalore and now the innovative landscape of Dubai, every step has been a lesson in resilience, curiosity, and human connection.</p>
+                
+                <p>I believe in the power of technology to transform lives, but more importantly, in the power of empathy to guide that transformation. Every algorithm I write, every model I train, carries with it the hope of making someone's life a little bit better.</p>
+                
+                <div class="life-highlights">
+                    <div class="highlight-card glass">
+                        <i class="fas fa-graduation-cap"></i>
+                        <h3>Learning</h3>
+                        <p>From computer science fundamentals to cutting-edge AI research, the journey of learning never stops.</p>
+                    </div>
+                    
+                    <div class="highlight-card glass">
+                        <i class="fas fa-globe"></i>
+                        <h3>Exploring</h3>
+                        <p>Traveling from India to UAE, experiencing diverse cultures and perspectives that shape my worldview.</p>
+                    </div>
+                    
+                    <div class="highlight-card glass">
+                        <i class="fas fa-heart"></i>
+                        <h3>Connecting</h3>
+                        <p>Building meaningful relationships with colleagues, mentors, and friends across the globe.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Balance Section -->
+        <section id="balance" class="section glass fade-in">
+            <button class="close-section"><i class="fas fa-times"></i></button>
+            <h2>Balance</h2>
+            <div class="balance-grid">
+                <div class="balance-item glass">
+                    <i class="fas fa-code"></i>
+                    <h3>Technology</h3>
+                    <p>Staying at the forefront of AI and machine learning, constantly exploring new frameworks, models, and methodologies. The digital world is my canvas for innovation.</p>
+                </div>
+                
+                <div class="balance-item glass">
+                    <i class="fas fa-leaf"></i>
+                    <h3>Nature</h3>
+                    <p>Finding peace in nature's embrace. Whether it's a quiet morning walk or weekend hikes, nature provides the clarity and inspiration needed for creative thinking.</p>
+                </div>
+                
+                <div class="balance-item glass">
+                    <i class="fas fa-users"></i>
+                    <h3>Community</h3>
+                    <p>Giving back through mentorship, sharing knowledge, and building inclusive tech communities. Success is meaningful only when it's shared.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Articles Section -->
+        <section id="articles" class="section glass fade-in">
+            <button class="close-section"><i class="fas fa-times"></i></button>
+            <h2>Articles</h2>
+            <div class="articles-grid">
+                <div class="article-card glass">
+                    <div class="article-date">Coming Soon</div>
+                    <h3>The Future of Agentic AI: Beyond Simple Automation</h3>
+                    <p>Exploring how autonomous AI agents are reshaping industries and the philosophical implications of truly intelligent systems.</p>
+                    <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                </div>
+                
+                <div class="article-card glass">
+                    <div class="article-date">Coming Soon</div>
+                    <h3>Building Multimodal RAG Systems: Lessons from the Field</h3>
+                    <p>A deep dive into the challenges and solutions for creating RAG systems that can process text, images, and structured data simultaneously.</p>
+                    <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                </div>
+                
+                <div class="article-card glass">
+                    <div class="article-date">Coming Soon</div>
+                    <h3>From Bangalore to Dubai: An AI Engineer's Journey</h3>
+                    <p>Reflections on cultural adaptation, professional growth, and the universal language of technology across borders.</p>
+                    <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </section>
     </div>
-  </div>
 
-  <!-- Navigation -->
-  <nav class="glass" role="navigation" aria-label="Main Navigation">
-    <ul>
-      <li><a href="#home">Home</a></li>
-      <li><a href="#about">About</a></li>
-      <li><a href="#resume">Resume</a></li>
-      <li><a href="#work">Work</a></li>
-      <li><a href="#life">Life</a></li>
-      <li><a href="#balance">Balance</a></li>
-      <li><a href="#articles">Articles</a></li>
-    </ul>
-  </nav>
+    <script>
+        // Section navigation
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('data-target');
+                showSection(targetId);
+            });
+        });
 
-  <main class="container">
-    <!-- Home -->
-    <section id="home" class="home fade-in">
-      <div class="quote-hindi">zinda ho toh zinda nazar aana zaroori hai</div>
-      <div class="quote-english">If you are alive, it is important to look alive</div>
-    </section>
+        // Close buttons
+        document.querySelectorAll('.close-section').forEach(button => {
+            button.addEventListener('click', function() {
+                document.querySelectorAll('.section').forEach(section => {
+                    section.classList.remove('active');
+                });
+                document.getElementById('home').classList.add('active');
+            });
+        });
 
-    <!-- About -->
-    <section id="about" class="section glass fade-in">
-      <h2>About Me</h2>
-      <p style="text-align: center; font-size: 1.2rem; max-width: 800px; margin: 0 auto; color: var(--text-secondary);">
-        I'm Arun Singh Thakur, an AI Engineer passionate about building intelligent systems that solve real-world problems. My work spans agentic AI, multimodal RAG systems, and educational technology. I thrive at the intersection of deep tech and human-centric design.
-      </p>
-    </section>
+        function showSection(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Show the selected section
+            document.getElementById(sectionId).classList.add('active');
+        }
 
-    <!-- Resume -->
-    <section id="resume" class="section glass fade-in">
-      <h2>Resume</h2>
-      <div class="download-section">
-        <a href="Arun_Singh_Thakur_Resume.pdf" class="download-btn" download>
-          <i class="fas fa-download"></i>
-          Download Resume
-        </a>
-      </div>
-    </section>
+        // Interactive cursor
+        document.addEventListener('DOMContentLoaded', function() {
+            const cursor = document.createElement('div');
+            cursor.classList.add('cursor');
+            document.body.appendChild(cursor);
+            
+            document.addEventListener('mousemove', function(e) {
+                cursor.style.left = e.clientX + 'px';
+                cursor.style.top = e.clientY + 'px';
+            });
+            
+            // Interactive elements effect
+            document.querySelectorAll('a, button, .work-item, .article-card, .highlight-card, .balance-item').forEach(el => {
+                el.addEventListener('mouseenter', function() {
+                    cursor.classList.add('cursor-hover');
+                });
+                
+                el.addEventListener('mouseleave', function() {
+                    cursor.classList.remove('cursor-hover');
+                });
+            });
+        });
 
-    <!-- Additional sections (Work, Life, Balance, Articles) go here... -->
-  </main>
+        // Interactive quote effect
+        const quote = document.querySelector('.quote-hindi');
+        quote.addEventListener('mousemove', (e) => {
+            const rect = quote.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            
+            const angleY = (x - centerX) / 20;
+            const angleX = (centerY - y) / 10;
+            
+            quote.style.transform = `perspective(1000px) rotateY(${angleY}deg) rotateX(${angleX}deg)`;
+            quote.style.textShadow = `
+                ${-angleY * 2}px ${angleX}px 10px rgba(0, 0, 0, 0.5),
+                ${angleY * 2}px ${-angleX}px 10px rgba(255, 255, 255, 0.1)
+            `;
+        });
+        
+        quote.addEventListener('mouseleave', () => {
+            quote.style.transform = 'perspective(1000px) rotateY(0) rotateX(0)';
+            quote.style.textShadow = '0 0 20px rgba(255, 255, 255, 0.3)';
+        });
+    </script>
 </body>
 </html>
