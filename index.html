@@ -7,11 +7,11 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         :root {
-            --primary-color: #667eea;
-            --secondary-color: #764ba2;
-            --accent-color: #f093fb;
+            --primary-color: #000000;
+            --secondary-color: #333333;
+            --accent-color: #666666;
             --text-primary: #ffffff;
-            --text-secondary: rgba(255, 255, 255, 0.8);
+            --text-secondary: #cccccc;
             --glass-bg: rgba(255, 255, 255, 0.1);
             --glass-border: rgba(255, 255, 255, 0.2);
         }
@@ -24,7 +24,7 @@
 
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #000000 0%, #333333 100%);
             min-height: 100vh;
             color: var(--text-primary);
             overflow-x: hidden;
@@ -70,7 +70,7 @@
             -webkit-backdrop-filter: blur(20px);
             border: 1px solid var(--glass-border);
             border-radius: 20px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
         }
 
         /* Navigation */
@@ -395,6 +395,69 @@
             color: var(--text-primary);
         }
 
+        /* Interactive Features */
+        .contact-form {
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 30px;
+            border-radius: 15px;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px solid var(--accent-color);
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-primary);
+            font-size: 1rem;
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            outline: none;
+            border-color: var(--text-primary);
+            box-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
+        }
+
+        .contact-form button {
+            background: linear-gradient(135deg, var(--accent-color), var(--primary-color));
+            color: var(--text-primary);
+            padding: 15px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .contact-form button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.1);
+        }
+
         /* Responsive design */
         @media (max-width: 768px) {
             .quote-hindi {
@@ -460,6 +523,11 @@
         </div>
     </div>
 
+    <!-- Theme Toggle -->
+    <div class="theme-toggle" id="themeToggle">
+        <i class="fas fa-moon"></i>
+    </div>
+
     <!-- Navigation -->
     <nav class="glass">
         <ul>
@@ -469,6 +537,7 @@
             <li><a href="#life">Life</a></li>
             <li><a href="#balance">Balance</a></li>
             <li><a href="#articles">Articles</a></li>
+            <li><a href="#contact">Contact</a></li>
         </ul>
     </nav>
 
@@ -604,6 +673,17 @@
                 </div>
             </div>
         </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="section glass fade-in">
+            <h2>Contact</h2>
+            <form class="contact-form glass">
+                <input type="text" id="name" placeholder="Your Name" required>
+                <input type="email" id="email" placeholder="Your Email" required>
+                <textarea id="message" placeholder="Your Message" rows="5" required></textarea>
+                <button type="submit">Send Message</button>
+            </form>
+        </section>
     </div>
 
     <script>
@@ -648,6 +728,66 @@
             });
         });
 
+        // Theme toggle
+        const themeToggle = document.getElementById('themeToggle');
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('light-theme');
+            if (document.body.classList.contains('light-theme')) {
+                themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+                document.documentElement.style.setProperty('--primary-color', '#ffffff');
+                document.documentElement.style.setProperty('--secondary-color', '#f0f0f0');
+                document.documentElement.style.setProperty('--accent-color', '#cccccc');
+                document.documentElement.style.setProperty('--text-primary', '#000000');
+                document.documentElement.style.setProperty('--text-secondary', '#666666');
+                document.documentElement.style.setProperty('--glass-bg', 'rgba(0, 0, 0, 0.1)');
+                document.documentElement.style.setProperty('--glass-border', 'rgba(0, 0, 0, 0.2)');
+                document.body.style.background = 'linear-gradient(135deg, #ffffff 0%, #f0f0f0 100%)';
+            } else {
+                themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+                document.documentElement.style.setProperty('--primary-color', '#000000');
+                document.documentElement.style.setProperty('--secondary-color', '#333333');
+                document.documentElement.style.setProperty('--accent-color', '#666666');
+                document.documentElement.style.setProperty('--text-primary', '#ffffff');
+                document.documentElement.style.setProperty('--text-secondary', '#cccccc');
+                document.documentElement.style.setProperty('--glass-bg', 'rgba(255, 255, 255, 0.1)');
+                document.documentElement.style.setProperty('--glass-border', 'rgba(255, 255, 255, 0.2)');
+                document.body.style.background = 'linear-gradient(135deg, #000000 0%, #333333 100%)';
+            }
+        });
+
+        // Contact form submission
+        const contactForm = document.querySelector('.contact-form');
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+            
+            // For demo purposes, just show an alert
+            alert(`Message sent!\nName: ${name}\nEmail: ${email}\nMessage: ${message}`);
+            contactForm.reset();
+            
+            // In a real implementation, you would send this data to a backend
+            // Example using fetch:
+            /*
+            fetch('/api/contact', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ name, email, message })
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert('Message sent successfully!');
+                contactForm.reset();
+            })
+            .catch(error => {
+                alert('Error sending message. Please try again.');
+            });
+            */
+        });
+
         // Add subtle cursor following effect
         document.addEventListener('mousemove', (e) => {
             const cursor = document.querySelector('.cursor');
@@ -658,7 +798,7 @@
                     position: fixed;
                     width: 20px;
                     height: 20px;
-                    background: radial-gradient(circle, rgba(240, 147, 251, 0.3), transparent);
+                    background: radial-gradient(circle, rgba(255, 255, 255, 0.3), transparent);
                     border-radius: 50%;
                     pointer-events: none;
                     z-index: 9999;
