@@ -125,45 +125,35 @@
             padding: 100px 20px 50px;
         }
 
-        /* Hero section */
-        .hero {
+        /* Home section with quote */
+        .home {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 80vh;
             text-align: center;
             padding: 60px 40px;
-            margin-bottom: 50px;
-            position: relative;
-            overflow: hidden;
         }
 
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.05) 0%, transparent 70%);
-            animation: rotate 20s linear infinite;
-        }
-
-        @keyframes rotate {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 2;
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
+        .quote-hindi {
+            font-size: 4rem;
             font-weight: 700;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
             background: linear-gradient(135deg, var(--text-primary), var(--accent-color));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            line-height: 1.2;
             animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        .quote-english {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            font-weight: 300;
+            font-style: italic;
+            margin-bottom: 50px;
         }
 
         @keyframes glow {
@@ -171,56 +161,16 @@
             to { filter: brightness(1.2); }
         }
 
-        .hero h2 {
-            font-size: 1.5rem;
-            color: var(--text-secondary);
-            margin-bottom: 30px;
-            font-weight: 300;
-        }
-
-        .hero p {
-            font-size: 1.1rem;
-            line-height: 1.6;
-            color: var(--text-secondary);
-            max-width: 600px;
-            margin: 0 auto 40px;
-        }
-
-        .contact-info {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            flex-wrap: wrap;
-            margin-bottom: 40px;
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            color: var(--text-secondary);
-            transition: all 0.3s ease;
-        }
-
-        .contact-item:hover {
-            color: var(--accent-color);
-            transform: translateY(-2px);
-        }
-
-        .contact-item i {
-            font-size: 1.2rem;
-        }
-
         /* Section styling */
         .section {
-            margin-bottom: 50px;
-            padding: 40px;
+            margin-bottom: 80px;
+            padding: 60px 40px;
             position: relative;
         }
 
         .section h2 {
-            font-size: 2.5rem;
-            margin-bottom: 30px;
+            font-size: 3rem;
+            margin-bottom: 40px;
             text-align: center;
             background: linear-gradient(135deg, var(--text-primary), var(--accent-color));
             -webkit-background-clip: text;
@@ -228,15 +178,166 @@
             background-clip: text;
         }
 
-        /* Skills grid */
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 30px;
+        /* Download Resume Section */
+        .download-section {
+            text-align: center;
         }
 
-        .skill-category {
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            background: linear-gradient(135deg, var(--accent-color), var(--primary-color));
+            color: white;
+            padding: 20px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .download-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Work Section */
+        .work-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .work-item {
+            padding: 30px;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border-left: 4px solid var(--accent-color);
+        }
+
+        .work-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+        }
+
+        .work-item h3 {
+            color: var(--accent-color);
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .work-item h4 {
+            color: var(--text-primary);
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+        }
+
+        .work-item p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
+        /* Life Section */
+        .life-content {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .life-content p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+        }
+
+        .life-highlights {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .highlight-card {
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .highlight-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .highlight-card i {
+            font-size: 3rem;
+            color: var(--accent-color);
+            margin-bottom: 20px;
+        }
+
+        .highlight-card h3 {
+            color: var(--text-primary);
+            margin-bottom: 15px;
+        }
+
+        .highlight-card p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        /* Balance Section */
+        .balance-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .balance-item {
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .balance-item:hover {
+            transform: scale(1.02);
+        }
+
+        .balance-item i {
+            font-size: 4rem;
+            color: var(--accent-color);
+            margin-bottom: 25px;
+        }
+
+        .balance-item h3 {
+            color: var(--text-primary);
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+
+        .balance-item p {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            font-size: 1.1rem;
+        }
+
+        /* Articles Section */
+        .articles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .article-card {
             padding: 30px;
             border-radius: 15px;
             transition: all 0.3s ease;
@@ -244,7 +345,7 @@
             overflow: hidden;
         }
 
-        .skill-category::before {
+        .article-card::before {
             content: '';
             position: absolute;
             top: 0;
@@ -255,157 +356,72 @@
             transition: left 0.5s;
         }
 
-        .skill-category:hover::before {
+        .article-card:hover::before {
             left: 100%;
         }
 
-        .skill-category:hover {
+        .article-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
         }
 
-        .skill-category h3 {
+        .article-date {
             color: var(--accent-color);
-            margin-bottom: 15px;
-            font-size: 1.3rem;
-        }
-
-        .skills-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        .skill-tag {
-            background: rgba(255, 255, 255, 0.15);
-            padding: 8px 15px;
-            border-radius: 25px;
             font-size: 0.9rem;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            transition: all 0.3s ease;
-        }
-
-        .skill-tag:hover {
-            background: var(--accent-color);
-            transform: scale(1.05);
-        }
-
-        /* Experience cards */
-        .experience-item {
-            margin-bottom: 40px;
-            padding: 30px;
-            border-radius: 15px;
-            transition: all 0.3s ease;
-            border-left: 4px solid var(--accent-color);
-        }
-
-        .experience-item:hover {
-            transform: translateX(10px);
-            background: rgba(255, 255, 255, 0.05);
-        }
-
-        .experience-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-        }
-
-        .company-info h3 {
-            color: var(--accent-color);
-            font-size: 1.5rem;
-            margin-bottom: 5px;
-        }
-
-        .company-info h4 {
-            color: var(--text-primary);
-            font-size: 1.2rem;
-            font-weight: 500;
-        }
-
-        .date-location {
-            text-align: right;
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-        }
-
-        .experience-item ul {
-            list-style: none;
-            padding-left: 0;
-        }
-
-        .experience-item li {
-            margin-bottom: 15px;
-            padding-left: 25px;
-            position: relative;
-            color: var(--text-secondary);
-            line-height: 1.6;
-        }
-
-        .experience-item li::before {
-            content: '▶';
-            position: absolute;
-            left: 0;
-            color: var(--accent-color);
-            font-size: 0.8rem;
-        }
-
-        /* Education */
-        .education-item {
-            text-align: center;
-            padding: 30px;
-            border-radius: 15px;
-        }
-
-        .education-item h3 {
-            color: var(--accent-color);
-            font-size: 1.8rem;
             margin-bottom: 10px;
         }
 
-        .education-item h4 {
+        .article-card h3 {
             color: var(--text-primary);
-            font-size: 1.3rem;
+            font-size: 1.4rem;
             margin-bottom: 15px;
+            line-height: 1.4;
         }
 
-        .education-item p {
+        .article-card p {
             color: var(--text-secondary);
-            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .read-more {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .read-more:hover {
+            color: var(--text-primary);
         }
 
         /* Responsive design */
         @media (max-width: 768px) {
-            .hero h1 {
+            .quote-hindi {
                 font-size: 2.5rem;
             }
 
-            .hero h2 {
-                font-size: 1.2rem;
+            .quote-english {
+                font-size: 1rem;
             }
 
-            .contact-info {
-                flex-direction: column;
-                align-items: center;
-                gap: 15px;
-            }
-
-            .experience-header {
-                flex-direction: column;
-                gap: 10px;
-            }
-
-            .date-location {
-                text-align: left;
+            .section h2 {
+                font-size: 2.2rem;
             }
 
             nav ul {
-                gap: 20px;
+                gap: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
             }
 
             .container {
                 padding: 80px 15px 30px;
+            }
+
+            .work-grid,
+            .articles-grid {
+                grid-template-columns: 1fr;
             }
         }
 
@@ -448,181 +464,144 @@
     <nav class="glass">
         <ul>
             <li><a href="#home">Home</a></li>
-            <li><a href="#skills">Skills</a></li>
-            <li><a href="#experience">Experience</a></li>
-            <li><a href="#education">Education</a></li>
+            <li><a href="#resume">Resume</a></li>
+            <li><a href="#work">Work</a></li>
+            <li><a href="#life">Life</a></li>
+            <li><a href="#balance">Balance</a></li>
+            <li><a href="#articles">Articles</a></li>
         </ul>
     </nav>
 
     <div class="container">
-        <!-- Hero Section -->
-        <section id="home" class="hero glass fade-in">
-            <div class="hero-content">
-                <h1>Arun Singh Thakur</h1>
-                <h2>Dynamic AI Engineer</h2>
-                <p>Expertise in machine learning, natural language processing, and generative AI. Proficient in Python, TensorFlow, and Keras, with hands-on experience in fine-tuning large language models, developing multimodal RAG systems, and building autonomous AI agents.</p>
+        <!-- Home Section -->
+        <section id="home" class="home fade-in">
+            <div class="quote-hindi">zinda ho toh zinda nazar aana zaroori hai</div>
+            <div class="quote-english">If you are alive, it is important to look alive</div>
+        </section>
+
+        <!-- Download Resume Section -->
+        <section id="resume" class="section glass fade-in">
+            <h2>Resume</h2>
+            <div class="download-section">
+                <a href="#" class="download-btn">
+                    <i class="fas fa-download"></i>
+                    Download Resume
+                </a>
+            </div>
+        </section>
+
+        <!-- Work Section -->
+        <section id="work" class="section glass fade-in">
+            <h2>Work</h2>
+            <div class="work-grid">
+                <div class="work-item glass">
+                    <h3>Braiyt MENA</h3>
+                    <h4>AI Engineer</h4>
+                    <p>Dubai, UAE</p>
+                    <p>Developed Agentic AI chatbots, autonomous inventory agents, and Agent Hub platform. Built AI-powered solutions for law enforcement, inventory management, and business intelligence.</p>
+                </div>
                 
-                <div class="contact-info">
-                    <div class="contact-item">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <span>Dubai, UAE</span>
+                <div class="work-item glass">
+                    <h3>Fixity Technologies</h3>
+                    <h4>AI Engineer</h4>
+                    <p>Bangalore, India</p>
+                    <p>Engineered assignment generators, fine-tuned LLMs, developed multimodal RAG systems, and built intelligent educational content creation pipelines.</p>
+                </div>
+                
+                <div class="work-item glass">
+                    <h3>Genpact</h3>
+                    <h4>Data Science Intern</h4>
+                    <p>Bangalore, India</p>
+                    <p>Worked on data science projects and gained hands-on experience in machine learning and data analysis.</p>
+                </div>
+                
+                <div class="work-item glass">
+                    <h3>Google Developer Student Club</h3>
+                    <h4>Technical Lead & AI Lead</h4>
+                    <p>NIIT University</p>
+                    <p>Led technical initiatives and AI projects, mentored students, and organized workshops and events for the developer community.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Life Section -->
+        <section id="life" class="section glass fade-in">
+            <h2>Life</h2>
+            <div class="life-content">
+                <p>Life is a beautiful journey of continuous learning and growth. From the classrooms of NIIT University to the bustling tech hubs of Bangalore and now the innovative landscape of Dubai, every step has been a lesson in resilience, curiosity, and human connection.</p>
+                
+                <p>I believe in the power of technology to transform lives, but more importantly, in the power of empathy to guide that transformation. Every algorithm I write, every model I train, carries with it the hope of making someone's life a little bit better.</p>
+                
+                <div class="life-highlights">
+                    <div class="highlight-card glass">
+                        <i class="fas fa-graduation-cap"></i>
+                        <h3>Learning</h3>
+                        <p>From computer science fundamentals to cutting-edge AI research, the journey of learning never stops.</p>
                     </div>
-                    <div class="contact-item">
-                        <i class="fas fa-envelope"></i>
-                        <span>arunsinghthakur.jobs@gmail.com</span>
+                    
+                    <div class="highlight-card glass">
+                        <i class="fas fa-globe"></i>
+                        <h3>Exploring</h3>
+                        <p>Traveling from India to UAE, experiencing diverse cultures and perspectives that shape my worldview.</p>
                     </div>
-                    <div class="contact-item">
-                        <i class="fas fa-phone"></i>
-                        <span>+971 507488093</span>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fab fa-linkedin"></i>
-                        <span>LinkedIn Profile</span>
+                    
+                    <div class="highlight-card glass">
+                        <i class="fas fa-heart"></i>
+                        <h3>Connecting</h3>
+                        <p>Building meaningful relationships with colleagues, mentors, and friends across the globe.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Skills Section -->
-        <section id="skills" class="section glass fade-in">
-            <h2>Technical Skills</h2>
-            <div class="skills-grid">
-                <div class="skill-category glass">
-                    <h3>Programming Languages</h3>
-                    <div class="skills-list">
-                        <span class="skill-tag">Python</span>
-                    </div>
+        <!-- Balance Section -->
+        <section id="balance" class="section glass fade-in">
+            <h2>Balance</h2>
+            <div class="balance-grid">
+                <div class="balance-item glass">
+                    <i class="fas fa-code"></i>
+                    <h3>Technology</h3>
+                    <p>Staying at the forefront of AI and machine learning, constantly exploring new frameworks, models, and methodologies. The digital world is my canvas for innovation.</p>
                 </div>
                 
-                <div class="skill-category glass">
-                    <h3>ML Frameworks</h3>
-                    <div class="skills-list">
-                        <span class="skill-tag">TensorFlow</span>
-                        <span class="skill-tag">Keras</span>
-                        <span class="skill-tag">Scikit-learn</span>
-                    </div>
+                <div class="balance-item glass">
+                    <i class="fas fa-leaf"></i>
+                    <h3>Nature</h3>
+                    <p>Finding peace in nature's embrace. Whether it's a quiet morning walk or weekend hikes, nature provides the clarity and inspiration needed for creative thinking.</p>
                 </div>
                 
-                <div class="skill-category glass">
-                    <h3>Generative AI & Agents</h3>
-                    <div class="skills-list">
-                        <span class="skill-tag">LangChain</span>
-                        <span class="skill-tag">LangGraph</span>
-                        <span class="skill-tag">AutoGen</span>
-                        <span class="skill-tag">CrewAI</span>
-                    </div>
-                </div>
-                
-                <div class="skill-category glass">
-                    <h3>Databases</h3>
-                    <div class="skills-list">
-                        <span class="skill-tag">MongoDB</span>
-                        <span class="skill-tag">PostgreSQL</span>
-                    </div>
-                </div>
-                
-                <div class="skill-category glass">
-                    <h3>Data Visualization</h3>
-                    <div class="skills-list">
-                        <span class="skill-tag">Matplotlib</span>
-                        <span class="skill-tag">Seaborn</span>
-                    </div>
-                </div>
-                
-                <div class="skill-category glass">
-                    <h3>Cloud & Tools</h3>
-                    <div class="skills-list">
-                        <span class="skill-tag">AWS</span>
-                        <span class="skill-tag">Azure</span>
-                        <span class="skill-tag">Docker</span>
-                        <span class="skill-tag">FastAPI</span>
-                        <span class="skill-tag">Git</span>
-                        <span class="skill-tag">NumPy</span>
-                        <span class="skill-tag">Pandas</span>
-                    </div>
+                <div class="balance-item glass">
+                    <i class="fas fa-users"></i>
+                    <h3>Community</h3>
+                    <p>Giving back through mentorship, sharing knowledge, and building inclusive tech communities. Success is meaningful only when it's shared.</p>
                 </div>
             </div>
         </section>
 
-        <!-- Experience Section -->
-        <section id="experience" class="section glass fade-in">
-            <h2>Professional Experience</h2>
-            
-            <div class="experience-item glass">
-                <div class="experience-header">
-                    <div class="company-info">
-                        <h3>Braiyt MENA</h3>
-                        <h4>AI Engineer</h4>
-                    </div>
-                    <div class="date-location">Dubai, UAE</div>
+        <!-- Articles Section -->
+        <section id="articles" class="section glass fade-in">
+            <h2>Articles</h2>
+            <div class="articles-grid">
+                <div class="article-card glass">
+                    <div class="article-date">Coming Soon</div>
+                    <h3>The Future of Agentic AI: Beyond Simple Automation</h3>
+                    <p>Exploring how autonomous AI agents are reshaping industries and the philosophical implications of truly intelligent systems.</p>
+                    <a href="#" class="read-more">Read More →</a>
                 </div>
-                <ul>
-                    <li>Developed an Agentic AI chatbot that analyzes high-frequency camera data, allowing users to interact with operational insights in their own language without technical expertise, enabling faster decision-making across multi-client environments, including a major Dubai-based gym.</li>
-                    <li>Built autonomous inventory agents to monitor stock levels and trigger reorder workflows, resulting in a 25% reduction in inventory costs through automated procurement strategies.</li>
-                    <li>Designed and launched Agent Hub, a centralized platform hosting multiple AI agents for document Q&A, trend-aware marketing, and business intelligence; adopted by clients including a government agency.</li>
-                    <li>Engineered an AI-powered chatbot for a law enforcement agency enabling real-time incident analysis via automated data summarization, insight extraction, visual reporting, and question answering.</li>
-                    <li>Developed an aspect-based text summarization system for extracting actionable insights from unstructured data, enhancing operational decision making.</li>
-                    <li>Built an autonomous RFP response writer that analyzes RFP documents, suggests optimal response templates, and generates draft responses with minimal human input significantly accelerating bid preparation workflows.</li>
-                </ul>
-            </div>
-
-            <div class="experience-item glass">
-                <div class="experience-header">
-                    <div class="company-info">
-                        <h3>Fixity Technologies</h3>
-                        <h4>AI Engineer</h4>
-                    </div>
-                    <div class="date-location">Bangalore, India<br>Aug 2024 - Oct 2024</div>
+                
+                <div class="article-card glass">
+                    <div class="article-date">Coming Soon</div>
+                    <h3>Building Multimodal RAG Systems: Lessons from the Field</h3>
+                    <p>A deep dive into the challenges and solutions for creating RAG systems that can process text, images, and structured data simultaneously.</p>
+                    <a href="#" class="read-more">Read More →</a>
                 </div>
-                <ul>
-                    <li>Engineered an agentic assignment generator using prompt-tuned Claude 3 Sonnet and GPT-4o for autonomous question generation and intelligent evaluation, reducing manual workload by 30%.</li>
-                    <li>Developed an adaptive question generation system with iterative refinement, leveraging multi-model AI interactions for enhanced accuracy.</li>
-                    <li>Created an intelligent educational content creation pipeline with automated scoring and feedback loops, processing up to 1,000 questions per hour.</li>
-                    <li>Fine-tuned a large language model using LORA and QLORA, achieving a 20% improvement in performance for client-specific tasks.</li>
-                    <li>Developed an LLM evaluator for a RAG pipeline, enabling customization of retrievers and vector databases, improving context retrieval accuracy by 15%.</li>
-                    <li>Built a multimodal RAG system incorporating tables, text, and images, integrated with a re-ranker for enhanced context retrieval.</li>
-                    <li>Performed exploratory data analysis (EDA) and fine-tuned BERT models for aspect-based sentiment analysis, improving model accuracy by 10%.</li>
-                </ul>
-            </div>
-
-            <div class="experience-item glass">
-                <div class="experience-header">
-                    <div class="company-info">
-                        <h3>Genpact</h3>
-                        <h4>Data Science Intern</h4>
-                    </div>
-                    <div class="date-location">Bangalore, India<br>Jan 2024 - June 2024</div>
+                
+                <div class="article-card glass">
+                    <div class="article-date">Coming Soon</div>
+                    <h3>From Bangalore to Dubai: An AI Engineer's Journey</h3>
+                    <p>Reflections on cultural adaptation, professional growth, and the universal language of technology across borders.</p>
+                    <a href="#" class="read-more">Read More →</a>
                 </div>
-            </div>
-
-            <div class="experience-item glass">
-                <div class="experience-header">
-                    <div class="company-info">
-                        <h3>Google Developer Student Club - NIIT University</h3>
-                        <h4>Technical Lead</h4>
-                    </div>
-                    <div class="date-location">Feb 2023 - Jan 2024</div>
-                </div>
-            </div>
-
-            <div class="experience-item glass">
-                <div class="experience-header">
-                    <div class="company-info">
-                        <h3>Google Developer Student Club - NIIT University</h3>
-                        <h4>Artificial Intelligence Lead</h4>
-                    </div>
-                    <div class="date-location">Sep 2022 - Feb 2023</div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Education Section -->
-        <section id="education" class="section glass fade-in">
-            <h2>Education</h2>
-            <div class="education-item glass">
-                <h3>NIIT University</h3>
-                <h4>Bachelor of Technology - Computer Science</h4>
-                <p>Rajasthan, India | 2020 - 2024</p>
             </div>
         </section>
     </div>
@@ -667,6 +646,32 @@
                 const speed = 0.5 + (index * 0.1);
                 shape.style.transform = `translateY(${scrolled * speed}px) rotate(${scrolled * 0.1}deg)`;
             });
+        });
+
+        // Add subtle cursor following effect
+        document.addEventListener('mousemove', (e) => {
+            const cursor = document.querySelector('.cursor');
+            if (!cursor) {
+                const newCursor = document.createElement('div');
+                newCursor.className = 'cursor';
+                newCursor.style.cssText = `
+                    position: fixed;
+                    width: 20px;
+                    height: 20px;
+                    background: radial-gradient(circle, rgba(240, 147, 251, 0.3), transparent);
+                    border-radius: 50%;
+                    pointer-events: none;
+                    z-index: 9999;
+                    transition: transform 0.1s ease;
+                `;
+                document.body.appendChild(newCursor);
+            }
+            
+            const actualCursor = document.querySelector('.cursor');
+            if (actualCursor) {
+                actualCursor.style.left = e.clientX - 10 + 'px';
+                actualCursor.style.top = e.clientY - 10 + 'px';
+            }
         });
     </script>
 </body>
