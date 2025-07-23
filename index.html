@@ -1,828 +1,296 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Arun Singh Thakur - AI Engineer Portfolio">
-    <title>Arun Singh Thakur - AI Engineer</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary-color: #0D1A26; /* Dark navy, Open AI-inspired */
-            --secondary-color: #1A2A44; /* Slightly lighter navy */
-            --accent-color: #10A37F; /* Vibrant green accent */
-            --text-primary: #FFFFFF;
-            --text-secondary: #A3BFFA;
-            --glass-bg: rgba(255, 255, 255, 0.05);
-            --glass-border: rgba(255, 255, 255, 0.1);
-            --neon-glow: 0 0 10px rgba(16, 163, 127, 0.5);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-            min-height: 100vh;
-            color: var(--text-primary);
-            overflow-x: hidden;
-            line-height: 1.6;
-        }
-
-        /* Light theme */
-        body.light-theme {
-            background: linear-gradient(135deg, #F5F7FA 0%, #E4E7EB 100%);
-            --primary-color: #F5F7FA;
-            --secondary-color: #E4E7EB;
-            --accent-color: #10A37F;
-            --text-primary: #0D1A26;
-            --text-secondary: #4B5EAA;
-            --glass-bg: rgba(0, 0, 0, 0.05);
-            --glass-border: rgba(0, 0, 0, 0.1);
-            --neon-glow: 0 0 10px rgba(16, 163, 127, 0.3);
-        }
-
-        /* Animated background elements */
-        .bg-animation {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            opacity: 0.05;
-        }
-
-        .floating-shapes {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-        }
-
-        .shape {
-            position: absolute;
-            background: var(--accent-color);
-            border-radius: 50%;
-            animation: float 8s ease-in-out infinite;
-            box-shadow: var(--neon-glow);
-        }
-
-        .shape:nth-child(1) { width: 100px; height: 100px; top: 15%; left: 10%; animation-delay: 0s; }
-        .shape:nth-child(2) { width: 140px; height: 140px; top: 55%; right: 15%; animation-delay: 2s; }
-        .shape:nth-child(3) { width: 80px; height: 80px; bottom: 25%; left: 25%; animation-delay: 4s; }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px) scale(1); }
-            50% { transform: translateY(-30px) scale(1.1); }
-        }
-
-        /* Glassmorphism container */
-        .glass {
-            background: var(--glass-bg);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            border: 1px solid var(--glass-border);
-            border-radius: 16px;
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
-        }
-
-        /* Navigation */
-        nav {
-            position: fixed;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 1000;
-            padding: 12px 24px;
-        }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-            gap: 20px;
-        }
-
-        nav a {
-            color: var(--text-primary);
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
-            position: relative;
-            padding: 8px 12px;
-        }
-
-        nav a:hover {
-            color: var(--accent-color);
-            transform: translateY(-2px);
-            box-shadow: var(--neon-glow);
-        }
-
-        nav a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: 0;
-            left: 50%;
-            background: var(--accent-color);
-            transition: all 0.3s ease;
-            transform: translateX(-50%);
-        }
-
-        nav a:hover::after {
-            width: 80%;
-        }
-
-        /* Main container */
-        .container {
-            max-width: 1280px;
-            margin: 0 auto;
-            padding: 100px 24px 60px;
-        }
-
-        /* Home section with quote */
-        .home {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            min-height: 80vh;
-            text-align: center;
-            padding: 80px 32px;
-        }
-
-        .quote-hindi {
-            font-size: 3.5rem;
-            font-weight: 700;
-            margin-bottom: 24px;
-            background: linear-gradient(135deg, var(--text-primary), var(--accent-color));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            line-height: 1.3;
-            animation: glow 3s ease-in-out infinite alternate;
-        }
-
-        .quote-english {
-            font-size: 1.3rem;
-            color: var(--text-secondary);
-            font-weight: 400;
-            font-style: italic;
-            margin-bottom: 40px;
-            max-width: 600px;
-        }
-
-        @keyframes glow {
-            from { filter: brightness(1); }
-            to { filter: brightness(1.3); }
-        }
-
-        /* Section styling */
-        .section {
-            margin-bottom: 100px;
-            padding: 60px 32px;
-            position: relative;
-        }
-
-        .section h2 {
-            font-size: 2.8rem;
-            margin-bottom: 32px;
-            text-align: center;
-            color: var(--text-primary);
-            letter-spacing: -0.02em;
-        }
-
-        /* Download Resume Section */
-        .download-section {
-            text-align: center;
-        }
-
-        .download-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            background: var(--accent-color);
-            color: var(--text-primary);
-            padding: 16px 32px;
-            border-radius: 12px;
-            text-decoration: none;
-            font-size: 1.2rem;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            box-shadow: var(--neon-glow);
-        }
-
-        .download-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 24px rgba(16, 163, 127, 0.4);
-        }
-
-        /* Work Section */
-        .work-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 24px;
-            margin-top: 32px;
-        }
-
-        .work-item {
-            padding: 24px;
-            border-radius: 12px;
-            transition: all 0.3s ease;
-            position: relative;
-            border-left: 3px solid var(--accent-color);
-        }
-
-        .work-item:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--neon-glow);
-        }
-
-        .work-item h3 {
-            color: var(--accent-color);
-            font-size: 1.6rem;
-            margin-bottom: 12px;
-        }
-
-        .work-item h4 {
-            color: var(--text-primary);
-            font-size: 1.3rem;
-            margin-bottom: 12px;
-        }
-
-        .work-item p {
-            color: var(--text-secondary);
-            line-height: 1.7;
-            font-size: 1rem;
-        }
-
-        /* Life Section */
-        .life-content {
-            text-align: center;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .life-content p {
-            font-size: 1.1rem;
-            line-height: 1.8;
-            color: var(--text-secondary);
-            margin-bottom: 24px;
-        }
-
-        .life-highlights {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 24px;
-            margin-top: 32px;
-        }
-
-        .highlight-card {
-            padding: 24px;
-            border-radius: 12px;
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-
-        .highlight-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--neon-glow);
-        }
-
-        .highlight-card i {
-            font-size: 2.5rem;
-            color: var(--accent-color);
-            margin-bottom: 16px;
-        }
-
-        .highlight-card h3 {
-            color: var(--text-primary);
-            font-size: 1.4rem;
-            margin-bottom: 12px;
-        }
-
-        .highlight-card p {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-            line-height: 1.7;
-        }
-
-        /* Balance Section */
-        .balance-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 32px;
-            margin-top: 32px;
-        }
-
-        .balance-item {
-            padding: 32px;
-            border-radius: 12px;
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-
-        .balance-item:hover {
-            transform: scale(1.03);
-            box-shadow: var(--neon-glow);
-        }
-
-        .balance-item i {
-            font-size: 3.5rem;
-            color: var(--accent-color);
-            margin-bottom: 20px;
-        }
-
-        .balance-item h3 {
-            color: var(--text-primary);
-            font-size: 1.6rem;
-            margin-bottom: 16px;
-        }
-
-        .balance-item p {
-            color: var(--text-secondary);
-            line-height: 1.7;
-            font-size: 1rem;
-        }
-
-        /* Articles Section */
-        .articles-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
-            gap: 24px;
-            margin-top: 32px;
-        }
-
-        .article-card {
-            padding: 24px;
-            border-radius: 12px;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .article-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(16, 163, 127, 0.2), transparent);
-            transition: left 0.5s;
-        }
-
-        .article-card:hover::before {
-            left: 100%;
-        }
-
-        .article-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--neon-glow);
-        }
-
-        .article-date {
-            color: var(--accent-color);
-            font-size: 0.9rem;
-            margin-bottom: 12px;
-            font-weight: 500;
-        }
-
-        .article-card h3 {
-            color: var(--text-primary);
-            font-size: 1.4rem;
-            margin-bottom: 12px;
-            line-height: 1.5;
-        }
-
-        .article-card p {
-            color: var(--text-secondary);
-            line-height: 1.7;
-            margin-bottom: 16px;
-            font-size: 0.95rem;
-        }
-
-        .read-more {
-            color: var(--accent-color);
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-
-        .read-more:hover {
-            color: var(--text-primary);
-            text-decoration: underline;
-        }
-
-        /* Contact Form */
-        .contact-form {
-            max-width: 600px;
-            margin: 40px auto;
-            padding: 32px;
-            border-radius: 12px;
-        }
-
-        .contact-form input,
-        .contact-form textarea {
-            width: 100%;
-            padding: 12px;
-            margin-bottom: 16px;
-            border: 1px solid var(--accent-color);
-            border-radius: 8px;
-            background: rgba(255, 255, 255, 0.03);
-            color: var(--text-primary);
-            font-size: 1rem;
-            transition: all 0.3s ease;
-        }
-
-        .contact-form input:focus,
-        .contact-form textarea:focus {
-            outline: none;
-            border-color: var(--text-primary);
-            box-shadow: var(--neon-glow);
-        }
-
-        .contact-form button {
-            background: var(--accent-color);
-            color: var(--text-primary);
-            padding: 12px 24px;
-            border: none;
-            border-radius: 8px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .contact-form button:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--neon-glow);
-        }
-
-        /* Theme Toggle */
-        .theme-toggle {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            border-radius: 50%;
-            width: 48px;
-            height: 48px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .theme-toggle:hover {
-            transform: scale(1.1);
-            box-shadow: var(--neon-glow);
-        }
-
-        /* Responsive design */
-        @media (max-width: 768px) {
-            .quote-hindi {
-                font-size: 2.2rem;
-            }
-
-            .quote-english {
-                font-size: 1.1rem;
-            }
-
-            .section h2 {
-                font-size: 2rem;
-            }
-
-            nav ul {
-                gap: 12px;
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-
-            .container {
-                padding: 80px 16px 40px;
-            }
-
-            .work-grid,
-            .articles-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Smooth scrolling */
-        html {
-            scroll-behavior: smooth;
-        }
-
-        /* Loading animation */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInUp 0.8s ease forwards;
-        }
-
-        @keyframes fadeInUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .fade-in:nth-child(1) { animation-delay: 0.1s; }
-        .fade-in:nth-child(2) { animation-delay: 0.2s; }
-        .fade-in:nth-child(3) { animation-delay: 0.3s; }
-        .fade-in:nth-child(4) { animation-delay: 0.4s; }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Arun Singh Thakur - AI Engineer Portfolio showcasing work, life, and thoughts." />
+  <meta name="author" content="Arun Singh Thakur" />
+  <link rel="icon" href="favicon.ico" />
+  <title>Arun Singh Thakur - AI Engineer</title>
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+  <style>
+    /* Root theme variables */
+    :root {
+      --primary-color: #667eea;
+      --secondary-color: #764ba2;
+      --accent-color: #f093fb;
+      --text-primary: #ffffff;
+      --text-secondary: rgba(255, 255, 255, 0.8);
+      --glass-bg: rgba(255, 255, 255, 0.1);
+      --glass-border: rgba(255, 255, 255, 0.2);
+    }
+
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: var(--text-primary);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Background animation */
+    .bg-animation {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: -1;
+      opacity: 0.1;
+    }
+
+    .floating-shapes {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+    }
+
+    .shape {
+      position: absolute;
+      background: linear-gradient(45deg, var(--accent-color), var(--primary-color));
+      border-radius: 50%;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    .shape:nth-child(1) { width: 80px; height: 80px; top: 20%; left: 10%; animation-delay: 0s; }
+    .shape:nth-child(2) { width: 120px; height: 120px; top: 60%; right: 10%; animation-delay: 2s; }
+    .shape:nth-child(3) { width: 60px; height: 60px; bottom: 20%; left: 20%; animation-delay: 4s; }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-20px) rotate(180deg); }
+    }
+
+    .glass {
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+      border-radius: 20px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1000;
+      padding: 15px 30px;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 30px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    nav a {
+      color: var(--text-primary);
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    nav a:hover {
+      color: var(--accent-color);
+      transform: translateY(-2px);
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -5px;
+      left: 50%;
+      background: var(--accent-color);
+      transition: all 0.3s ease;
+      transform: translateX(-50%);
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    /* Layout */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 100px 20px 50px;
+    }
+
+    section {
+      margin-bottom: 80px;
+      padding: 60px 40px;
+      position: relative;
+    }
+
+    section h2 {
+      font-size: 3rem;
+      text-align: center;
+      margin-bottom: 40px;
+      background: linear-gradient(135deg, var(--text-primary), var(--accent-color));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* Home */
+    .home {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 80vh;
+      text-align: center;
+    }
+
+    .quote-hindi {
+      font-size: 4rem;
+      font-weight: 700;
+      margin-bottom: 30px;
+      background: linear-gradient(135deg, var(--text-primary), var(--accent-color));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: glow 2s ease-in-out infinite alternate;
+    }
+
+    .quote-english {
+      font-size: 1.2rem;
+      font-style: italic;
+      color: var(--text-secondary);
+    }
+
+    @keyframes glow {
+      from { filter: brightness(1); }
+      to { filter: brightness(1.2); }
+    }
+
+    /* Resume */
+    .download-section {
+      text-align: center;
+    }
+
+    .download-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 15px;
+      background: linear-gradient(135deg, var(--accent-color), var(--primary-color));
+      color: white;
+      padding: 20px 40px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-size: 1.2rem;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .download-btn:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Fade-in animation */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeInUp 0.8s ease forwards;
+    }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .fade-in:nth-child(1) { animation-delay: 0.1s; }
+    .fade-in:nth-child(2) { animation-delay: 0.2s; }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .quote-hindi {
+        font-size: 2.5rem;
+      }
+
+      .section h2 {
+        font-size: 2.2rem;
+      }
+
+      nav ul {
+        gap: 15px;
+      }
+
+      .container {
+        padding: 80px 15px 30px;
+      }
+    }
+  </style>
 </head>
 <body>
-    <!-- Animated background -->
-    <div class="bg-animation">
-        <div class="floating-shapes">
-            <div class="shape"></div>
-            <div class="shape"></div>
-            <div class="shape"></div>
-        </div>
+  <!-- Background -->
+  <div class="bg-animation">
+    <div class="floating-shapes">
+      <div class="shape"></div>
+      <div class="shape"></div>
+      <div class="shape"></div>
     </div>
+  </div>
 
-    <!-- Theme Toggle -->
-    <div class="theme-toggle" id="themeToggle">
-        <i class="fas fa-moon"></i>
-    </div>
+  <!-- Navigation -->
+  <nav class="glass" role="navigation" aria-label="Main Navigation">
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#resume">Resume</a></li>
+      <li><a href="#work">Work</a></li>
+      <li><a href="#life">Life</a></li>
+      <li><a href="#balance">Balance</a></li>
+      <li><a href="#articles">Articles</a></li>
+    </ul>
+  </nav>
 
-    <!-- Navigation -->
-    <nav class="glass">
-        <ul>
-            <li><a href="#home">Home</a></li>
-            <li><a href="#resume">Resume</a></li>
-            <li><a href="#work">Work</a></li>
-            <li><a href="#life">Life</a></li>
-            <li><a href="#balance">Balance</a></li>
-            <li><a href="#articles">Articles</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-    </nav>
+  <main class="container">
+    <!-- Home -->
+    <section id="home" class="home fade-in">
+      <div class="quote-hindi">zinda ho toh zinda nazar aana zaroori hai</div>
+      <div class="quote-english">If you are alive, it is important to look alive</div>
+    </section>
 
-    <div class="container">
-        <!-- Home Section -->
-        <section id="home" class="home fade-in">
-            <div class="quote-hindi">zinda ho toh zinda nazar aana zaroori hai</div>
-            <div class="quote-english">If you are alive, it is important to look alive</div>
-        </section>
+    <!-- About -->
+    <section id="about" class="section glass fade-in">
+      <h2>About Me</h2>
+      <p style="text-align: center; font-size: 1.2rem; max-width: 800px; margin: 0 auto; color: var(--text-secondary);">
+        I'm Arun Singh Thakur, an AI Engineer passionate about building intelligent systems that solve real-world problems. My work spans agentic AI, multimodal RAG systems, and educational technology. I thrive at the intersection of deep tech and human-centric design.
+      </p>
+    </section>
 
-        <!-- Download Resume Section -->
-        <section id="resume" class="section glass fade-in">
-            <h2>Resume</h2>
-            <div class="download-section">
-                <a href="arun_ai-engineer_resume.pdf" class="download-btn" downloadable>
-                    <i class="fas fa-download"></i>
-                    Download Resume
-                </a>
-            </div>
-        </section>
+    <!-- Resume -->
+    <section id="resume" class="section glass fade-in">
+      <h2>Resume</h2>
+      <div class="download-section">
+        <a href="Arun_Singh_Thakur_Resume.pdf" class="download-btn" download>
+          <i class="fas fa-download"></i>
+          Download Resume
+        </a>
+      </div>
+    </section>
 
-        <!-- Work Section -->
-        <section id="work" class="section glass fade-in">
-            <h2>Work</h2>
-            <div class="work-grid">
-                <div class="work-item glass">
-                    <h3>Braiyt MENA</h3>
-                    <h4>AI Engineer</h4>
-                    <p>Dubai, UAE</p>
-                    <p>Developed Agentic AI chatbots, autonomous inventory agents, and Agent Hub platform. Built AI-powered solutions for law enforcement, inventory management, and business intelligence.</p>
-                </div>
-                
-                <div class="work-item glass">
-                    <h3>Fixity Technologies</h3>
-                    <h4>AI Engineer</h4>
-                    <p>Bangalore, India</p>
-                    <p>Engineered assignment generators, fine-tuned LLMs, developed multimodal RAG systems, and built intelligent educational content creation pipelines.</p>
-                </div>
-                
-                <div class="work-item glass">
-                    <h3>Genpact</h3>
-                    <h4>Data Science Intern</h4>
-                    <p>Bangalore, India</p>
-                    <p>Worked on data science projects and gained hands-on experience in machine learning and data analysis.</p>
-                </div>
-                
-                <div class="work-item glass">
-                    <h3>Google Developer Student Club</h3>
-                    <h4>Technical Lead & AI Lead</h4>
-                    <p>NIIT University</p>
-                    <p>Led technical initiatives and AI projects, mentored students, and organized workshops and events for the developer community.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Life Section -->
-        <section id="life" class="section glass fade-in">
-            <h2>Life</h2>
-            <div class="life-content">
-                <p>Life is a beautiful journey of continuous learning and growth. From the classrooms of NIIT University to the bustling tech hubs of Bangalore and now the innovative landscape of Dubai, every step has been a lesson in resilience, curiosity, and human connection.</p>
-                
-                <p>I believe in the power of technology to transform lives, but more importantly, in the power of empathy to guide that transformation. Every algorithm I write, every model I train, carries with it the hope of making someone's life a little bit better.</p>
-                
-                <div class="life-highlights">
-                    <div class="highlight-card glass">
-                        <i class="fas fa-graduation-cap"></i>
-                        <h3>Learning</h3>
-                        <p>From computer science fundamentals to cutting-edge AI research, the journey of learning never stops.</p>
-                    </div>
-                    
-                    <div class="highlight-card glass">
-                        <i class="fas fa-globe"></i>
-                        <h3>Exploring</h3>
-                        <p>Traveling from India to UAE, experiencing diverse cultures and perspectives that shape my worldview.</p>
-                    </div>
-                    
-                    <div class="highlight-card glass">
-                        <i class="fas fa-heart"></i>
-                        <h3>Connecting</h3>
-                        <p>Building meaningful relationships with colleagues, mentors, and friends across the globe.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Balance Section -->
-        <section id="balance" class="section glass fade-in">
-            <h2>Balance</h2>
-            <div class="balance-grid">
-                <div class="balance-item glass">
-                    <i class="fas fa-code"></i>
-                    <h3>Technology</h3>
-                    <p>Staying at the forefront of AI and machine learning, constantly exploring new frameworks, models, and methodologies. The digital world is my canvas for innovation.</p>
-                </div>
-                
-                <div class="balance-item glass">
-                    <i class="fas fa-leaf"></i>
-                    <h3>Nature</h3>
-                    <p>Finding peace in nature's embrace. Whether it's a quiet morning walk or weekend hikes, nature provides the clarity and inspiration needed for creative thinking.</p>
-                </div>
-                
-                <div class="balance-item glass">
-                    <i class="fas fa-users"></i>
-                    <h3>Community</h3>
-                    <p>Giving back through mentorship, sharing knowledge, and building inclusive tech communities. Success is meaningful only when it's shared.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Articles Section -->
-        <section id="articles" class="section glass fade-in">
-            <h2>Articles</h2>
-            <div class="articles-grid">
-                <div class="article-card glass">
-                    <div class="article-date">Coming Soon</div>
-                    <h3>The Future of Agentic AI: Beyond Simple Automation</h3>
-                    <p>Exploring how autonomous AI agents are reshaping industries and the philosophical implications of truly intelligent systems.</p>
-                    <a href="#" class="read-more">Read More →</a>
-                </div>
-                
-                <div class="article-card glass">
-                    <div class="article-date">Coming Soon</div>
-                    <h3>Building Multimodal RAG Systems: Lessons from the Field</h3>
-                    <p>A deep dive into the challenges and solutions for creating RAG systems that can process text, images, and structured data simultaneously.</p>
-                    <a href="#" class="read-more">Read More →</a>
-                </div>
-                
-                <div class="article-card glass">
-                    <div class="article-date">Coming Soon</div>
-                    <h3>From Bangalore to Dubai: An AI Engineer's Journey</h3>
-                    <p>Reflections on cultural adaptation, professional growth, and the universal language of technology across borders.</p>
-                    <a href="#" class="read-more">Read More →</a>
-                </div>
-            </div>
-        </section>
-
-        <!-- Contact Section -->
-        <section id="contact" class="section glass fade-in">
-            <h2>Contact</h2>
-            <form class="contact-form glass">
-                <input type="text" id="name" placeholder="Your Name" required>
-                <input type="email" id="email" placeholder="Your Email" required>
-                <textarea id="message" placeholder="Your Message" rows="5" required></textarea>
-                <button type="submit">Send Message</button>
-            </form>
-        </section>
-    </div>
-
-    <script>
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('nav a').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                target.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-            });
-        });
-
-        // Add animation classes on scroll
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.animationPlayState = 'running';
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.fade-in').forEach(el => {
-            observer.observe(el);
-        });
-
-        // Parallax effect for floating shapes
-        window.addEventListener('scroll', () => {
-            const scrolled = window.pageYOffset;
-            const shapes = document.querySelectorAll('.shape');
-            
-            shapes.forEach((shape, index) => {
-                const speed = 0.3 + (index * 0.1);
-                shape.style.transform = `translateY(${scrolled * speed}px) scale(1)`;
-            });
-        });
-
-        // Theme toggle
-        const themeToggle = document.getElementById('themeToggle');
-        themeToggle.addEventListener('click', () => {
-            document.body.classList.toggle('light-theme');
-            themeToggle.innerHTML = document.body.classList.contains('light-theme')
-                ? '<i class="fas fa-sun"></i>'
-                : '<i class="fas fa-moon"></i>';
-        });
-
-        // Contact form submission
-        const contactForm = document.querySelector('.contact-form');
-        contactForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const message = document.getElementById('message').value;
-            
-            // For demo purposes, show an alert
-            alert(`Message sent!\nName: ${name}\nEmail: ${email}\nMessage: ${message}`);
-            contactForm.reset();
-            
-            // For real implementation, use a backend service like Formspree
-            /*
-            fetch('https://formspree.io/f/your-form-id', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ name, email, message })
-            })
-            .then(response => response.json())
-            .then(data => {
-                alert('Message sent successfully!');
-                contactForm.reset();
-            })
-            .catch(error => {
-                alert('Error sending message. Please try again.');
-            });
-            */
-        });
-
-        // Cursor effect
-        document.addEventListener('mousemove', (e) => {
-            const cursor = document.querySelector('.cursor');
-            if (!cursor) {
-                const newCursor = document.createElement('div');
-                newCursor.className = 'cursor';
-                newCursor.style.cssText = `
-                    position: fixed;
-                    width: 16px;
-                    height: 16px;
-                    background: radial-gradient(circle, var(--accent-color), transparent 70%);
-                    border-radius: 50%;
-                    pointer-events: none;
-                    z-index: 9999;
-                    transition: transform 0.2s ease;
-                `;
-                document.body.appendChild(newCursor);
-            }
-            
-            const actualCursor = document.querySelector('.cursor');
-            if (actualCursor) {
-                actualCursor.style.left = e.clientX - 8 + 'px';
-                actualCursor.style.top = e.clientY - 8 + 'px';
-            }
-        });
-    </script>
+    <!-- Additional sections (Work, Life, Balance, Articles) go here... -->
+  </main>
 </body>
 </html>
