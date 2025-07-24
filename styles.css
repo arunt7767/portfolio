@@ -448,146 +448,93 @@ header {
     border: 1px solid rgba(247, 247, 248, 0.1);
 }
 
-.work-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 1px;
-    opacity: 0;
-    transition: opacity 0.3s ease;
+.work-card.expanded {
+    padding-bottom: 40px;
 }
 
-.light-mode .work-card::before {
-    background: linear-gradient(90deg, transparent, rgba(10, 10, 10, 0.3), transparent);
+.work-card-summary {
+    pointer-events: none;
 }
 
-.dark-mode .work-card::before {
-    background: linear-gradient(90deg, transparent, rgba(247, 247, 248, 0.3), transparent);
-}
-
-.work-card:hover {
-    transform: translateY(-4px);
-}
-
-.light-mode .work-card:hover {
-    border-color: rgba(10, 10, 10, 0.2);
-    background: #f0f0f1;
-}
-
-.dark-mode .work-card:hover {
-    border-color: rgba(247, 247, 248, 0.2);
-    background: #333333;
-}
-
-.work-card:hover::before {
-    opacity: 1;
-}
-
-.work-card-header {
-    margin-bottom: 16px;
-}
-
-.work-card h3 {
-    font-size: 24px;
-    font-weight: 600;
+.work-card-preview p {
+    margin-top: 12px;
     margin-bottom: 8px;
+    line-height: 1.5;
 }
 
-.light-mode .work-card h3 {
-    color: #0a0a0a;
-}
-
-.dark-mode .work-card h3 {
-    color: #f7f7f8;
-}
-
-.work-card h4 {
-    font-size: 16px;
-    margin-bottom: 4px;
-    font-weight: 500;
-}
-
-.light-mode .work-card h4 {
-    color: rgba(10, 10, 10, 0.8);
-}
-
-.dark-mode .work-card h4 {
-    color: rgba(247, 247, 248, 0.8);
-}
-
-.work-card .location {
+.expand-indicator, .collapse-indicator {
     font-size: 14px;
-    margin-bottom: 16px;
+    font-weight: 500;
+    margin-top: 12px;
+    display: inline-block;
 }
 
-.light-mode .work-card .location {
-    color: rgba(10, 10, 10, 0.6);
-}
-
-.dark-mode .work-card .location {
-    color: rgba(247, 247, 248, 0.6);
-}
-
-.work-card-summary p {
-    line-height: 1.6;
-    margin-bottom: 0;
-}
-
-.light-mode .work-card-summary p {
+.light-mode .expand-indicator,
+.light-mode .collapse-indicator {
     color: rgba(10, 10, 10, 0.7);
 }
 
-.dark-mode .work-card-summary p {
+.dark-mode .expand-indicator,
+.dark-mode .collapse-indicator {
     color: rgba(247, 247, 248, 0.7);
 }
 
 .work-card-details {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.5s ease, padding 0.3s ease;
-    padding: 0 16px;
+    display: none;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid;
+    animation: fadeIn 0.3s ease-out;
 }
 
-.work-card.expanded .work-card-details {
-    max-height: 1000px;
-    padding: 16px;
+.light-mode .work-card-details {
+    border-color: rgba(10, 10, 10, 0.1);
 }
 
-.work-card-details ul {
-    padding-left: 20px;
+.dark-mode .work-card-details {
+    border-color: rgba(247, 247, 248, 0.1);
+}
+
+.project-list {
+    list-style: none;
     margin-top: 16px;
 }
 
-.work-card-details li {
-    margin-bottom: 12px;
+.project-list li {
+    margin-bottom: 24px;
+}
+
+.project-list h4 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.light-mode .project-list h4 {
+    color: #0a0a0a;
+}
+
+.dark-mode .project-list h4 {
+    color: #f7f7f8;
+}
+
+.project-list p {
     line-height: 1.6;
-    position: relative;
-    list-style-type: none;
+    font-size: 15px;
 }
 
-.work-card-details li::before {
-    content: "•";
-    color: #4f46e5;
-    font-weight: bold;
-    display: inline-block;
-    width: 1em;
-    margin-left: -1em;
-    position: absolute;
-    left: 0;
-}
-
-.light-mode .work-card-details li {
+.light-mode .project-list p {
     color: rgba(10, 10, 10, 0.8);
 }
 
-.dark-mode .work-card-details li {
+.dark-mode .project-list p {
     color: rgba(247, 247, 248, 0.8);
 }
 
-.work-card.expanded {
-    padding-bottom: 24px;
+.collapse-indicator {
+    margin-top: 20px;
+    display: block;
+    text-align: center;
 }
 
 /* Resume Section */
@@ -933,10 +880,10 @@ footer p {
 }
 
 /* Animations */
-@keyframes fadeInUp {
+@keyframes fadeIn {
     from {
         opacity: 0;
-        transform: translateY(30px);
+        transform: translateY(10px);
     }
     to {
         opacity: 1;
