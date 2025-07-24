@@ -28,27 +28,27 @@
     <!-- Hero Section -->
     <section id="home" class="hero">
         <div class="hero-content">
-            <div class="hero-badge">
-                <span>✨</span>
-                AI Engineer
+            <div class="hero-text">
+                <div class="hero-title-container">
+                    <h1 class="hero-title">zinda ho toh zinda nazar aana zaroori hai</h1>
+                    <div class="hero-divider"></div>
+                    <p class="hero-subtitle">
+                        If you are alive, it is important to look alive.
+                    </p>
+                </div>
+                <div class="cta-buttons">
+                    <a href="#" class="btn-primary" onclick="showSection('work', event)">
+                        View My Work
+                        <span>→</span>
+                    </a>
+                    <a href="#" class="btn-secondary" onclick="showSection('resume', event)">
+                        Download Resume
+                        <span>↓</span>
+                    </a>
+                </div>
             </div>
-            <div class="hero-title-container">
-                <h1 class="hero-title">zinda ho toh zinda nazar aana zaroori hai</h1>
-                <div class="hero-divider"></div>
-                <p class="hero-subtitle">
-                    If you are alive, it is important to look alive.<br>
-                    Crafting intelligent systems that bridge technology and human experience.
-                </p>
-            </div>
-            <div class="cta-buttons">
-                <a href="#" class="btn-primary" onclick="showSection('work', event)">
-                    View My Work
-                    <span>→</span>
-                </a>
-                <a href="#" class="btn-secondary" onclick="showSection('resume', event)">
-                    Download Resume
-                    <span>↓</span>
-                </a>
+            <div class="hero-image">
+                <img src="web.jpg" alt="Arun Singh Thakur">
             </div>
         </div>
     </section>
@@ -278,15 +278,6 @@
         document.addEventListener('click', function(e) {
             if (e.target.tagName === 'A' && e.target.getAttribute('href') === '#') {
                 e.preventDefault();
-            }
-        });
-        
-        // Add subtle parallax effect to hero section
-        window.addEventListener('scroll', function() {
-            const scrolled = window.pageYOffset;
-            const hero = document.querySelector('.hero');
-            if (hero && hero.style.display !== 'none') {
-                hero.style.transform = `translateY(${scrolled * 0.5}px)`;
             }
         });
     </script>
