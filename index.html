@@ -3,206 +3,734 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mount Fuji Pixel Art</title>
+    <title>Arun Singh Thakur | AI Engineer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        body {
+        * {
             margin: 0;
-            padding: 20px;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #000;
+            color: #fff;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 0 24px;
+        }
+        
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
             display: flex;
-            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            height: 64px;
+        }
+        
+        .logo {
+            font-size: 20px;
+            font-weight: 600;
+            color: #fff;
+            text-decoration: none;
+            letter-spacing: -0.02em;
+        }
+        
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+            list-style: none;
+        }
+        
+        .nav-menu a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 14px;
+            transition: color 0.2s ease;
+            position: relative;
+        }
+        
+        .nav-menu a:hover {
+            color: #fff;
+        }
+        
+        .nav-menu a.active {
+            color: #fff;
+        }
+        
+        .nav-menu a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: #fff;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
             align-items: center;
             justify-content: center;
-            min-height: 100vh;
-            background: linear-gradient(to bottom, #1a2980, #26d0ce);
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            color: white;
+            padding: 120px 24px 80px;
+            background: radial-gradient(ellipse at center, rgba(29, 78, 216, 0.1) 0%, transparent 70%);
+        }
+        
+        .hero-content {
+            max-width: 800px;
             text-align: center;
         }
         
-        .container {
-            display: flex;
-            flex-direction: column;
+        .hero-badge {
+            display: inline-flex;
             align-items: center;
-            gap: 20px;
-            background: rgba(0, 0, 0, 0.3);
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            max-width: 800px;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 8px 16px;
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 32px;
+            color: rgba(255, 255, 255, 0.8);
         }
         
-        h1 {
-            margin: 0;
-            font-size: 2.8rem;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-            letter-spacing: 1px;
+        .hero-title {
+            font-size: clamp(48px, 8vw, 72px);
+            font-weight: 700;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            margin-bottom: 24px;
+            background: linear-gradient(135deg, #fff 0%, rgba(255, 255, 255, 0.7) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
         
-        .subtitle {
-            font-size: 1.2rem;
-            margin-top: -5px;
-            margin-bottom: 15px;
-            opacity: 0.9;
+        .hero-subtitle {
+            font-size: 20px;
+            color: rgba(255, 255, 255, 0.7);
+            font-weight: 400;
+            margin-bottom: 40px;
+            line-height: 1.5;
         }
         
-        .canvas-container {
-            background: #f0f0f0;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
-            margin: 10px;
+        .cta-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
         }
         
-        canvas {
+        .btn-primary {
+            background: #fff;
+            color: #000;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+        
+        .btn-primary:hover {
+            background: rgba(255, 255, 255, 0.9);
+            transform: translateY(-1px);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+        
+        .btn-secondary:hover {
+            border-color: rgba(255, 255, 255, 0.6);
+            background: rgba(255, 255, 255, 0.05);
+        }
+        
+        /* Content Sections */
+        .content-section {
+            display: none;
+            padding: 120px 24px 80px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .content-section.active {
             display: block;
         }
         
-        .description {
+        .section-header {
+            text-align: center;
+            margin-bottom: 64px;
+        }
+        
+        .section-title {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            letter-spacing: -0.02em;
+        }
+        
+        .section-subtitle {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.7);
             max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* Work Experience Cards */
+        .work-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 32px;
+            margin-top: 48px;
+        }
+        
+        .work-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 32px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .work-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .work-card:hover {
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-4px);
+            background: rgba(255, 255, 255, 0.03);
+        }
+        
+        .work-card:hover::before {
+            opacity: 1;
+        }
+        
+        .work-card h3 {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #fff;
+        }
+        
+        .work-card h4 {
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 4px;
+            font-weight: 500;
+        }
+        
+        .work-card .location {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 16px;
+        }
+        
+        .work-card p {
+            color: rgba(255, 255, 255, 0.7);
             line-height: 1.6;
-            font-size: 1.1rem;
-            margin-top: 10px;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 20px;
-            border-radius: 10px;
         }
         
-        .pixel-grid {
-            display: inline-grid;
-            grid-template-columns: repeat(20, 1fr);
-            gap: 1px;
-            margin: 20px 0;
-            background: #333;
-            padding: 5px;
-            border-radius: 5px;
+        /* Resume Section */
+        .resume-content {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
         }
         
-        .pixel {
-            width: 12px;
-            height: 12px;
+        .download-section {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 48px;
+            margin-bottom: 48px;
         }
         
-        .legend {
-            display: flex;
-            gap: 20px;
-            margin-top: 15px;
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 32px;
+            text-align: left;
         }
         
-        .legend-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 0.9rem;
+        .skill-category h3 {
+            color: #fff;
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 16px;
         }
         
-        .color-box {
-            width: 20px;
-            height: 20px;
-            border-radius: 4px;
-            border: 1px solid rgba(255, 255, 255, 0.3);
+        .skill-category ul {
+            list-style: none;
         }
         
-        footer {
-            margin-top: 20px;
-            font-size: 0.9rem;
+        .skill-category li {
+            color: rgba(255, 255, 255, 0.7);
+            padding: 6px 0;
+            font-size: 14px;
+        }
+        
+        .skill-category li::before {
+            content: '→';
+            margin-right: 8px;
+            color: rgba(255, 255, 255, 0.4);
+        }
+        
+        /* Life & Balance Sections */
+        .philosophy-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 32px;
+            margin-top: 48px;
+        }
+        
+        .philosophy-card {
+            text-align: center;
+            padding: 40px 24px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+        
+        .philosophy-card:hover {
+            background: rgba(255, 255, 255, 0.03);
+            border-color: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        .philosophy-icon {
+            font-size: 48px;
+            margin-bottom: 24px;
             opacity: 0.8;
+        }
+        
+        .philosophy-card h3 {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: #fff;
+        }
+        
+        .philosophy-card p {
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.6;
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 48px 24px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 80px;
+        }
+        
+        footer p {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 14px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero {
+                padding: 100px 16px 60px;
+            }
+            
+            .content-section {
+                padding: 100px 16px 60px;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .work-grid,
+            .philosophy-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .hero-content > * {
+            animation: fadeInUp 0.8s ease forwards;
+        }
+        
+        .hero-badge {
+            animation-delay: 0.1s;
+        }
+        
+        .hero-title {
+            animation-delay: 0.2s;
+        }
+        
+        .hero-subtitle {
+            animation-delay: 0.3s;
+        }
+        
+        .cta-buttons {
+            animation-delay: 0.4s;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Mount Fuji</h1>
-        <div class="subtitle">Black and White Pixel Art</div>
-        
-        <div class="canvas-container">
-            <canvas id="fujiCanvas" width="400" height="300"></canvas>
+    <!-- Header -->
+    <header>
+        <div class="header-content">
+            <a href="#" class="logo" onclick="showSection('home', event)">Arun Singh Thakur</a>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="#" onclick="showSection('home', event)" class="nav-link active">Home</a></li>
+                    <li><a href="#" onclick="showSection('resume', event)" class="nav-link">Resume</a></li>
+                    <li><a href="#" onclick="showSection('work', event)" class="nav-link">Work</a></li>
+                    <li><a href="#" onclick="showSection('life', event)" class="nav-link">Life</a></li>
+                    <li><a href="#" onclick="showSection('balance', event)" class="nav-link">Balance</a></li>
+                </ul>
+            </nav>
+            <button class="mobile-menu-btn">☰</button>
+        </div>
+    </header>
+    
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">
+                <span>✨</span>
+                AI Engineer
+            </div>
+            <h1 class="hero-title">zinda ho toh zinda nazar aana zaroori hai</h1>
+            <p class="hero-subtitle">
+                If you are alive, it is important to look alive.<br>
+                Crafting intelligent systems that bridge technology and human experience.
+            </p>
+            <div class="cta-buttons">
+                <a href="#" class="btn-primary" onclick="showSection('work', event)">
+                    View My Work
+                    <span>→</span>
+                </a>
+                <a href="#" class="btn-secondary" onclick="showSection('resume', event)">
+                    Download Resume
+                    <span>↓</span>
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Resume Section -->
+    <section id="resume" class="content-section">
+        <div class="section-header">
+            <h2 class="section-title">Resume</h2>
+            <p class="section-subtitle">
+                AI Engineer with expertise in developing agentic systems, multimodal RAG implementations, 
+                and fine-tuning LLMs for enterprise solutions.
+            </p>
         </div>
         
-        <div class="description">
-            <p>This minimalist representation captures the iconic symmetrical cone shape of Mount Fuji with its snow-capped peak. The pixel art uses only black and white to create a striking visual contrast.</p>
+        <div class="resume-content">
+            <div class="download-section">
+                <h3 style="margin-bottom: 16px; font-size: 24px;">Professional Summary</h3>
+                <p style="color: rgba(255, 255, 255, 0.7); margin-bottom: 32px; line-height: 1.6;">
+                    AI Engineer with proven ability to design and deploy AI-powered systems that solve 
+                    complex business challenges across diverse industries. Specialized in agentic systems, 
+                    autonomous agents, and intelligent chatbot development.
+                </p>
+                <a href="arun_ai-engineer_resume.pdf" class="btn-primary" download>
+                    <span>📄</span>
+                    Download Full Resume
+                </a>
+            </div>
             
-            <div class="legend">
-                <div class="legend-item">
-                    <div class="color-box" style="background-color: black;"></div>
-                    <span>Mountain</span>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3>AI & Machine Learning</h3>
+                    <ul>
+                        <li>Agentic AI Systems</li>
+                        <li>Multimodal RAG</li>
+                        <li>LLM Fine-tuning</li>
+                        <li>Autonomous Agents</li>
+                        <li>Neural Networks</li>
+                    </ul>
                 </div>
-                <div class="legend-item">
-                    <div class="color-box" style="background-color: white; border-color: #999;"></div>
-                    <span>Snow Cap</span>
+                
+                <div class="skill-category">
+                    <h3>Technologies</h3>
+                    <ul>
+                        <li>Python & PyTorch</li>
+                        <li>TensorFlow</li>
+                        <li>Transformers</li>
+                        <li>OpenAI APIs</li>
+                        <li>Docker & Kubernetes</li>
+                    </ul>
                 </div>
-                <div class="legend-item">
-                    <div class="color-box" style="background-color: #d0d0d0; border-color: #999;"></div>
-                    <span>Background</span>
+                
+                <div class="skill-category">
+                    <h3>Applications</h3>
+                    <ul>
+                        <li>AI Chatbots</li>
+                        <li>Business Intelligence AI</li>
+                        <li>Educational AI Tools</li>
+                        <li>Inventory Management</li>
+                        <li>Content Generation</li>
+                    </ul>
                 </div>
             </div>
         </div>
+    </section>
+    
+    <!-- Work Section -->
+    <section id="work" class="content-section">
+        <div class="section-header">
+            <h2 class="section-title">Work Experience</h2>
+            <p class="section-subtitle">
+                Building AI solutions across different industries and geographies
+            </p>
+        </div>
         
-        <footer>HTML5 Canvas Pixel Art | Inspired by Japan's iconic mountain</footer>
-    </div>
-
-    <script>
-        const canvas = document.getElementById('fujiCanvas');
-        const ctx = canvas.getContext('2d');
-        
-        // Set background
-        ctx.fillStyle = '#d0d0d0';
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-        
-        // Function to draw a pixel block
-        function drawBlock(x, y, width, height, color) {
-            ctx.fillStyle = color;
-            ctx.fillRect(x, y, width, height);
+        <div class="work-grid">
+            <div class="work-card">
+                <h3>Braiyt MENA</h3>
+                <h4>AI Engineer</h4>
+                <p class="location">Dubai, UAE</p>
+                <p>Developed Agentic AI chatbots, autonomous inventory agents, and Agent Hub platform. Built AI-powered solutions for law enforcement, inventory management, and business intelligence.</p>
+            </div>
             
-            // Add pixel grid effect
-            ctx.strokeStyle = 'rgba(0, 0, 0, 0.1)';
-            ctx.lineWidth = 0.5;
-            for (let i = 0; i <= width; i += 10) {
-                ctx.beginPath();
-                ctx.moveTo(x + i, y);
-                ctx.lineTo(x + i, y + height);
-                ctx.stroke();
+            <div class="work-card">
+                <h3>Fixity Technologies</h3>
+                <h4>AI Engineer</h4>
+                <p class="location">Bangalore, India</p>
+                <p>Engineered assignment generators, fine-tuned LLMs, developed multimodal RAG systems, and built intelligent educational content creation pipelines.</p>
+            </div>
+            
+            <div class="work-card">
+                <h3>Genpact</h3>
+                <h4>Data Science Intern</h4>
+                <p class="location">Bangalore, India</p>
+                <p>Worked on data science projects and gained hands-on experience in machine learning and data analysis techniques.</p>
+            </div>
+            
+            <div class="work-card">
+                <h3>Google Developer Student Club</h3>
+                <h4>Technical Lead & AI Lead</h4>
+                <p class="location">NIIT University</p>
+                <p>Led technical initiatives and AI projects, mentored students, and organized workshops and events for the developer community.</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Life Section -->
+    <section id="life" class="content-section">
+        <div class="section-header">
+            <h2 class="section-title">Life Philosophy</h2>
+            <p class="section-subtitle">
+                Continuous learning, growth, and human connection through technology
+            </p>
+        </div>
+        
+        <div style="max-width: 800px; margin: 0 auto 48px; text-align: center;">
+            <p style="font-size: 18px; line-height: 1.7; color: rgba(255, 255, 255, 0.7); margin-bottom: 32px;">
+                Life is a beautiful journey of continuous learning and growth. From the classrooms of NIIT University 
+                to the bustling tech hubs of Bangalore and now the innovative landscape of Dubai, every step has been 
+                a lesson in resilience, curiosity, and human connection.
+            </p>
+            
+            <p style="font-size: 18px; line-height: 1.7; color: rgba(255, 255, 255, 0.7);">
+                I believe in the power of technology to transform lives, but more importantly, in the power of empathy 
+                to guide that transformation. Every algorithm I write, every model I train, carries with it the hope 
+                of making someone's life a little bit better.
+            </p>
+        </div>
+        
+        <div class="philosophy-grid">
+            <div class="philosophy-card">
+                <div class="philosophy-icon">🎓</div>
+                <h3>Learning</h3>
+                <p>From computer science fundamentals to cutting-edge AI research, the journey of learning never stops.</p>
+            </div>
+            
+            <div class="philosophy-card">
+                <div class="philosophy-icon">🌍</div>
+                <h3>Exploring</h3>
+                <p>Traveling from India to UAE, experiencing diverse cultures and perspectives that shape my worldview.</p>
+            </div>
+            
+            <div class="philosophy-card">
+                <div class="philosophy-icon">💝</div>
+                <h3>Connecting</h3>
+                <p>Building meaningful relationships with colleagues, mentors, and friends across the globe.</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Balance Section -->
+    <section id="balance" class="content-section">
+        <div class="section-header">
+            <h2 class="section-title">Work-Life Balance</h2>
+            <p class="section-subtitle">
+                Harmonizing innovation, nature, and community impact
+            </p>
+        </div>
+        
+        <div class="philosophy-grid">
+            <div class="philosophy-card">
+                <div class="philosophy-icon">💻</div>
+                <h3>Technology</h3>
+                <p>Staying at the forefront of AI and machine learning, constantly exploring new frameworks, models, and methodologies. The digital world is my canvas for innovation.</p>
+            </div>
+            
+            <div class="philosophy-card">
+                <div class="philosophy-icon">🌿</div>
+                <h3>Nature</h3>
+                <p>Finding peace in nature's embrace. Whether it's a quiet morning walk or weekend hikes, nature provides the clarity and inspiration needed for creative thinking.</p>
+            </div>
+            
+            <div class="philosophy-card">
+                <div class="philosophy-icon">👥</div>
+                <h3>Community</h3>
+                <p>Giving back through mentorship, sharing knowledge, and building inclusive tech communities. Success is meaningful only when it's shared.</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <p>© 2024 Arun Singh Thakur | AI Engineer</p>
+    </footer>
+    
+    <script>
+        // Navigation functionality
+        function showSection(sectionId, event) {
+            // Prevent default anchor behavior
+            event.preventDefault();
+            
+            // Hide all sections
+            document.querySelectorAll('.content-section, .hero').forEach(section => {
+                section.classList.remove('active');
+                section.style.display = 'none';
+            });
+            
+            // Update nav links
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+            
+            // Show target section
+            if (sectionId === 'home') {
+                document.querySelector('.hero').style.display = 'flex';
+            } else {
+                document.getElementById(sectionId).classList.add('active');
+                document.getElementById(sectionId).style.display = 'block';
             }
-            for (let i = 0; i <= height; i += 10) {
-                ctx.beginPath();
-                ctx.moveTo(x, y + i);
-                ctx.lineTo(x + width, y + i);
-                ctx.stroke();
-            }
+            
+            // Update active nav link
+            event.target.classList.add('active');
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
         
-        // Draw the base of Mount Fuji
-        drawBlock(100, 200, 200, 60, 'black');
+        // Initialize - show home by default
+        document.addEventListener('DOMContentLoaded', function() {
+            // Show home section by default
+            document.querySelector('.hero').style.display = 'flex';
+            
+            // Set home link as active
+            document.querySelector('.nav-menu a[onclick*="home"]').classList.add('active');
+        });
         
-        // Draw the middle section
-        drawBlock(130, 160, 140, 40, 'black');
+        // Smooth scrolling for better UX
+        document.addEventListener('click', function(e) {
+            if (e.target.tagName === 'A' && e.target.getAttribute('href') === '#') {
+                e.preventDefault();
+            }
+        });
         
-        // Draw the upper section
-        drawBlock(160, 130, 80, 30, 'black');
-        
-        // Draw the snow cap
-        drawBlock(170, 110, 60, 20, 'white');
-        drawBlock(180, 90, 40, 20, 'white');
-        drawBlock(190, 70, 20, 20, 'white');
-        
-        // Add sun in the background
-        ctx.beginPath();
-        ctx.arc(320, 70, 40, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(255, 255, 255, 0.3)';
-        ctx.fill();
-        
-        // Add decorative elements
-        ctx.fillStyle = 'rgba(0, 0, 0, 0.2)';
-        for (let i = 0; i < 20; i++) {
-            const x = Math.random() * canvas.width;
-            const y = Math.random() * 100;
-            const size = Math.random() * 3 + 1;
-            ctx.fillRect(x, y, size, size);
-        }
-        
-        // Add title on canvas
-        ctx.font = 'bold 24px Arial';
-        ctx.fillStyle = 'black';
-        ctx.fillText('富士山', 170, 50);
+        // Add subtle parallax effect to hero section
+        window.addEventListener('scroll', function() {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.hero');
+            if (hero && hero.style.display !== 'none') {
+                hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+            }
+        });
     </script>
 </body>
 </html>
