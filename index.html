@@ -7,7 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body class="light-mode">
     <!-- Header -->
     <header>
         <div class="header-content">
@@ -145,7 +145,7 @@
                 <p>Worked on data science projects and gained hands-on experience in machine learning and data analysis techniques.</p>
             </div>
             
-            
+           
         </div>
     </section>
     
@@ -225,7 +225,13 @@
     
     <!-- Footer -->
     <footer>
-        <p>© 2025 Arun Singh Thakur | AI Engineer</p>
+        <div class="footer-content">
+            <p>© 2025 Arun Singh Thakur | AI Engineer</p>
+            <button id="theme-toggle" class="theme-toggle">
+                <span class="light-icon">☀️</span>
+                <span class="dark-icon">🌙</span>
+            </button>
+        </div>
     </footer>
     
     <script>
@@ -260,13 +266,30 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
         
-        // Initialize - show home by default
+        // Theme toggle functionality
         document.addEventListener('DOMContentLoaded', function() {
             // Show home section by default
             document.querySelector('.hero').style.display = 'flex';
             
             // Set home link as active
             document.querySelector('.nav-menu a[onclick*="home"]').classList.add('active');
+            
+            // Theme toggle
+            const themeToggle = document.getElementById('theme-toggle');
+            const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+            
+            // Check for saved theme preference or use system preference
+            const currentTheme = localStorage.getItem('theme');
+            if (currentTheme === 'dark' || (!currentTheme && prefersDarkScheme.matches)) {
+                document.body.classList.add('dark-mode');
+            }
+            
+            // Toggle theme on button click
+            themeToggle.addEventListener('click', function() {
+                document.body.classList.toggle('dark-mode');
+                const theme = document.body.classList.contains('dark-mode') ? 'dark' : 'light';
+                localStorage.setItem('theme', theme);
+            });
         });
         
         // Smooth scrolling for better UX
