@@ -431,10 +431,11 @@ header {
 
 .work-card {
     border-radius: 12px;
-    padding: 32px;
+    padding: 24px;
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
+    cursor: pointer;
 }
 
 .light-mode .work-card {
@@ -484,6 +485,10 @@ header {
     opacity: 1;
 }
 
+.work-card-header {
+    margin-bottom: 16px;
+}
+
 .work-card h3 {
     font-size: 24px;
     font-weight: 600;
@@ -525,16 +530,64 @@ header {
     color: rgba(247, 247, 248, 0.6);
 }
 
-.work-card p {
+.work-card-summary p {
     line-height: 1.6;
+    margin-bottom: 0;
 }
 
-.light-mode .work-card p {
+.light-mode .work-card-summary p {
     color: rgba(10, 10, 10, 0.7);
 }
 
-.dark-mode .work-card p {
+.dark-mode .work-card-summary p {
     color: rgba(247, 247, 248, 0.7);
+}
+
+.work-card-details {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease, padding 0.3s ease;
+    padding: 0 16px;
+}
+
+.work-card.expanded .work-card-details {
+    max-height: 1000px;
+    padding: 16px;
+}
+
+.work-card-details ul {
+    padding-left: 20px;
+    margin-top: 16px;
+}
+
+.work-card-details li {
+    margin-bottom: 12px;
+    line-height: 1.6;
+    position: relative;
+    list-style-type: none;
+}
+
+.work-card-details li::before {
+    content: "•";
+    color: #4f46e5;
+    font-weight: bold;
+    display: inline-block;
+    width: 1em;
+    margin-left: -1em;
+    position: absolute;
+    left: 0;
+}
+
+.light-mode .work-card-details li {
+    color: rgba(10, 10, 10, 0.8);
+}
+
+.dark-mode .work-card-details li {
+    color: rgba(247, 247, 248, 0.8);
+}
+
+.work-card.expanded {
+    padding-bottom: 24px;
 }
 
 /* Resume Section */
