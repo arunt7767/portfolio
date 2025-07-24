@@ -12,7 +12,7 @@
     <header>
         <div class="header-content">
             <a href="#" class="logo" onclick="showSection('home', event)">Arun Singh Thakur</a>
-            <nav>
+            <nav id="main-nav">
                 <ul class="nav-menu">
                     <li><a href="#" onclick="showSection('home', event)" class="nav-link active">Home</a></li>
                     <li><a href="#" onclick="showSection('resume', event)" class="nav-link">Resume</a></li>
@@ -21,7 +21,7 @@
                     <li><a href="#" onclick="showSection('balance', event)" class="nav-link">Balance</a></li>
                 </ul>
             </nav>
-            <button class="mobile-menu-btn">☰</button>
+            <button class="mobile-menu-btn" id="mobile-menu-btn">☰</button>
         </div>
     </header>
     
@@ -144,13 +144,6 @@
                 <p class="location">Bangalore, India</p>
                 <p>Worked on data science projects and gained hands-on experience in machine learning and data analysis techniques.</p>
             </div>
-            
-            <div class="work-card">
-                <h3>Google Developer Student Club</h3>
-                <h4>Technical Lead & AI Lead</h4>
-                <p class="location">NIIT University</p>
-                <p>Led technical initiatives and AI projects, mentored students, and organized workshops and events for the developer community.</p>
-            </div>
         </div>
     </section>
     
@@ -267,9 +260,17 @@
             // Update active nav link
             event.target.classList.add('active');
             
+            // Close mobile menu if open
+            document.getElementById('main-nav').classList.remove('mobile-visible');
+            
             // Scroll to top
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
+        
+        // Mobile menu functionality
+        document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+            document.getElementById('main-nav').classList.toggle('mobile-visible');
+        });
         
         // Theme toggle functionality
         document.addEventListener('DOMContentLoaded', function() {
@@ -297,8 +298,16 @@
             });
         });
         
-        // Smooth scrolling for better UX
+        // Close mobile menu when clicking outside
         document.addEventListener('click', function(e) {
+            const nav = document.getElementById('main-nav');
+            const btn = document.getElementById('mobile-menu-btn');
+            
+            if (!nav.contains(e.target) && e.target !== btn) {
+                nav.classList.remove('mobile-visible');
+            }
+            
+            // Smooth scrolling for better UX
             if (e.target.tagName === 'A' && e.target.getAttribute('href') === '#') {
                 e.preventDefault();
             }
