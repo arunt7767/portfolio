@@ -124,25 +124,62 @@
         </div>
         
         <div class="work-grid">
-            <div class="work-card">
-                <h3>Braiyt MENA</h3>
-                <h4>AI Engineer</h4>
-                <p class="location">Dubai, UAE</p>
-                <p>Developed Agentic AI chatbots, autonomous inventory agents, and Agent Hub platform. Built AI-powered solutions for law enforcement, inventory management, and business intelligence.</p>
+            <div class="work-card" onclick="toggleWorkDetails(this)">
+                <div class="work-card-header">
+                    <h3>Braiyt MENA</h3>
+                    <h4>AI Engineer</h4>
+                    <p class="location">Dubai, UAE</p>
+                    <div class="work-card-summary">
+                        <p>Developed Agentic AI chatbots, autonomous inventory agents, and Agent Hub platform.</p>
+                    </div>
+                </div>
+                <div class="work-card-details">
+                    <ul>
+                        <li>Developed a Agentic AI chatbot that analyzes high-frequency camera data, allowing users to interact with operational insights in their own language without technical expertise, enabling faster decision-making across multi-client environments, including a major Dubai-based gym.</li>
+                        <li>Built autonomous inventory agents to monitor stock levels and trigger reorder workflows, resulting in a 25% reduction in inventory costs through automated procurement strategies.</li>
+                        <li>Designed and launched Agent Hub, a centralized platform hosting multiple AI agents for document Q&A, trend-aware marketing, and business intelligence; adopted by clients including a government agency.</li>
+                        <li>Engineered an AI-powered chatbot for a law enforcement agency enable real-time incident analysis via automated data summarization, insight extraction, visual reporting, and question answering.</li>
+                        <li>Developed an aspect-based text summarization system for extracting actionable insights from unstructured data, enhancing operational decision making.</li>
+                        <li>Built an autonomous RFP response writer that analyzes RFP documents, suggests optimal response templates, and generates draft responses with minimal human input significantly accelerating bid preparation workflows.</li>
+                    </ul>
+                </div>
             </div>
             
-            <div class="work-card">
-                <h3>Fixity Technologies</h3>
-                <h4>AI Engineer</h4>
-                <p class="location">Bangalore, India</p>
-                <p>Engineered assignment generators, fine-tuned LLMs, developed multimodal RAG systems, and built intelligent educational content creation pipelines.</p>
+            <div class="work-card" onclick="toggleWorkDetails(this)">
+                <div class="work-card-header">
+                    <h3>Fixity Technologies</h3>
+                    <h4>AI Engineer</h4>
+                    <p class="location">Bangalore, India</p>
+                    <div class="work-card-summary">
+                        <p>Engineered assignment generators, fine-tuned LLMs, developed multimodal RAG systems.</p>
+                    </div>
+                </div>
+                <div class="work-card-details">
+                    <ul>
+                        <li>Engineered an agentic assignment generator using prompt-tuned Claude 3 Sonnet and GPT-4o for autonomous question generation and intelligent evaluation, reducing manual workload by 30%.</li>
+                        <li>Developed an adaptive question generation system with iterative refinement, leveraging multi-model AI interactions for enhanced accuracy.</li>
+                        <li>Created an intelligent educational content creation pipeline with automated scoring and feedback loops, processing up to 1,000 questions per hour.</li>
+                    </ul>
+                </div>
             </div>
             
-            <div class="work-card">
-                <h3>Genpact</h3>
-                <h4>Data Science Intern</h4>
-                <p class="location">Bangalore, India</p>
-                <p>Worked on data science projects and gained hands-on experience in machine learning and data analysis techniques.</p>
+            <div class="work-card" onclick="toggleWorkDetails(this)">
+                <div class="work-card-header">
+                    <h3>Genpact</h3>
+                    <h4>Data Science Intern</h4>
+                    <p class="location">Bangalore, India</p>
+                    <div class="work-card-summary">
+                        <p>Worked on data science projects and gained hands-on experience in machine learning.</p>
+                    </div>
+                </div>
+                <div class="work-card-details">
+                    <ul>
+                        <li>Fine-tuned a large language model using LORA and QLORA, achieving a 20% improvement in performance for client-specific tasks.</li>
+                        <li>Developed an LLM evaluator for a RAG pipeline, enabling customization of retrievers and vector databases, improving context retrieval accuracy by 15%.</li>
+                        <li>Built a multimodal RAG system incorporating tables, text, and images, integrated with a re-ranker for enhanced context retrieval.</li>
+                        <li>Performed exploratory data analysis (EDA) and fine-tuned BERT models for aspect-based sentiment analysis, improving model accuracy by 10%.</li>
+                    </ul>
+                </div>
             </div>
         </div>
     </section>
@@ -267,8 +304,22 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
         
+        // Toggle work experience details
+        function toggleWorkDetails(card) {
+            // Close all other open cards first
+            document.querySelectorAll('.work-card').forEach(otherCard => {
+                if (otherCard !== card && otherCard.classList.contains('expanded')) {
+                    otherCard.classList.remove('expanded');
+                }
+            });
+            
+            // Toggle current card
+            card.classList.toggle('expanded');
+        }
+        
         // Mobile menu functionality
-        document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+        document.getElementById('mobile-menu-btn').addEventListener('click', function(e) {
+            e.stopPropagation();
             document.getElementById('main-nav').classList.toggle('mobile-visible');
         });
         
