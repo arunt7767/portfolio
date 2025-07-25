@@ -693,17 +693,16 @@ header {
     color: rgba(247, 247, 248, 0.7);
 }
 
-.skills-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 32px;
+.skills-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 24px;
     text-align: left;
 }
 
-.skill-category h3 {
-    font-size: 18px;
-    font-weight: 600;
-    margin-bottom: 16px;
+.skill-category {
+    flex: 1;
+    min-width: 0;
 }
 
 .light-mode .skill-category h3 {
@@ -1023,6 +1022,12 @@ footer p {
     .skills-grid {
         grid-template-columns: 1fr;
     }
+    @media (max-width: 768px) {
+    .skills-container {
+        flex-direction: column;
+        gap: 32px;
+    }
+}
     
     .footer-content {
         flex-direction: column;
