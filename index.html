@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Arun Singh Thakur | AI Engineer</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -39,7 +39,7 @@
             right: 0;
             z-index: 1000;
             backdrop-filter: blur(20px);
-            padding: 0 24px;
+            padding: 0 16px;
         }
 
         .light-mode header {
@@ -58,11 +58,11 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            height: 64px;
+            height: 60px;
         }
 
         .logo {
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 600;
             text-decoration: none;
             letter-spacing: -0.02em;
@@ -79,7 +79,7 @@
         .nav-menu {
             display: flex;
             align-items: center;
-            gap: 32px;
+            gap: 24px;
             list-style: none;
         }
 
@@ -87,8 +87,9 @@
             text-decoration: none;
             font-weight: 400;
             font-size: 14px;
-            transition: color 0.2s ease;
+            padding: 8px;
             position: relative;
+            touch-action: manipulation;
         }
 
         .light-mode .nav-menu a {
@@ -99,11 +100,11 @@
             color: rgba(247, 247, 248, 0.8);
         }
 
-        .light-mode .nav-menu a:hover {
+        .light-mode .nav-menu a:hover, .light-mode .nav-menu a:focus {
             color: #0a0a0a;
         }
 
-        .dark-mode .nav-menu a:hover {
+        .dark-mode .nav-menu a:hover, .dark-mode .nav-menu a:focus {
             color: #f7f7f8;
         }
 
@@ -130,9 +131,9 @@
         .nav-menu a.active::after {
             content: '';
             position: absolute;
-            bottom: -20px;
-            left: 0;
-            right: 0;
+            bottom: -2px;
+            left: 8px;
+            right: 8px;
             height: 2px;
         }
 
@@ -142,6 +143,8 @@
             border: none;
             font-size: 24px;
             cursor: pointer;
+            padding: 8px;
+            touch-action: manipulation;
         }
 
         .light-mode .mobile-menu-btn {
@@ -155,20 +158,19 @@
         /* Mobile Menu Styles */
         @media (max-width: 768px) {
             header {
-                padding: 0 16px;
+                padding: 0 12px;
             }
 
             .nav-menu {
                 position: fixed;
-                top: 64px;
+                top: 60px;
                 left: 0;
                 right: 0;
-                background: inherit;
                 flex-direction: column;
                 align-items: flex-start;
-                padding: 20px;
-                gap: 20px;
-                height: calc(100vh - 64px);
+                padding: 16px;
+                gap: 16px;
+                height: calc(100vh - 60px);
                 transform: translateX(-100%);
                 transition: transform 0.3s ease;
                 z-index: 999;
@@ -186,8 +188,16 @@
                 transform: translateX(0);
             }
 
+            .nav-menu a {
+                font-size: 16px;
+                padding: 12px;
+                width: 100%;
+            }
+
             .nav-menu a.active::after {
-                bottom: -10px;
+                bottom: 0;
+                left: 12px;
+                right: 12px;
             }
 
             .mobile-menu-btn {
@@ -200,7 +210,7 @@
             min-height: 100vh;
             display: flex;
             align-items: center;
-            padding: 120px 24px 80px;
+            padding: 80px 16px 60px;
         }
 
         .light-mode .hero {
@@ -218,7 +228,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            gap: 60px;
+            gap: 40px;
         }
 
         .hero-text {
@@ -239,24 +249,23 @@
         }
 
         .light-mode .hero-image img {
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
         }
 
         .dark-mode .hero-image img {
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
         }
 
         .hero-title-container {
-            margin: 40px 0;
+            margin: 32px 0;
         }
 
         .hero-title {
-            font-size: clamp(32px, 6vw, 72px);
+            font-size: clamp(32px, 6vw, 48px);
             font-weight: 700;
             line-height: 1.1;
             letter-spacing: -0.02em;
-            margin-bottom: 32px;
-            text-align: left;
+            margin-bottom: 24px;
         }
 
         .light-mode .hero-title {
@@ -269,8 +278,8 @@
 
         .hero-divider {
             height: 1px;
-            width: 100px;
-            margin: 32px 0;
+            width: 80px;
+            margin: 24px 0;
         }
 
         .light-mode .hero-divider {
@@ -282,11 +291,11 @@
         }
 
         .hero-subtitle {
-            font-size: clamp(16px, 4vw, 20px);
+            font-size: clamp(16px, 3vw, 18px);
             font-weight: 400;
             line-height: 1.5;
             max-width: 500px;
-            margin-bottom: 40px;
+            margin-bottom: 32px;
         }
 
         .light-mode .hero-subtitle {
@@ -299,10 +308,10 @@
 
         .cta-buttons {
             display: flex;
-            gap: 16px;
+            gap: 12px;
             justify-content: flex-start;
             flex-wrap: wrap;
-            margin-top: 60px;
+            margin-top: 40px;
         }
 
         .btn-primary {
@@ -315,8 +324,8 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            transition: all 0.2s ease;
             cursor: pointer;
+            touch-action: manipulation;
         }
 
         .light-mode .btn-primary {
@@ -329,16 +338,8 @@
             color: #0a0a0a;
         }
 
-        .btn-primary:hover {
-            transform: translateY(-1px);
-        }
-
-        .light-mode .btn-primary:hover {
-            background: rgba(10, 10, 10, 0.9);
-        }
-
-        .dark-mode .btn-primary:hover {
-            background: rgba(247, 247, 248, 0.9);
+        .btn-primary:active {
+            transform: scale(0.98);
         }
 
         .btn-secondary {
@@ -351,8 +352,8 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            transition: all 0.2s ease;
             cursor: pointer;
+            touch-action: manipulation;
         }
 
         .light-mode .btn-secondary {
@@ -365,24 +366,14 @@
             border: 1px solid rgba(247, 247, 248, 0.3);
         }
 
-        .btn-secondary:hover {
-            transform: translateY(-1px);
-        }
-
-        .light-mode .btn-secondary:hover {
-            border-color: rgba(10, 10, 10, 0.6);
-            background: rgba(10, 10, 10, 0.05);
-        }
-
-        .dark-mode .btn-secondary:hover {
-            border-color: rgba(247, 247, 248, 0.6);
-            background: rgba(247, 247, 248, 0.05);
+        .btn-secondary:active {
+            transform: scale(0.98);
         }
 
         /* Content Sections */
         .content-section {
             display: none;
-            padding: 120px 24px 80px;
+            padding: 80px 16px 60px;
             max-width: 1200px;
             margin: 0 auto;
         }
@@ -401,13 +392,13 @@
 
         .section-header {
             text-align: center;
-            margin-bottom: 64px;
+            margin-bottom: 48px;
         }
 
         .section-title {
-            font-size: clamp(32px, 6vw, 48px);
+            font-size: clamp(28px, 5vw, 36px);
             font-weight: 700;
-            margin-bottom: 16px;
+            margin-bottom: 12px;
             letter-spacing: -0.02em;
         }
 
@@ -420,7 +411,7 @@
         }
 
         .section-subtitle {
-            font-size: clamp(16px, 3vw, 18px);
+            font-size: clamp(14px, 2.5vw, 16px);
             max-width: 600px;
             margin: 0 auto;
         }
@@ -436,18 +427,17 @@
         /* Work Experience Cards */
         .work-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 24px;
-            margin-top: 48px;
+            margin-top: 32px;
         }
 
         .work-card {
             border-radius: 12px;
-            padding: 32px;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
+            padding: 24px;
+            transition: transform 0.2s ease;
             cursor: pointer;
+            touch-action: manipulation;
         }
 
         .light-mode .work-card {
@@ -460,20 +450,12 @@
             border: 1px solid rgba(247, 247, 248, 0.1);
         }
 
-        .work-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .light-mode .work-card:hover {
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .dark-mode .work-card:hover {
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        .work-card:active {
+            transform: scale(0.98);
         }
 
         .work-card h3 {
-            font-size: clamp(20px, 4vw, 24px);
+            font-size: clamp(18px, 3vw, 20px);
             font-weight: 600;
             margin-bottom: 8px;
         }
@@ -487,7 +469,7 @@
         }
 
         .work-card h4 {
-            font-size: 16px;
+            font-size: 14px;
             margin-bottom: 4px;
             font-weight: 500;
         }
@@ -501,8 +483,8 @@
         }
 
         .work-card .location {
-            font-size: 14px;
-            margin-bottom: 16px;
+            font-size: 13px;
+            margin-bottom: 12px;
         }
 
         .light-mode .work-card .location {
@@ -515,7 +497,8 @@
 
         .work-card p {
             line-height: 1.6;
-            margin-bottom: 16px;
+            font-size: 14px;
+            margin-bottom: 12px;
         }
 
         .light-mode .work-card p {
@@ -527,10 +510,10 @@
         }
 
         .view-projects {
-            margin-top: 20px;
+            margin-top: 16px;
             font-weight: 500;
             display: inline-block;
-            transition: all 0.2s ease;
+            font-size: 14px;
         }
 
         .light-mode .view-projects {
@@ -541,14 +524,10 @@
             color: rgba(247, 247, 248, 0.7);
         }
 
-        .work-card:hover .view-projects {
-            transform: translateX(5px);
-        }
-
         /* Project Pages */
         #project-pages {
             display: none;
-            padding: 120px 24px 80px;
+            padding: 80px 16px 60px;
             max-width: 1200px;
             margin: 0 auto;
         }
@@ -566,27 +545,27 @@
         }
 
         .projects-header {
-            margin-bottom: 40px;
+            margin-bottom: 32px;
             display: flex;
             align-items: center;
-            gap: 20px;
+            gap: 16px;
         }
 
         .projects-header h2 {
-            font-size: clamp(24px, 5vw, 36px);
+            font-size: clamp(20px, 4vw, 28px);
             font-weight: 700;
         }
 
         .back-button {
             background: none;
             border: none;
-            font-size: 18px;
+            font-size: 16px;
             cursor: pointer;
             display: flex;
             align-items: center;
-            padding: 8px 12px;
+            padding: 8px;
             border-radius: 6px;
-            transition: all 0.2s ease;
+            touch-action: manipulation;
         }
 
         .light-mode .back-button {
@@ -597,26 +576,20 @@
             color: #f7f7f8;
         }
 
-        .light-mode .back-button:hover {
-            background: rgba(10, 10, 10, 0.1);
-        }
-
-        .dark-mode .back-button:hover {
-            background: rgba(247, 247, 248, 0.1);
+        .back-button:active {
+            background: rgba(0, 0, 0, 0.1);
         }
 
         .projects-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 24px;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
         }
 
         .project-card {
-            padding: 24px;
+            padding: 20px;
             border-radius: 12px;
-            transition: all 0.3s ease;
-            opacity: 0;
-            transform: translateY(20px);
+            transition: transform 0.2s ease;
         }
 
         .light-mode .project-card {
@@ -630,9 +603,9 @@
         }
 
         .project-card h3 {
-            font-size: clamp(18px, 3vw, 20px);
+            font-size: clamp(16px, 2.5vw, 18px);
             font-weight: 600;
-            margin-bottom: 16px;
+            margin-bottom: 12px;
         }
 
         .light-mode .project-card h3 {
@@ -645,7 +618,7 @@
 
         .project-card p {
             line-height: 1.6;
-            font-size: 15px;
+            font-size: 14px;
         }
 
         .light-mode .project-card p {
@@ -665,8 +638,8 @@
 
         .download-section {
             border-radius: 12px;
-            padding: clamp(24px, 5vw, 48px);
-            margin-bottom: 48px;
+            padding: clamp(20px, 4vw, 32px);
+            margin-bottom: 32px;
         }
 
         .light-mode .download-section {
@@ -680,8 +653,8 @@
         }
 
         .download-section h3 {
-            margin-bottom: 16px;
-            font-size: clamp(20px, 4vw, 24px);
+            margin-bottom: 12px;
+            font-size: clamp(18px, 3vw, 20px);
         }
 
         .light-mode .download-section h3 {
@@ -693,8 +666,9 @@
         }
 
         .download-section p {
-            margin-bottom: 32px;
+            margin-bottom: 24px;
             line-height: 1.6;
+            font-size: 14px;
         }
 
         .light-mode .download-section p {
@@ -705,11 +679,10 @@
             color: rgba(247, 247, 248, 0.7);
         }
 
-        /* Updated Skills Section - Flexbox instead of Grid */
         .skills-section h3 {
             text-align: center;
-            margin-bottom: 32px;
-            font-size: clamp(20px, 4vw, 24px);
+            margin-bottom: 24px;
+            font-size: clamp(18px, 3vw, 20px);
         }
 
         .light-mode .skills-section h3 {
@@ -723,7 +696,7 @@
         .skills-container {
             display: flex;
             justify-content: space-between;
-            gap: 24px;
+            gap: 20px;
             text-align: left;
         }
 
@@ -733,9 +706,9 @@
         }
 
         .skill-category h4 {
-            font-size: clamp(16px, 3vw, 18px);
+            font-size: clamp(14px, 2.5vw, 16px);
             font-weight: 600;
-            margin-bottom: 16px;
+            margin-bottom: 12px;
         }
 
         .light-mode .skill-category h4 {
@@ -752,7 +725,7 @@
 
         .skill-category li {
             padding: 6px 0;
-            font-size: 14px;
+            font-size: 13px;
         }
 
         .light-mode .skill-category li {
@@ -779,14 +752,14 @@
         /* Life & Balance Sections */
         .life-content {
             max-width: 800px;
-            margin: 0 auto 48px;
+            margin: 0 auto 32px;
             text-align: center;
         }
 
         .life-content p {
-            font-size: clamp(16px, 3vw, 18px);
+            font-size: clamp(14px, 2.5vw, 16px);
             line-height: 1.7;
-            margin-bottom: 32px;
+            margin-bottom: 24px;
         }
 
         .light-mode .life-content p {
@@ -799,16 +772,16 @@
 
         .philosophy-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 24px;
-            margin-top: 48px;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
+            margin-top: 32px;
         }
 
         .philosophy-card {
             text-align: center;
-            padding: clamp(24px, 5vw, 40px) 24px;
+            padding: clamp(20px, 4vw, 32px);
             border-radius: 12px;
-            transition: all 0.3s ease;
+            transition: transform 0.2s ease;
         }
 
         .light-mode .philosophy-card {
@@ -821,30 +794,16 @@
             border: 1px solid rgba(247, 247, 248, 0.05);
         }
 
-        .philosophy-card:hover {
-            transform: translateY(-2px);
-        }
-
-        .light-mode .philosophy-card:hover {
-            background: #f0f0f1;
-            border-color: rgba(10, 10, 10, 0.1);
-        }
-
-        .dark-mode .philosophy-card:hover {
-            background: #333333;
-            border-color: rgba(247, 247, 248, 0.1);
-        }
-
         .philosophy-icon {
-            font-size: clamp(32px, 6vw, 48px);
-            margin-bottom: 24px;
+            font-size: clamp(28px, 5vw, 36px);
+            margin-bottom: 16px;
             opacity: 0.8;
         }
 
         .philosophy-card h3 {
-            font-size: clamp(18px, 3vw, 20px);
+            font-size: clamp(16px, 2.5vw, 18px);
             font-weight: 600;
-            margin-bottom: 16px;
+            margin-bottom: 12px;
         }
 
         .light-mode .philosophy-card h3 {
@@ -857,7 +816,7 @@
 
         .philosophy-card p {
             line-height: 1.6;
-            font-size: clamp(14px, 2.5vw, 16px);
+            font-size: 14px;
         }
 
         .light-mode .philosophy-card p {
@@ -871,8 +830,8 @@
         /* Footer */
         footer {
             text-align: center;
-            padding: 48px 24px;
-            margin-top: 80px;
+            padding: 32px 16px;
+            margin-top: 60px;
         }
 
         .light-mode footer {
@@ -892,11 +851,11 @@
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            gap: 20px;
+            gap: 16px;
         }
 
         footer p {
-            font-size: 14px;
+            font-size: 13px;
         }
 
         .light-mode footer p {
@@ -911,15 +870,15 @@
             background: transparent;
             border: none;
             cursor: pointer;
-            font-size: 24px;
+            font-size: 20px;
             padding: 8px;
             border-radius: 50%;
-            width: 40px;
-            height: 40px;
+            width: 36px;
+            height: 36px;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: all 0.3s ease;
+            touch-action: manipulation;
         }
 
         .light-mode .theme-toggle {
@@ -930,16 +889,8 @@
             color: #f7f7f8;
         }
 
-        .theme-toggle:hover {
-            transform: scale(1.1);
-        }
-
-        .light-mode .theme-toggle:hover {
-            background: rgba(10, 10, 10, 0.1);
-        }
-
-        .dark-mode .theme-toggle:hover {
-            background: rgba(247, 247, 248, 0.1);
+        .theme-toggle:active {
+            transform: scale(0.95);
         }
 
         .dark-icon {
@@ -963,21 +914,10 @@
         }
 
         /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
         @keyframes slideUp {
             from {
                 opacity: 0;
-                transform: translateY(30px);
+                transform: translateY(20px);
             }
             to {
                 opacity: 1;
@@ -986,91 +926,80 @@
         }
 
         .animate-slide-up {
-            animation: slideUp 0.5s ease forwards;
-        }
-
-        .hero-content > * {
-            animation: fadeInUp 0.8s ease forwards;
-        }
-
-        .hero-title {
-            animation-delay: 0.2s;
-        }
-
-        .hero-subtitle {
-            animation-delay: 0.3s;
-        }
-
-        .cta-buttons {
-            animation-delay: 0.4s;
+            animation: slideUp 0.4s ease forwards;
         }
 
         /* Mobile Responsive Adjustments */
         @media (max-width: 768px) {
             .hero {
-                padding: 100px 16px 60px;
+                padding: 80px 12px 40px;
             }
-            
+
             .hero-content {
                 flex-direction: column;
-                gap: 40px;
+                gap: 32px;
             }
-            
+
             .hero-text {
                 order: 2;
                 text-align: center;
             }
-            
+
             .hero-image {
                 order: 1;
                 justify-content: center;
             }
-            
+
             .hero-title {
                 text-align: center;
+                font-size: clamp(28px, 6vw, 36px);
             }
-            
+
             .hero-subtitle {
-                margin: 0 auto 40px;
+                margin: 0 auto 24px;
                 text-align: center;
+                font-size: clamp(14px, 3vw, 16px);
             }
-            
+
             .cta-buttons {
                 justify-content: center;
                 flex-direction: column;
                 align-items: center;
+                gap: 16px;
             }
-            
+
             .btn-primary, .btn-secondary {
                 width: 100%;
-                max-width: 280px;
+                max-width: 300px;
                 justify-content: center;
+                padding: 14px 24px;
+                font-size: 15px;
             }
-            
+
             .content-section {
-                padding: 100px 16px 60px;
+                padding: 80px 12px 40px;
             }
-            
+
             .work-grid,
             .philosophy-grid,
             .projects-container {
                 grid-template-columns: 1fr;
             }
-            
+
             .skills-container {
                 flex-direction: column;
-                gap: 32px;
+                gap: 24px;
             }
-            
+
             .footer-content {
                 flex-direction: column;
-                gap: 20px;
+                gap: 16px;
             }
-            
+
             .projects-header {
                 flex-direction: column;
                 align-items: flex-start;
-                gap: 10px;
+                gap: 8px;
             }
         }
 
@@ -1078,11 +1007,19 @@
             .work-card,
             .project-card,
             .philosophy-card {
-                padding: 20px;
+                padding: 16px;
             }
-            
+
             .download-section {
-                padding: 24px;
+                padding: 16px;
+            }
+
+            .hero-title {
+                font-size: clamp(24px, 5vw, 32px);
+            }
+
+            .section-title {
+                font-size: clamp(24px, 4vw, 28px);
             }
         }
     </style>
@@ -1104,7 +1041,7 @@
             <button class="mobile-menu-btn" id="mobile-menu-btn">☰</button>
         </div>
     </header>
-    
+
     <!-- Hero Section -->
     <section id="home" class="hero">
         <div class="hero-content">
@@ -1112,16 +1049,14 @@
                 <div class="hero-title-container">
                     <h1 class="hero-title">zinda ho toh zinda nazar aana zaroori hai</h1>
                     <div class="hero-divider"></div>
-                    <p class="hero-subtitle">
-                        If you are alive, it is important to look alive.
-                    </p>
+                    <p class="hero-subtitle">If you are alive, it is important to look alive.</p>
                 </div>
                 <div class="cta-buttons">
                     <a href="#" class="btn-primary" onclick="showSection('work', event)">
                         View My Work
                         <span>→</span>
                     </a>
-                    <a href="#" class="btn-secondary" onclick="showSection('resume', event)">
+                    <a href="#" class="btn-secondary" onclick="downloadResume()">
                         Download Resume
                         <span>↓</span>
                     </a>
@@ -1132,31 +1067,22 @@
             </div>
         </div>
     </section>
-    
+
     <!-- Resume Section -->
     <section id="resume" class="content-section">
         <div class="section-header">
             <h2 class="section-title">Resume</h2>
-            <p class="section-subtitle">
-                AI Engineer with expertise in developing agentic systems, multimodal RAG implementations, 
-                and fine-tuning LLMs for enterprise solutions.
-            </p>
+            <p class="section-subtitle">AI Engineer with expertise in developing agentic systems, multimodal RAG implementations, and fine-tuning LLMs for enterprise solutions.</p>
         </div>
-        
         <div class="resume-content">
             <div class="download-section">
                 <h3>Professional Summary</h3>
-                <p>
-                    AI Engineer with proven ability to design and deploy AI-powered systems that solve 
-                    complex business challenges across diverse industries. Specialized in agentic systems, 
-                    autonomous agents, and intelligent chatbot development.
-                </p>
+                <p>AI Engineer with proven ability to design and deploy AI-powered systems that solve complex business challenges across diverse industries. Specialized in agentic systems, autonomous agents, and intelligent chatbot development.</p>
                 <a href="#" class="btn-primary" onclick="downloadResume()">
                     <span>📄</span>
                     Download Full Resume
                 </a>
             </div>
-            
             <div class="skills-section">
                 <h3>Technical Skills</h3>
                 <div class="skills-container">
@@ -1169,7 +1095,6 @@
                             <li>Neural Networks</li>
                         </ul>
                     </div>
-                    
                     <div class="skill-category">
                         <h4>Technologies</h4>
                         <ul>
@@ -1179,7 +1104,6 @@
                             <li>OpenAI APIs</li>
                         </ul>
                     </div>
-                    
                     <div class="skill-category">
                         <h4>Tools</h4>
                         <ul>
@@ -1193,18 +1117,14 @@
             </div>
         </div>
     </section>
-    
+
     <!-- Work Section -->
     <section id="work" class="content-section">
         <div class="section-header">
             <h2 class="section-title">Work Experience</h2>
-            <p class="section-subtitle">
-                Building AI solutions across different industries and geographies
-            </p>
+            <p class="section-subtitle">Building AI solutions across different industries and geographies</p>
         </div>
-        
         <div class="work-grid">
-            <!-- Braiyt MENA -->
             <div class="work-card" onclick="showCompanyProjects('braiyt')">
                 <h3>Braiyt MENA</h3>
                 <h4>AI Engineer</h4>
@@ -1212,8 +1132,6 @@
                 <p>Developed Agentic AI chatbots, autonomous inventory agents, and Agent Hub platform...</p>
                 <div class="view-projects">View Projects →</div>
             </div>
-            
-            <!-- Fixity Technologies -->
             <div class="work-card" onclick="showCompanyProjects('fixity')">
                 <h3>Fixity Technologies</h3>
                 <h4>AI Engineer</h4>
@@ -1221,8 +1139,6 @@
                 <p>Engineered assignment generators, fine-tuned LLMs, developed multimodal RAG systems...</p>
                 <div class="view-projects">View Projects →</div>
             </div>
-            
-            <!-- Genpact -->
             <div class="work-card" onclick="showCompanyProjects('genpact')">
                 <h3>Genpact</h3>
                 <h4>Data Science Intern</h4>
@@ -1233,9 +1149,8 @@
         </div>
     </section>
 
-    <!-- Project Pages (hidden by default) -->
+    <!-- Project Pages -->
     <div id="project-pages">
-        <!-- Braiyt MENA Projects -->
         <div id="braiyt-projects" class="company-projects">
             <div class="projects-header">
                 <button class="back-button" onclick="hideCompanyProjects()">← Back</button>
@@ -1244,32 +1159,30 @@
             <div class="projects-container">
                 <div class="project-card animate-slide-up">
                     <h3>Agentic AI Chatbot</h3>
-                    <p>Developed an Agentic AI chatbot that analyzes high-frequency camera data, allowing users to interact with operational insights in their own language without technical expertise, enabling faster decision-making across multi-client environments, including a major Dubai-based gym.</p>
+                    <p>Developed an Agentic AI chatbot that analyzes high-frequency camera data, allowing users to interact with operational insights in their own language without technical expertise.</p>
                 </div>
-                <div class="project-card animate-slide-up" style="animation-delay: 0.1s">
+                <div class="project-card animate-slide-up">
                     <h3>Autonomous Inventory Agents</h3>
-                    <p>Built autonomous inventory agents to monitor stock levels and trigger reorder workflows, resulting in a 25% reduction in inventory costs through automated procurement strategies.</p>
+                    <p>Built autonomous inventory agents to monitor stock levels and trigger reorder workflows, reducing inventory costs by 25%.</p>
                 </div>
-                <div class="project-card animate-slide-up" style="animation-delay: 0.2s">
+                <div class="project-card animate-slide-up">
                     <h3>Agent Hub Platform</h3>
-                    <p>Designed and launched Agent Hub, a centralized platform hosting multiple AI agents for document Q&A, trend-aware marketing, and business intelligence; adopted by clients including a government agency.</p>
+                    <p>Designed and launched Agent Hub, a centralized platform hosting multiple AI agents for document Q&A, trend-aware marketing, and business intelligence.</p>
                 </div>
-                <div class="project-card animate-slide-up" style="animation-delay: 0.3s">
+                <div class="project-card animate-slide-up">
                     <h3>Law Enforcement Chatbot</h3>
-                    <p>Engineered an AI-powered chatbot for a law enforcement agency to enable real-time incident analysis via automated data summarization, insight extraction, visual reporting, and question answering.</p>
+                    <p>Engineered an AI-powered chatbot for a law enforcement agency to enable real-time incident analysis via automated data summarization.</p>
                 </div>
-                <div class="project-card animate-slide-up" style="animation-delay: 0.4s">
+                <div class="project-card animate-slide-up">
                     <h3>Text Summarization System</h3>
-                    <p>Developed an aspect-based text summarization system for extracting actionable insights from unstructured data, enhancing operational decision making.</p>
+                    <p>Developed an aspect-based text summarization system for extracting actionable insights from unstructured data.</p>
                 </div>
-                <div class="project-card animate-slide-up" style="animation-delay: 0.5s">
+                <div class="project-card animate-slide-up">
                     <h3>RFP Response Writer</h3>
-                    <p>Built an autonomous RFP response writer that analyzes RFP documents, suggests optimal response templates, and generates draft responses with minimal human input, significantly accelerating bid preparation workflows.</p>
+                    <p>Built an autonomous RFP response writer that analyzes RFP documents and generates draft responses with minimal human input.</p>
                 </div>
             </div>
         </div>
-
-        <!-- Fixity Technologies Projects -->
         <div id="fixity-projects" class="company-projects">
             <div class="projects-header">
                 <button class="back-button" onclick="hideCompanyProjects()">← Back</button>
@@ -1278,20 +1191,18 @@
             <div class="projects-container">
                 <div class="project-card animate-slide-up">
                     <h3>Agentic Assignment Generator</h3>
-                    <p>Engineered an agentic assignment generator using prompt-tuned Claude 3 Sonnet and GPT-4o for autonomous question generation and intelligent evaluation, reducing manual workload by 30%.</p>
+                    <p>Engineered an agentic assignment generator using Claude 3 Sonnet and GPT-4o for autonomous question generation, reducing manual workload by 30%.</p>
                 </div>
-                <div class="project-card animate-slide-up" style="animation-delay: 0.1s">
+                <div class="project-card animate-slide-up">
                     <h3>Adaptive Question Generation</h3>
-                    <p>Developed an adaptive question generation system with iterative refinement, leveraging multi-model AI interactions for enhanced accuracy.</p>
+                    <p>Developed an adaptive question generation system with iterative refinement for enhanced accuracy.</p>
                 </div>
-                <div class="project-card animate-slide-up" style="animation-delay: 0.2s">
+                <div class="project-card animate-slide-up">
                     <h3>Educational Content Pipeline</h3>
-                    <p>Created an intelligent educational content creation pipeline with automated scoring and feedback loops, processing up to 1,000 questions per hour.</p>
+                    <p>Created an intelligent educational content creation pipeline with automated scoring and feedback loops.</p>
                 </div>
             </div>
         </div>
-
-        <!-- Genpact Projects -->
         <div id="genpact-projects" class="company-projects">
             <div class="projects-header">
                 <button class="back-button" onclick="hideCompanyProjects()">← Back</button>
@@ -1300,60 +1211,45 @@
             <div class="projects-container">
                 <div class="project-card animate-slide-up">
                     <h3>LLM Fine-tuning</h3>
-                    <p>Fine-tuned a large language model using LORA and QLORA, achieving a 20% improvement in performance for client-specific tasks.</p>
+                    <p>Fine-tuned a large language model using LORA and QLORA, achieving a 20% improvement in performance.</p>
                 </div>
-                <div class="project-card animate-slide-up" style="animation-delay: 0.1s">
+                <div class="project-card animate-slide-up">
                     <h3>LLM Evaluator for RAG</h3>
-                    <p>Developed an LLM evaluator for a RAG pipeline, enabling customization of retrievers and vector databases, improving context retrieval accuracy by 15%.</p>
+                    <p>Developed an LLM evaluator for a RAG pipeline, improving context retrieval accuracy by 15%.</p>
                 </div>
-                <div class="project-card animate-slide-up" style="animation-delay: 0.2s">
+                <div class="project-card animate-slide-up">
                     <h3>Multimodal RAG System</h3>
-                    <p>Built a multimodal RAG system incorporating tables, text, and images, integrated with a re-ranker for enhanced context retrieval.</p>
+                    <p>Built a multimodal RAG system incorporating tables, text, and images, integrated with a re-ranker.</p>
                 </div>
-                <div class="project-card animate-slide-up" style="animation-delay: 0.3s">
+                <div class="project-card animate-slide-up">
                     <h3>Sentiment Analysis</h3>
-                    <p>Performed exploratory data analysis (EDA) and fine-tuned BERT models for aspect-based sentiment analysis, improving model accuracy by 10%.</p>
+                    <p>Fine-tuned BERT models for aspect-based sentiment analysis, improving model accuracy by 10%.</p>
                 </div>
             </div>
         </div>
     </div>
-    
+
     <!-- Life Section -->
     <section id="life" class="content-section">
         <div class="section-header">
             <h2 class="section-title">Life Philosophy</h2>
-            <p class="section-subtitle">
-                Continuous learning, growth, and human connection through technology
-            </p>
+            <p class="section-subtitle">Continuous learning, growth, and human connection through technology</p>
         </div>
-        
         <div class="life-content">
-            <p>
-                Life is a beautiful journey of continuous learning and growth. From the classrooms of NIIT University 
-                to the bustling tech hubs of Bangalore and now the innovative landscape of Dubai, every step has been 
-                a lesson in resilience, curiosity, and human connection.
-            </p>
-            
-            <p>
-                I believe in the power of technology to transform lives, but more importantly, in the power of empathy 
-                to guide that transformation. Every algorithm I write, every model I train, carries with it the hope 
-                of making someone's life a little bit better.
-            </p>
+            <p>Life is a beautiful journey of continuous learning and growth. From the classrooms of NIIT University to the bustling tech hubs of Bangalore and now the innovative landscape of Dubai, every step has been a lesson in resilience, curiosity, and human connection.</p>
+            <p>I believe in the power of technology to transform lives, but more importantly, in the power of empathy to guide that transformation.</p>
         </div>
-        
         <div class="philosophy-grid">
             <div class="philosophy-card">
                 <div class="philosophy-icon">🎓</div>
                 <h3>Learning</h3>
                 <p>From computer science fundamentals to cutting-edge AI research, the journey of learning never stops.</p>
             </div>
-            
             <div class="philosophy-card">
                 <div class="philosophy-icon">🌍</div>
                 <h3>Exploring</h3>
                 <p>Traveling from India to UAE, experiencing diverse cultures and perspectives that shape my worldview.</p>
             </div>
-            
             <div class="philosophy-card">
                 <div class="philosophy-icon">💝</div>
                 <h3>Connecting</h3>
@@ -1361,37 +1257,32 @@
             </div>
         </div>
     </section>
-    
+
     <!-- Balance Section -->
     <section id="balance" class="content-section">
         <div class="section-header">
             <h2 class="section-title">Work-Life Balance</h2>
-            <p class="section-subtitle">
-                Harmonizing innovation, nature, and community impact
-            </p>
+            <p class="section-subtitle">Harmonizing innovation, nature, and community impact</p>
         </div>
-        
         <div class="philosophy-grid">
             <div class="philosophy-card">
                 <div class="philosophy-icon">💻</div>
                 <h3>Technology</h3>
-                <p>Staying at the forefront of AI and machine learning, constantly exploring new frameworks, models, and methodologies. The digital world is my canvas for innovation.</p>
+                <p>Staying at the forefront of AI and machine learning, constantly exploring new frameworks and models.</p>
             </div>
-            
             <div class="philosophy-card">
                 <div class="philosophy-icon">🌿</div>
                 <h3>Nature</h3>
-                <p>Finding peace in nature's embrace. Whether it's a quiet morning walk or weekend hikes, nature provides the clarity and inspiration needed for creative thinking.</p>
+                <p>Finding peace in nature's embrace, providing clarity and inspiration for creative thinking.</p>
             </div>
-            
             <div class="philosophy-card">
                 <div class="philosophy-icon">👥</div>
                 <h3>Community</h3>
-                <p>Giving back through mentorship, sharing knowledge, and building inclusive tech communities. Success is meaningful only when it's shared.</p>
+                <p>Giving back through mentorship, sharing knowledge, and building inclusive tech communities.</p>
             </div>
         </div>
     </section>
-    
+
     <!-- Footer -->
     <footer>
         <div class="footer-content">
@@ -1402,22 +1293,22 @@
             </button>
         </div>
     </footer>
-    
+
     <script>
         // Navigation functionality
         function showSection(sectionId, event) {
             if (event) event.preventDefault();
-            
+
             // Hide all sections and project pages
             document.querySelectorAll('.content-section, .hero, .company-projects').forEach(section => {
                 section.style.display = 'none';
             });
-            
+
             // Update nav links
             document.querySelectorAll('.nav-link').forEach(link => {
                 link.classList.remove('active');
             });
-            
+
             // Show target section
             if (sectionId === 'home') {
                 document.querySelector('.hero').style.display = 'flex';
@@ -1427,19 +1318,17 @@
             } else {
                 document.getElementById(sectionId).style.display = 'block';
             }
-            
+
             // Update active nav link
-            if (event) {
+            if (event && event.target.classList.contains('nav-link')) {
                 event.target.classList.add('active');
             }
-            
-            // Close mobile menu if open
+
+            // Close mobile menu
             document.getElementById('main-nav').classList.remove('mobile-visible');
-            
-            // Scroll to top
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
-        
+
         // Show company projects
         function showCompanyProjects(companyId) {
             document.getElementById('work').style.display = 'none';
@@ -1450,17 +1339,16 @@
             document.getElementById(`${companyId}-projects`).style.display = 'block';
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
-        
+
         // Hide company projects
         function hideCompanyProjects() {
             document.getElementById('project-pages').style.display = 'none';
             document.getElementById('work').style.display = 'block';
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
-        
-        // FIXED: Download Resume functionality
+
+        // Download Resume functionality
         function downloadResume() {
-            // Create a dummy PDF content or link to actual resume
             const resumeContent = `
             ARUN SINGH THAKUR - AI ENGINEER
             
@@ -1491,8 +1379,6 @@
             • Built multimodal RAG systems with enhanced retrieval accuracy
             • Performed sentiment analysis with 10% accuracy improvement
             `;
-            
-            // Create and download the resume as a text file
             const blob = new Blob([resumeContent], { type: 'text/plain' });
             const url = window.URL.createObjectURL(blob);
             const a = document.createElement('a');
@@ -1502,55 +1388,51 @@
             a.click();
             document.body.removeChild(a);
             window.URL.revokeObjectURL(url);
-            
-            // Show success message
             alert('Resume downloaded successfully!');
         }
-        
+
         // Mobile menu functionality
-        document.getElementById('mobile-menu-btn').addEventListener('click', function(e) {
-            e.stopPropagation();
-            document.getElementById('main-nav').classList.toggle('mobile-visible');
-        });
-        
-        // Theme toggle functionality
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', () => {
             // Show home section by default
             showSection('home');
-            
+
+            const menuBtn = document.getElementById('mobile-menu-btn');
+            const nav = document.getElementById('main-nav');
+
+            menuBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                nav.classList.toggle('mobile-visible');
+                menuBtn.textContent = nav.classList.contains('mobile-visible') ? '✕' : '☰';
+            });
+
+            // Close menu when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!nav.contains(e.target) && e.target !== menuBtn && nav.classList.contains('mobile-visible')) {
+                    nav.classList.remove('mobile-visible');
+                    menuBtn.textContent = '☰';
+                }
+            });
+
             // Theme toggle
             const themeToggle = document.getElementById('theme-toggle');
             const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
-            
-            // Check for saved theme preference or use system preference
             const currentTheme = localStorage.getItem('theme');
+
             if (currentTheme === 'dark' || (!currentTheme && prefersDarkScheme.matches)) {
                 document.body.classList.add('dark-mode');
                 document.body.classList.remove('light-mode');
             }
-            
-            // Toggle theme on button click
-            themeToggle.addEventListener('click', function() {
+
+            themeToggle.addEventListener('click', () => {
                 document.body.classList.toggle('dark-mode');
                 document.body.classList.toggle('light-mode');
-                const theme = document.body.classList.contains('dark-mode') ? 'dark' : 'light';
-                localStorage.setItem('theme', theme);
+                localStorage.setItem('theme', document.body.classList.contains('dark-mode') ? 'dark' : 'light');
             });
-        });
-        
-        // Close mobile menu when clicking outside
-        document.addEventListener('click', function(e) {
-            const nav = document.getElementById('main-nav');
-            const btn = document.getElementById('mobile-menu-btn');
-            
-            if (!nav.contains(e.target) && e.target !== btn) {
-                nav.classList.remove('mobile-visible');
-            }
-            
-            // Smooth scrolling for better UX
-            if (e.target.tagName === 'A' && e.target.getAttribute('href') === '#') {
-                e.preventDefault();
-            }
+
+            // Prevent default link behavior for hash links
+            document.querySelectorAll('a[href="#"]').forEach(link => {
+                link.addEventListener('click', (e) => e.preventDefault());
+            });
         });
     </script>
 </body>
