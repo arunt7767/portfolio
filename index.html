@@ -19,20 +19,16 @@
             position: relative;
         }
         
-        /* Animated Background GIF */
-        body::before {
-            content: '';
+        /* Tenor GIF Background Container */
+        .gif-background {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url('https://media.tenor.com/7q6mJ7k5n-AAAAAC/jump.gif');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
             z-index: -2;
-            opacity: 0.1;
+            opacity: 0.08;
+            pointer-events: none;
         }
         
         /* Light Mode Defaults */
@@ -865,6 +861,14 @@
     </style>
 </head>
 <body class="light-mode">
+    <!-- OFFICIAL TENOR GIF EMBED -->
+    <div class="gif-background">
+        <div class="tenor-gif-embed" data-postid="3526123" data-share-method="host" data-aspect-ratio="1.77778">
+            <a href="https://tenor.com/view/jump-gif-3526123">Jump So High GIF</a>
+        </div>
+    </div>
+    <script type="text/javascript" async src="https://tenor.com/embed.js"></script>
+
     <!-- Header -->
     <header>
         <div class="header-content">
