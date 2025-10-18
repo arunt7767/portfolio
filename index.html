@@ -12,25 +12,45 @@
             box-sizing: border-box;
             transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
         }
-
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             line-height: 1.6;
             overflow-x: hidden;
+            position: relative;
         }
-
+        /* Animated Background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://media.tenor.com/h7F86c0ekKAAAAAC/jump.gif');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0.15;
+            z-index: -1;
+            pointer-events: none;
+        }
         /* Light Mode Defaults */
         body.light-mode {
             background: #f7f7f8;
             color: #0a0a0a;
         }
-
+        body.light-mode::before {
+            opacity: 0.1;
+        }
         /* Dark Mode */
         body.dark-mode {
             background: #0a0a0a;
             color: #f7f7f8;
         }
-
+        body.dark-mode::before {
+            opacity: 0.2;
+            filter: brightness(0.7);
+        }
         /* Header */
         header {
             position: fixed;
@@ -41,17 +61,14 @@
             backdrop-filter: blur(20px);
             padding: 0 16px;
         }
-
         .light-mode header {
-            background: rgba(247, 247, 248, 0.8);
+            background: rgba(247, 247, 248, 0.95);
             border-bottom: 1px solid rgba(0, 0, 0, 0.1);
         }
-
         .dark-mode header {
-            background: rgba(10, 10, 10, 0.8);
+            background: rgba(10, 10, 10, 0.95);
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
-
         .header-content {
             max-width: 1200px;
             margin: 0 auto;
@@ -60,74 +77,53 @@
             justify-content: space-between;
             height: 60px;
         }
-
         .logo {
             font-size: 18px;
             font-weight: 600;
             text-decoration: none;
             letter-spacing: -0.02em;
         }
-
         .light-mode .logo {
             color: #0a0a0a;
         }
-
         .dark-mode .logo {
             color: #f7f7f8;
         }
-
         .nav-menu {
             display: flex;
             align-items: center;
             gap: 24px;
             list-style: none;
         }
-
         .nav-menu a {
             text-decoration: none;
             font-weight: 400;
             font-size: 14px;
             padding: 8px;
             position: relative;
-            touch-action: manipulation;
+            cursor: pointer;
         }
-
         .light-mode .nav-menu a {
             color: rgba(10, 10, 10, 0.8);
         }
-
         .dark-mode .nav-menu a {
             color: rgba(247, 247, 248, 0.8);
         }
-
-        .light-mode .nav-menu a:hover, .light-mode .nav-menu a:focus {
+        .light-mode .nav-menu a:hover {
             color: #0a0a0a;
         }
-
-        .dark-mode .nav-menu a:hover, .dark-mode .nav-menu a:focus {
+        .dark-mode .nav-menu a:hover {
             color: #f7f7f8;
         }
-
         .nav-menu a.active {
             font-weight: 500;
         }
-
         .light-mode .nav-menu a.active {
             color: #0a0a0a;
         }
-
         .dark-mode .nav-menu a.active {
             color: #f7f7f8;
         }
-
-        .light-mode .nav-menu a.active::after {
-            background: #0a0a0a;
-        }
-
-        .dark-mode .nav-menu a.active::after {
-            background: #f7f7f8;
-        }
-
         .nav-menu a.active::after {
             content: '';
             position: absolute;
@@ -136,7 +132,12 @@
             right: 8px;
             height: 2px;
         }
-
+        .light-mode .nav-menu a.active::after {
+            background: #0a0a0a;
+        }
+        .dark-mode .nav-menu a.active::after {
+            background: #f7f7f8;
+        }
         .mobile-menu-btn {
             display: none;
             background: none;
@@ -144,23 +145,16 @@
             font-size: 24px;
             cursor: pointer;
             padding: 8px;
-            touch-action: manipulation;
+            z-index: 1001;
         }
-
         .light-mode .mobile-menu-btn {
             color: #0a0a0a;
         }
-
         .dark-mode .mobile-menu-btn {
             color: #f7f7f8;
         }
-
         /* Mobile Menu Styles */
         @media (max-width: 768px) {
-            header {
-                padding: 0 12px;
-            }
-
             .nav-menu {
                 position: fixed;
                 top: 60px;
@@ -168,43 +162,51 @@
                 right: 0;
                 flex-direction: column;
                 align-items: flex-start;
-                padding: 16px;
-                gap: 16px;
-                height: calc(100vh - 60px);
+                padding: 24px;
+                gap: 8px;
+                max-height: calc(100vh - 60px);
+                overflow-y: auto;
                 transform: translateX(-100%);
                 transition: transform 0.3s ease;
-                z-index: 999;
             }
-
             .light-mode .nav-menu {
-                background: #f7f7f8;
+                background: rgba(247, 247, 248, 0.98);
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
             }
-
             .dark-mode .nav-menu {
-                background: #0a0a0a;
+                background: rgba(10, 10, 10, 0.98);
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
             }
-
             .nav-menu.mobile-visible {
                 transform: translateX(0);
             }
-
-            .nav-menu a {
-                font-size: 16px;
-                padding: 12px;
+            .nav-menu li {
                 width: 100%;
             }
-
-            .nav-menu a.active::after {
-                bottom: 0;
-                left: 12px;
-                right: 12px;
+            .nav-menu a {
+                font-size: 18px;
+                padding: 16px 12px;
+                width: 100%;
+                display: block;
+                border-radius: 8px;
             }
-
+            .light-mode .nav-menu a:active {
+                background: rgba(0, 0, 0, 0.05);
+            }
+            .dark-mode .nav-menu a:active {
+                background: rgba(255, 255, 255, 0.05);
+            }
+            .nav-menu a.active::after {
+                bottom: 8px;
+                left: 12px;
+                right: auto;
+                width: 4px;
+                height: calc(100% - 16px);
+            }
             .mobile-menu-btn {
                 display: block;
             }
         }
-
         /* Hero Section */
         .hero {
             min-height: 100vh;
@@ -212,15 +214,6 @@
             align-items: center;
             padding: 80px 16px 60px;
         }
-
-        .light-mode .hero {
-            background: #f7f7f8;
-        }
-
-        .dark-mode .hero {
-            background: #0a0a0a;
-        }
-
         .hero-content {
             max-width: 1200px;
             width: 100%;
@@ -230,82 +223,66 @@
             align-items: center;
             gap: 40px;
         }
-
         .hero-text {
             flex: 1;
             max-width: 600px;
         }
-
         .hero-image {
             flex: 1;
             display: flex;
             justify-content: flex-end;
         }
-
         .hero-image img {
             max-width: 100%;
             height: auto;
             border-radius: 8px;
         }
-
         .light-mode .hero-image img {
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
         }
-
         .dark-mode .hero-image img {
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
         }
-
         .hero-title-container {
             margin: 32px 0;
         }
-
         .hero-title {
-            font-size: clamp(32px, 6vw, 48px);
+            font-size: clamp(28px, 5vw, 48px);
             font-weight: 700;
             line-height: 1.1;
             letter-spacing: -0.02em;
             margin-bottom: 24px;
         }
-
         .light-mode .hero-title {
             color: #0a0a0a;
         }
-
         .dark-mode .hero-title {
             color: #f7f7f8;
         }
-
         .hero-divider {
             height: 1px;
             width: 80px;
             margin: 24px 0;
         }
-
         .light-mode .hero-divider {
             background: rgba(10, 10, 10, 0.2);
         }
-
         .dark-mode .hero-divider {
             background: rgba(247, 247, 248, 0.2);
         }
-
         .hero-subtitle {
-            font-size: clamp(16px, 3vw, 18px);
+            font-size: clamp(15px, 2.5vw, 18px);
             font-weight: 400;
             line-height: 1.5;
             max-width: 500px;
             margin-bottom: 32px;
         }
-
         .light-mode .hero-subtitle {
             color: rgba(10, 10, 10, 0.7);
         }
-
         .dark-mode .hero-subtitle {
             color: rgba(247, 247, 248, 0.7);
         }
-
         .cta-buttons {
             display: flex;
             gap: 12px;
@@ -313,63 +290,45 @@
             flex-wrap: wrap;
             margin-top: 40px;
         }
-
-        .btn-primary {
-            border: none;
-            padding: 12px 24px;
-            border-radius: 6px;
-            font-size: 14px;
+        .btn-primary, .btn-secondary {
+            padding: 14px 28px;
+            border-radius: 8px;
+            font-size: 15px;
             font-weight: 500;
             text-decoration: none;
             display: inline-flex;
             align-items: center;
             gap: 8px;
             cursor: pointer;
-            touch-action: manipulation;
+            border: none;
+            transition: transform 0.1s ease, box-shadow 0.3s ease;
         }
-
         .light-mode .btn-primary {
             background: #0a0a0a;
             color: #f7f7f8;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
         }
-
         .dark-mode .btn-primary {
             background: #f7f7f8;
             color: #0a0a0a;
+            box-shadow: 0 2px 8px rgba(255, 255, 255, 0.15);
         }
-
         .btn-primary:active {
-            transform: scale(0.98);
+            transform: translateY(1px);
         }
-
-        .btn-secondary {
-            background: transparent;
-            padding: 12px 24px;
-            border-radius: 6px;
-            font-size: 14px;
-            font-weight: 500;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            cursor: pointer;
-            touch-action: manipulation;
-        }
-
         .light-mode .btn-secondary {
             color: #0a0a0a;
-            border: 1px solid rgba(10, 10, 10, 0.3);
+            border: 2px solid rgba(10, 10, 10, 0.3);
+            background: transparent;
         }
-
         .dark-mode .btn-secondary {
             color: #f7f7f8;
-            border: 1px solid rgba(247, 247, 248, 0.3);
+            border: 2px solid rgba(247, 247, 248, 0.3);
+            background: transparent;
         }
-
         .btn-secondary:active {
-            transform: scale(0.98);
+            transform: translateY(1px);
         }
-
         /* Content Sections */
         .content-section {
             display: none;
@@ -377,153 +336,117 @@
             max-width: 1200px;
             margin: 0 auto;
         }
-
         .content-section.active {
             display: block;
         }
-
-        .light-mode .content-section {
-            background: #fff;
-        }
-
-        .dark-mode .content-section {
-            background: #1a1a1a;
-        }
-
         .section-header {
             text-align: center;
             margin-bottom: 48px;
         }
-
         .section-title {
-            font-size: clamp(28px, 5vw, 36px);
+            font-size: clamp(26px, 4vw, 36px);
             font-weight: 700;
             margin-bottom: 12px;
             letter-spacing: -0.02em;
         }
-
         .light-mode .section-title {
             color: #0a0a0a;
         }
-
         .dark-mode .section-title {
             color: #f7f7f8;
         }
-
         .section-subtitle {
-            font-size: clamp(14px, 2.5vw, 16px);
+            font-size: clamp(14px, 2vw, 16px);
             max-width: 600px;
             margin: 0 auto;
         }
-
         .light-mode .section-subtitle {
             color: rgba(10, 10, 10, 0.7);
         }
-
         .dark-mode .section-subtitle {
             color: rgba(247, 247, 248, 0.7);
         }
-
         /* Work Experience Cards */
         .work-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 24px;
+            gap: 20px;
             margin-top: 32px;
         }
-
         .work-card {
             border-radius: 12px;
             padding: 24px;
-            transition: transform 0.2s ease;
             cursor: pointer;
-            touch-action: manipulation;
+            transition: transform 0.2s ease, box-shadow 0.3s ease;
         }
-
         .light-mode .work-card {
-            background: #f7f7f8;
+            background: rgba(255, 255, 255, 0.8);
             border: 1px solid rgba(10, 10, 10, 0.1);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
         }
-
         .dark-mode .work-card {
-            background: #2a2a2a;
+            background: rgba(42, 42, 42, 0.8);
             border: 1px solid rgba(247, 247, 248, 0.1);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
         }
-
         .work-card:active {
             transform: scale(0.98);
         }
-
         .work-card h3 {
-            font-size: clamp(18px, 3vw, 20px);
+            font-size: clamp(18px, 2.5vw, 20px);
             font-weight: 600;
             margin-bottom: 8px;
         }
-
         .light-mode .work-card h3 {
             color: #0a0a0a;
         }
-
         .dark-mode .work-card h3 {
             color: #f7f7f8;
         }
-
         .work-card h4 {
             font-size: 14px;
             margin-bottom: 4px;
             font-weight: 500;
         }
-
         .light-mode .work-card h4 {
             color: rgba(10, 10, 10, 0.8);
         }
-
         .dark-mode .work-card h4 {
             color: rgba(247, 247, 248, 0.8);
         }
-
         .work-card .location {
             font-size: 13px;
             margin-bottom: 12px;
         }
-
         .light-mode .work-card .location {
             color: rgba(10, 10, 10, 0.6);
         }
-
         .dark-mode .work-card .location {
             color: rgba(247, 247, 248, 0.6);
         }
-
         .work-card p {
             line-height: 1.6;
             font-size: 14px;
             margin-bottom: 12px;
         }
-
         .light-mode .work-card p {
             color: rgba(10, 10, 10, 0.7);
         }
-
         .dark-mode .work-card p {
             color: rgba(247, 247, 248, 0.7);
         }
-
         .view-projects {
             margin-top: 16px;
             font-weight: 500;
             display: inline-block;
             font-size: 14px;
         }
-
         .light-mode .view-projects {
-            color: rgba(10, 10, 10, 0.7);
+            color: rgba(10, 10, 10, 0.8);
         }
-
         .dark-mode .view-projects {
-            color: rgba(247, 247, 248, 0.7);
+            color: rgba(247, 247, 248, 0.8);
         }
-
         /* Project Pages */
         #project-pages {
             display: none;
@@ -531,319 +454,246 @@
             max-width: 1200px;
             margin: 0 auto;
         }
-
-        .light-mode #project-pages {
-            background: #fff;
-        }
-
-        .dark-mode #project-pages {
-            background: #1a1a1a;
-        }
-
         .company-projects {
             display: none;
         }
-
         .projects-header {
             margin-bottom: 32px;
             display: flex;
             align-items: center;
             gap: 16px;
         }
-
         .projects-header h2 {
-            font-size: clamp(20px, 4vw, 28px);
+            font-size: clamp(20px, 3.5vw, 28px);
             font-weight: 700;
         }
-
         .back-button {
             background: none;
             border: none;
-            font-size: 16px;
+            font-size: 18px;
             cursor: pointer;
             display: flex;
             align-items: center;
-            padding: 8px;
-            border-radius: 6px;
-            touch-action: manipulation;
+            padding: 10px;
+            border-radius: 8px;
+            min-width: 44px;
+            min-height: 44px;
+            justify-content: center;
         }
-
         .light-mode .back-button {
             color: #0a0a0a;
         }
-
         .dark-mode .back-button {
             color: #f7f7f8;
         }
-
         .back-button:active {
             background: rgba(0, 0, 0, 0.1);
         }
-
         .projects-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
             gap: 20px;
         }
-
         .project-card {
             padding: 20px;
             border-radius: 12px;
-            transition: transform 0.2s ease;
         }
-
         .light-mode .project-card {
-            background: #f7f7f8;
+            background: rgba(255, 255, 255, 0.8);
             border: 1px solid rgba(10, 10, 10, 0.1);
         }
-
         .dark-mode .project-card {
-            background: #2a2a2a;
+            background: rgba(42, 42, 42, 0.8);
             border: 1px solid rgba(247, 247, 248, 0.1);
         }
-
         .project-card h3 {
-            font-size: clamp(16px, 2.5vw, 18px);
+            font-size: clamp(16px, 2vw, 18px);
             font-weight: 600;
             margin-bottom: 12px;
         }
-
         .light-mode .project-card h3 {
             color: #0a0a0a;
         }
-
         .dark-mode .project-card h3 {
             color: #f7f7f8;
         }
-
         .project-card p {
             line-height: 1.6;
             font-size: 14px;
         }
-
         .light-mode .project-card p {
             color: rgba(10, 10, 10, 0.8);
         }
-
         .dark-mode .project-card p {
             color: rgba(247, 247, 248, 0.8);
         }
-
         /* Resume Section */
         .resume-content {
             text-align: center;
             max-width: 800px;
             margin: 0 auto;
         }
-
         .download-section {
             border-radius: 12px;
-            padding: clamp(20px, 4vw, 32px);
+            padding: clamp(24px, 4vw, 32px);
             margin-bottom: 32px;
         }
-
         .light-mode .download-section {
-            background: #f7f7f8;
+            background: rgba(255, 255, 255, 0.8);
             border: 1px solid rgba(10, 10, 10, 0.1);
         }
-
         .dark-mode .download-section {
-            background: #2a2a2a;
+            background: rgba(42, 42, 42, 0.8);
             border: 1px solid rgba(247, 247, 248, 0.1);
         }
-
         .download-section h3 {
             margin-bottom: 12px;
-            font-size: clamp(18px, 3vw, 20px);
+            font-size: clamp(18px, 2.5vw, 20px);
         }
-
         .light-mode .download-section h3 {
             color: #0a0a0a;
         }
-
         .dark-mode .download-section h3 {
             color: #f7f7f8;
         }
-
         .download-section p {
             margin-bottom: 24px;
             line-height: 1.6;
             font-size: 14px;
         }
-
         .light-mode .download-section p {
             color: rgba(10, 10, 10, 0.7);
         }
-
         .dark-mode .download-section p {
             color: rgba(247, 247, 248, 0.7);
         }
-
         .skills-section h3 {
             text-align: center;
             margin-bottom: 24px;
-            font-size: clamp(18px, 3vw, 20px);
+            font-size: clamp(18px, 2.5vw, 20px);
         }
-
         .light-mode .skills-section h3 {
             color: #0a0a0a;
         }
-
         .dark-mode .skills-section h3 {
             color: #f7f7f8;
         }
-
         .skills-container {
-            display: flex;
-            justify-content: space-between;
-            gap: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 24px;
             text-align: left;
         }
-
-        .skill-category {
-            flex: 1;
-            min-width: 0;
-        }
-
         .skill-category h4 {
-            font-size: clamp(14px, 2.5vw, 16px);
+            font-size: clamp(15px, 2vw, 16px);
             font-weight: 600;
             margin-bottom: 12px;
         }
-
         .light-mode .skill-category h4 {
             color: #0a0a0a;
         }
-
         .dark-mode .skill-category h4 {
             color: #f7f7f8;
         }
-
         .skill-category ul {
             list-style: none;
         }
-
         .skill-category li {
-            padding: 6px 0;
-            font-size: 13px;
+            padding: 8px 0;
+            font-size: 14px;
         }
-
         .light-mode .skill-category li {
             color: rgba(10, 10, 10, 0.7);
         }
-
         .dark-mode .skill-category li {
             color: rgba(247, 247, 248, 0.7);
         }
-
         .skill-category li::before {
             content: '→';
             margin-right: 8px;
         }
-
         .light-mode .skill-category li::before {
             color: rgba(10, 10, 10, 0.4);
         }
-
         .dark-mode .skill-category li::before {
             color: rgba(247, 247, 248, 0.4);
         }
-
         /* Life & Balance Sections */
         .life-content {
             max-width: 800px;
             margin: 0 auto 32px;
             text-align: center;
         }
-
         .life-content p {
-            font-size: clamp(14px, 2.5vw, 16px);
+            font-size: clamp(14px, 2vw, 16px);
             line-height: 1.7;
             margin-bottom: 24px;
         }
-
         .light-mode .life-content p {
             color: rgba(10, 10, 10, 0.7);
         }
-
         .dark-mode .life-content p {
             color: rgba(247, 247, 248, 0.7);
         }
-
         .philosophy-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
             gap: 20px;
             margin-top: 32px;
         }
-
         .philosophy-card {
             text-align: center;
-            padding: clamp(20px, 4vw, 32px);
+            padding: clamp(24px, 4vw, 32px);
             border-radius: 12px;
-            transition: transform 0.2s ease;
         }
-
         .light-mode .philosophy-card {
-            background: #f7f7f8;
+            background: rgba(255, 255, 255, 0.8);
             border: 1px solid rgba(10, 10, 10, 0.05);
         }
-
         .dark-mode .philosophy-card {
-            background: #2a2a2a;
+            background: rgba(42, 42, 42, 0.8);
             border: 1px solid rgba(247, 247, 248, 0.05);
         }
-
         .philosophy-icon {
-            font-size: clamp(28px, 5vw, 36px);
+            font-size: clamp(32px, 5vw, 40px);
             margin-bottom: 16px;
             opacity: 0.8;
         }
-
         .philosophy-card h3 {
-            font-size: clamp(16px, 2.5vw, 18px);
+            font-size: clamp(16px, 2vw, 18px);
             font-weight: 600;
             margin-bottom: 12px;
         }
-
         .light-mode .philosophy-card h3 {
             color: #0a0a0a;
         }
-
         .dark-mode .philosophy-card h3 {
             color: #f7f7f8;
         }
-
         .philosophy-card p {
             line-height: 1.6;
             font-size: 14px;
         }
-
         .light-mode .philosophy-card p {
             color: rgba(10, 10, 10, 0.7);
         }
-
         .dark-mode .philosophy-card p {
             color: rgba(247, 247, 248, 0.7);
         }
-
         /* Footer */
         footer {
             text-align: center;
             padding: 32px 16px;
             margin-top: 60px;
         }
-
         .light-mode footer {
-            background: #fff;
+            background: rgba(255, 255, 255, 0.8);
             border-top: 1px solid rgba(10, 10, 10, 0.1);
         }
-
         .dark-mode footer {
-            background: #1a1a1a;
+            background: rgba(26, 26, 26, 0.8);
             border-top: 1px solid rgba(247, 247, 248, 0.1);
         }
-
         .footer-content {
             max-width: 1200px;
             margin: 0 auto;
@@ -853,196 +703,129 @@
             flex-wrap: wrap;
             gap: 16px;
         }
-
         footer p {
             font-size: 13px;
         }
-
         .light-mode footer p {
             color: rgba(10, 10, 10, 0.6);
         }
-
         .dark-mode footer p {
             color: rgba(247, 247, 248, 0.6);
         }
-
         .theme-toggle {
             background: transparent;
             border: none;
             cursor: pointer;
-            font-size: 20px;
-            padding: 8px;
+            font-size: 24px;
+            padding: 10px;
             border-radius: 50%;
-            width: 36px;
-            height: 36px;
+            width: 44px;
+            height: 44px;
             display: flex;
             align-items: center;
             justify-content: center;
-            touch-action: manipulation;
+            transition: transform 0.2s ease;
         }
-
         .light-mode .theme-toggle {
             color: #0a0a0a;
         }
-
         .dark-mode .theme-toggle {
             color: #f7f7f8;
         }
-
         .theme-toggle:active {
-            transform: scale(0.95);
+            transform: scale(0.9);
         }
-
         .dark-icon {
             display: none;
         }
-
-        .light-mode .dark-icon {
-            display: none;
-        }
-
         .light-mode .light-icon {
             display: inline;
         }
-
+        .light-mode .dark-icon {
+            display: none;
+        }
         .dark-mode .light-icon {
             display: none;
         }
-
         .dark-mode .dark-icon {
             display: inline;
         }
-
-        /* Animations */
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .animate-slide-up {
-            animation: slideUp 0.4s ease forwards;
-        }
-
-        /* Mobile Responsive Adjustments */
+        /* Mobile Responsive */
         @media (max-width: 768px) {
             .hero {
-                padding: 80px 12px 40px;
+                padding: 80px 16px 40px;
             }
-
             .hero-content {
                 flex-direction: column;
                 gap: 32px;
             }
-
             .hero-text {
                 order: 2;
                 text-align: center;
             }
-
             .hero-image {
                 order: 1;
                 justify-content: center;
             }
-
+            .hero-image img {
+                max-width: 280px;
+            }
             .hero-title {
                 text-align: center;
-                font-size: clamp(28px, 6vw, 36px);
             }
-
+            .hero-divider {
+                margin: 24px auto;
+            }
             .hero-subtitle {
                 margin: 0 auto 24px;
                 text-align: center;
-                font-size: clamp(14px, 3vw, 16px);
             }
-
             .cta-buttons {
                 justify-content: center;
-                flex-direction: column;
-                align-items: center;
-                gap: 16px;
-            }
-
-            .btn-primary, .btn-secondary {
                 width: 100%;
-                max-width: 300px;
+            }
+            .btn-primary, .btn-secondary {
+                flex: 1;
+                min-width: 140px;
                 justify-content: center;
-                padding: 14px 24px;
-                font-size: 15px;
             }
-
             .content-section {
-                padding: 80px 12px 40px;
+                padding: 80px 16px 40px;
             }
-
             .work-grid,
             .philosophy-grid,
             .projects-container {
                 grid-template-columns: 1fr;
             }
-
             .skills-container {
-                flex-direction: column;
-                gap: 24px;
+                grid-template-columns: 1fr;
             }
-
             .footer-content {
                 flex-direction: column;
-                gap: 16px;
             }
-
             .projects-header {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 8px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .work-card,
-            .project-card,
-            .philosophy-card {
-                padding: 16px;
-            }
-
-            .download-section {
-                padding: 16px;
-            }
-
-            .hero-title {
-                font-size: clamp(24px, 5vw, 32px);
-            }
-
-            .section-title {
-                font-size: clamp(24px, 4vw, 28px);
+                flex-wrap: wrap;
             }
         }
     </style>
 </head>
 <body class="light-mode">
-    <!-- Header -->
     <header>
         <div class="header-content">
-            <a href="#" class="logo" onclick="showSection('home', event)">Arun Singh Thakur</a>
+            <a href="#" class="logo" data-section="home">Arun Singh Thakur</a>
+            <button class="mobile-menu-btn" id="mobile-menu-btn">☰</button>
             <nav id="main-nav">
                 <ul class="nav-menu">
-                    <li><a href="#" onclick="showSection('home', event)" class="nav-link active">Home</a></li>
-                    <li><a href="#" onclick="showSection('resume', event)" class="nav-link">Resume</a></li>
-                    <li><a href="#" onclick="showSection('work', event)" class="nav-link">Work</a></li>
-                    <li><a href="#" onclick="showSection('life', event)" class="nav-link">Life</a></li>
-                    <li><a href="#" onclick="showSection('balance', event)" class="nav-link">Balance</a></li>
+                    <li><a href="#" data-section="home" class="nav-link active">Home</a></li>
+                    <li><a href="#" data-section="resume" class="nav-link">Resume</a></li>
+                    <li><a href="#" data-section="work" class="nav-link">Work</a></li>
+                    <li><a href="#" data-section="life" class="nav-link">Life</a></li>
+                    <li><a href="#" data-section="balance" class="nav-link">Balance</a></li>
                 </ul>
             </nav>
-            <button class="mobile-menu-btn" id="mobile-menu-btn">☰</button>
         </div>
     </header>
 
-    <!-- Hero Section -->
     <section id="home" class="hero">
         <div class="hero-content">
             <div class="hero-text">
@@ -1052,388 +835,13 @@
                     <p class="hero-subtitle">If you are alive, it is important to look alive.</p>
                 </div>
                 <div class="cta-buttons">
-                    <a href="#" class="btn-primary" onclick="showSection('work', event)">
+                    <a href="#" class="btn-primary" data-section="work">
                         View My Work
                         <span>→</span>
                     </a>
-                    <a href="#" class="btn-secondary" onclick="downloadResume()">
+                    <button class="btn-secondary" onclick="downloadResume()">
                         Download Resume
                         <span>↓</span>
-                    </a>
+                    </button>
                 </div>
             </div>
-            <div class="hero-image">
-                <img src="web.jpg" alt="Arun Singh Thakur">
-            </div>
-        </div>
-    </section>
-
-    <!-- Resume Section -->
-    <section id="resume" class="content-section">
-        <div class="section-header">
-            <h2 class="section-title">Resume</h2>
-            <p class="section-subtitle">AI Engineer with expertise in developing agentic systems, multimodal RAG implementations, and fine-tuning LLMs for enterprise solutions.</p>
-        </div>
-        <div class="resume-content">
-            <div class="download-section">
-                <h3>Professional Summary</h3>
-                <p>AI Engineer with proven ability to design and deploy AI-powered systems that solve complex business challenges across diverse industries. Specialized in agentic systems, autonomous agents, and intelligent chatbot development.</p>
-                <a href="#" class="btn-primary" onclick="downloadResume()">
-                    <span>📄</span>
-                    Download Full Resume
-                </a>
-            </div>
-            <div class="skills-section">
-                <h3>Technical Skills</h3>
-                <div class="skills-container">
-                    <div class="skill-category">
-                        <h4>AI & Machine Learning</h4>
-                        <ul>
-                            <li>Agentic AI Systems</li>
-                            <li>LLM Fine-tuning</li>
-                            <li>Multimodal RAG</li>
-                            <li>Neural Networks</li>
-                        </ul>
-                    </div>
-                    <div class="skill-category">
-                        <h4>Technologies</h4>
-                        <ul>
-                            <li>Python & PyTorch</li>
-                            <li>TensorFlow</li>
-                            <li>Transformers</li>
-                            <li>OpenAI APIs</li>
-                        </ul>
-                    </div>
-                    <div class="skill-category">
-                        <h4>Tools</h4>
-                        <ul>
-                            <li>Docker</li>
-                            <li>Kubernetes</li>
-                            <li>Git</li>
-                            <li>CI/CD Pipelines</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Work Section -->
-    <section id="work" class="content-section">
-        <div class="section-header">
-            <h2 class="section-title">Work Experience</h2>
-            <p class="section-subtitle">Building AI solutions across different industries and geographies</p>
-        </div>
-        <div class="work-grid">
-            <div class="work-card" onclick="showCompanyProjects('braiyt')">
-                <h3>Braiyt MENA</h3>
-                <h4>AI Engineer</h4>
-                <p class="location">Dubai, UAE</p>
-                <p>Developed Agentic AI chatbots, autonomous inventory agents, and Agent Hub platform...</p>
-                <div class="view-projects">View Projects →</div>
-            </div>
-            <div class="work-card" onclick="showCompanyProjects('fixity')">
-                <h3>Fixity Technologies</h3>
-                <h4>AI Engineer</h4>
-                <p class="location">Bangalore, India</p>
-                <p>Engineered assignment generators, fine-tuned LLMs, developed multimodal RAG systems...</p>
-                <div class="view-projects">View Projects →</div>
-            </div>
-            <div class="work-card" onclick="showCompanyProjects('genpact')">
-                <h3>Genpact</h3>
-                <h4>Data Science Intern</h4>
-                <p class="location">Bangalore, India</p>
-                <p>Worked on data science projects and gained hands-on experience in machine learning...</p>
-                <div class="view-projects">View Projects →</div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Project Pages -->
-    <div id="project-pages">
-        <div id="braiyt-projects" class="company-projects">
-            <div class="projects-header">
-                <button class="back-button" onclick="hideCompanyProjects()">← Back</button>
-                <h2>Braiyt MENA Projects</h2>
-            </div>
-            <div class="projects-container">
-                <div class="project-card animate-slide-up">
-                    <h3>Agentic AI Chatbot</h3>
-                    <p>Developed an Agentic AI chatbot that analyzes high-frequency camera data, allowing users to interact with operational insights in their own language without technical expertise.</p>
-                </div>
-                <div class="project-card animate-slide-up">
-                    <h3>Autonomous Inventory Agents</h3>
-                    <p>Built autonomous inventory agents to monitor stock levels and trigger reorder workflows, reducing inventory costs by 25%.</p>
-                </div>
-                <div class="project-card animate-slide-up">
-                    <h3>Agent Hub Platform</h3>
-                    <p>Designed and launched Agent Hub, a centralized platform hosting multiple AI agents for document Q&A, trend-aware marketing, and business intelligence.</p>
-                </div>
-                <div class="project-card animate-slide-up">
-                    <h3>Law Enforcement Chatbot</h3>
-                    <p>Engineered an AI-powered chatbot for a law enforcement agency to enable real-time incident analysis via automated data summarization.</p>
-                </div>
-                <div class="project-card animate-slide-up">
-                    <h3>Text Summarization System</h3>
-                    <p>Developed an aspect-based text summarization system for extracting actionable insights from unstructured data.</p>
-                </div>
-                <div class="project-card animate-slide-up">
-                    <h3>RFP Response Writer</h3>
-                    <p>Built an autonomous RFP response writer that analyzes RFP documents and generates draft responses with minimal human input.</p>
-                </div>
-            </div>
-        </div>
-        <div id="fixity-projects" class="company-projects">
-            <div class="projects-header">
-                <button class="back-button" onclick="hideCompanyProjects()">← Back</button>
-                <h2>Fixity Technologies Projects</h2>
-            </div>
-            <div class="projects-container">
-                <div class="project-card animate-slide-up">
-                    <h3>Agentic Assignment Generator</h3>
-                    <p>Engineered an agentic assignment generator using Claude 3 Sonnet and GPT-4o for autonomous question generation, reducing manual workload by 30%.</p>
-                </div>
-                <div class="project-card animate-slide-up">
-                    <h3>Adaptive Question Generation</h3>
-                    <p>Developed an adaptive question generation system with iterative refinement for enhanced accuracy.</p>
-                </div>
-                <div class="project-card animate-slide-up">
-                    <h3>Educational Content Pipeline</h3>
-                    <p>Created an intelligent educational content creation pipeline with automated scoring and feedback loops.</p>
-                </div>
-            </div>
-        </div>
-        <div id="genpact-projects" class="company-projects">
-            <div class="projects-header">
-                <button class="back-button" onclick="hideCompanyProjects()">← Back</button>
-                <h2>Genpact Projects</h2>
-            </div>
-            <div class="projects-container">
-                <div class="project-card animate-slide-up">
-                    <h3>LLM Fine-tuning</h3>
-                    <p>Fine-tuned a large language model using LORA and QLORA, achieving a 20% improvement in performance.</p>
-                </div>
-                <div class="project-card animate-slide-up">
-                    <h3>LLM Evaluator for RAG</h3>
-                    <p>Developed an LLM evaluator for a RAG pipeline, improving context retrieval accuracy by 15%.</p>
-                </div>
-                <div class="project-card animate-slide-up">
-                    <h3>Multimodal RAG System</h3>
-                    <p>Built a multimodal RAG system incorporating tables, text, and images, integrated with a re-ranker.</p>
-                </div>
-                <div class="project-card animate-slide-up">
-                    <h3>Sentiment Analysis</h3>
-                    <p>Fine-tuned BERT models for aspect-based sentiment analysis, improving model accuracy by 10%.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Life Section -->
-    <section id="life" class="content-section">
-        <div class="section-header">
-            <h2 class="section-title">Life Philosophy</h2>
-            <p class="section-subtitle">Continuous learning, growth, and human connection through technology</p>
-        </div>
-        <div class="life-content">
-            <p>Life is a beautiful journey of continuous learning and growth. From the classrooms of NIIT University to the bustling tech hubs of Bangalore and now the innovative landscape of Dubai, every step has been a lesson in resilience, curiosity, and human connection.</p>
-            <p>I believe in the power of technology to transform lives, but more importantly, in the power of empathy to guide that transformation.</p>
-        </div>
-        <div class="philosophy-grid">
-            <div class="philosophy-card">
-                <div class="philosophy-icon">🎓</div>
-                <h3>Learning</h3>
-                <p>From computer science fundamentals to cutting-edge AI research, the journey of learning never stops.</p>
-            </div>
-            <div class="philosophy-card">
-                <div class="philosophy-icon">🌍</div>
-                <h3>Exploring</h3>
-                <p>Traveling from India to UAE, experiencing diverse cultures and perspectives that shape my worldview.</p>
-            </div>
-            <div class="philosophy-card">
-                <div class="philosophy-icon">💝</div>
-                <h3>Connecting</h3>
-                <p>Building meaningful relationships with colleagues, mentors, and friends across the globe.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Balance Section -->
-    <section id="balance" class="content-section">
-        <div class="section-header">
-            <h2 class="section-title">Work-Life Balance</h2>
-            <p class="section-subtitle">Harmonizing innovation, nature, and community impact</p>
-        </div>
-        <div class="philosophy-grid">
-            <div class="philosophy-card">
-                <div class="philosophy-icon">💻</div>
-                <h3>Technology</h3>
-                <p>Staying at the forefront of AI and machine learning, constantly exploring new frameworks and models.</p>
-            </div>
-            <div class="philosophy-card">
-                <div class="philosophy-icon">🌿</div>
-                <h3>Nature</h3>
-                <p>Finding peace in nature's embrace, providing clarity and inspiration for creative thinking.</p>
-            </div>
-            <div class="philosophy-card">
-                <div class="philosophy-icon">👥</div>
-                <h3>Community</h3>
-                <p>Giving back through mentorship, sharing knowledge, and building inclusive tech communities.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <div class="footer-content">
-            <p>© 2025 Arun Singh Thakur | AI Engineer</p>
-            <button id="theme-toggle" class="theme-toggle">
-                <span class="light-icon">☀️</span>
-                <span class="dark-icon">🌙</span>
-            </button>
-        </div>
-    </footer>
-
-    <script>
-        // Navigation functionality
-        function showSection(sectionId, event) {
-            if (event) event.preventDefault();
-
-            // Hide all sections and project pages
-            document.querySelectorAll('.content-section, .hero, .company-projects').forEach(section => {
-                section.style.display = 'none';
-            });
-
-            // Update nav links
-            document.querySelectorAll('.nav-link').forEach(link => {
-                link.classList.remove('active');
-            });
-
-            // Show target section
-            if (sectionId === 'home') {
-                document.querySelector('.hero').style.display = 'flex';
-            } else if (sectionId === 'work') {
-                document.getElementById('work').style.display = 'block';
-                document.getElementById('project-pages').style.display = 'none';
-            } else {
-                document.getElementById(sectionId).style.display = 'block';
-            }
-
-            // Update active nav link
-            if (event && event.target.classList.contains('nav-link')) {
-                event.target.classList.add('active');
-            }
-
-            // Close mobile menu
-            document.getElementById('main-nav').classList.remove('mobile-visible');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        // Show company projects
-        function showCompanyProjects(companyId) {
-            document.getElementById('work').style.display = 'none';
-            document.getElementById('project-pages').style.display = 'block';
-            document.querySelectorAll('.company-projects').forEach(page => {
-                page.style.display = 'none';
-            });
-            document.getElementById(`${companyId}-projects`).style.display = 'block';
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        // Hide company projects
-        function hideCompanyProjects() {
-            document.getElementById('project-pages').style.display = 'none';
-            document.getElementById('work').style.display = 'block';
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        // Download Resume functionality
-        function downloadResume() {
-            const resumeContent = `
-            ARUN SINGH THAKUR - AI ENGINEER
-            
-            PROFESSIONAL SUMMARY:
-            AI Engineer with proven ability to design and deploy AI-powered systems that solve 
-            complex business challenges across diverse industries. Specialized in agentic systems, 
-            autonomous agents, and intelligent chatbot development.
-            
-            TECHNICAL SKILLS:
-            • AI & Machine Learning: Agentic AI Systems, LLM Fine-tuning, Multimodal RAG, Neural Networks
-            • Technologies: Python & PyTorch, TensorFlow, Transformers, OpenAI APIs
-            • Tools: Docker, Kubernetes, Git, CI/CD Pipelines
-            
-            WORK EXPERIENCE:
-            
-            BRAIYT MENA - AI Engineer (Dubai, UAE)
-            • Developed Agentic AI chatbots analyzing high-frequency camera data
-            • Built autonomous inventory agents reducing costs by 25%
-            • Designed Agent Hub platform adopted by government agencies
-            
-            FIXITY TECHNOLOGIES - AI Engineer (Bangalore, India)
-            • Engineered agentic assignment generator reducing manual workload by 30%
-            • Developed adaptive question generation systems
-            • Created educational content pipeline processing 1,000 questions/hour
-            
-            GENPACT - Data Science Intern (Bangalore, India)
-            • Fine-tuned LLM models achieving 20% performance improvement
-            • Built multimodal RAG systems with enhanced retrieval accuracy
-            • Performed sentiment analysis with 10% accuracy improvement
-            `;
-            const blob = new Blob([resumeContent], { type: 'text/plain' });
-            const url = window.URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = 'Arun_Singh_Thakur_Resume.txt';
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            window.URL.revokeObjectURL(url);
-            alert('Resume downloaded successfully!');
-        }
-
-        // Mobile menu functionality
-        document.addEventListener('DOMContentLoaded', () => {
-            // Show home section by default
-            showSection('home');
-
-            const menuBtn = document.getElementById('mobile-menu-btn');
-            const nav = document.getElementById('main-nav');
-
-            menuBtn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                nav.classList.toggle('mobile-visible');
-                menuBtn.textContent = nav.classList.contains('mobile-visible') ? '✕' : '☰';
-            });
-
-            // Close menu when clicking outside
-            document.addEventListener('click', (e) => {
-                if (!nav.contains(e.target) && e.target !== menuBtn && nav.classList.contains('mobile-visible')) {
-                    nav.classList.remove('mobile-visible');
-                    menuBtn.textContent = '☰';
-                }
-            });
-
-            // Theme toggle
-            const themeToggle = document.getElementById('theme-toggle');
-            const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
-            const currentTheme = localStorage.getItem('theme');
-
-            if (currentTheme === 'dark' || (!currentTheme && prefersDarkScheme.matches)) {
-                document.body.classList.add('dark-mode');
-                document.body.classList.remove('light-mode');
-            }
-
-            themeToggle.addEventListener('click', () => {
-                document.body.classList.toggle('dark-mode');
-                document.body.classList.toggle('light-mode');
-                localStorage.setItem('theme', document.body.classList.contains('dark-mode') ? 'dark' : 'light');
-            });
-
-            // Prevent default link behavior for hash links
-            document.querySelectorAll('a[href="#"]').forEach(link => {
-                link.addEventListener('click', (e) => e.preventDefault());
-            });
-        });
-    </script>
-</body>
-</html>
