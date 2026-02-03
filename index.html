@@ -1005,137 +1005,27 @@
             });
         });
 
-        // Download resume function - Mobile compatible with reliable fallback
+        // Download resume function - Opens actual PDF file
         function downloadResume() {
-            const resumeContent = `ARUN SINGH THAKUR
-AI ENGINEER
-
-Dubai, UAE
-Email: arun@example.com
-Phone: +971-XXX-XXXX
-
-PROFESSIONAL SUMMARY
-Experienced AI Engineer specializing in Agentic AI systems, LLM fine-tuning, and autonomous agents. Proven track record of building production-grade AI solutions across law enforcement, inventory management, and educational technology sectors.
-
-WORK EXPERIENCE
-
-AI Engineer - Braiyt MENA (Dubai, UAE)
-• Developed Agentic AI chatbots using LangGraph, CrewAI, and AutoGen
-• Built autonomous inventory agents and Agent Hub platform
-• Created AI-powered solutions for law enforcement and business intelligence
-
-AI Engineer - Fixity Technologies (Bangalore, India)
-• Engineered intelligent assignment generators and content creation pipelines
-• Fine-tuned LLMs using QLoRA/LoRA techniques
-• Developed multimodal RAG systems with Claude and GPT-4
-
-Data Science Intern - Genpact (Bangalore, India)
-• Worked on machine learning and data analysis projects
-• Built predictive models for business intelligence
-
-Technical Lead & AI Lead - Google Developer Student Club (NIIT University)
-• Led technical initiatives and AI projects
-• Mentored 200+ students
-• Organized workshops on machine learning and AI
-
-TECHNICAL SKILLS
-• Languages: Python, JavaScript, SQL
-• AI/ML: LangChain, LangGraph, CrewAI, AutoGen, TensorFlow, PyTorch
-• LLMs: GPT-4, Claude, Llama, Fine-tuning (QLoRA/LoRA)
-• Frameworks: FastAPI, Flask, React, Node.js
-• Tools: Docker, Git, AWS, Azure
-
-EDUCATION
-B.Tech in Computer Science Engineering
-NIIT University
-
-PHILOSOPHY
-"zinda ho toh zinda nazar aana zaroori hai"
-If you are alive, it is important to look alive.`;
-
-            // Simple approach: open in new window with pre-formatted text
-            // This works reliably on all mobile browsers
-            const newWindow = window.open('', '_blank');
+            // Path to the PDF file in the same directory
+            const pdfPath = 'arun_ai-engineer_resume.pdf';
             
-            if (newWindow) {
-                newWindow.document.write(`
-                    <!DOCTYPE html>
-                    <html>
-                    <head>
-                        <meta charset="UTF-8">
-                        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                        <title>Arun Singh Thakur - Resume</title>
-                        <style>
-                            body {
-                                font-family: 'Courier New', monospace;
-                                padding: 20px;
-                                max-width: 800px;
-                                margin: 0 auto;
-                                background: #fff;
-                                color: #000;
-                                line-height: 1.6;
-                            }
-                            pre {
-                                white-space: pre-wrap;
-                                word-wrap: break-word;
-                            }
-                            .download-btn {
-                                position: fixed;
-                                bottom: 20px;
-                                right: 20px;
-                                background: #000;
-                                color: #fff;
-                                padding: 12px 24px;
-                                border: none;
-                                border-radius: 25px;
-                                font-size: 14px;
-                                cursor: pointer;
-                                box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-                                z-index: 1000;
-                            }
-                            .download-btn:active {
-                                transform: scale(0.95);
-                            }
-                            @media print {
-                                .download-btn { display: none; }
-                            }
-                        </style>
-                    </head>
-                    <body>
-                        <button class="download-btn" onclick="window.print()">📄 Save as PDF</button>
-                        <pre>${resumeContent}</pre>
-                    </body>
-                    </html>
-                `);
-                newWindow.document.close();
-            } else {
-                // If popup blocked, try alternative method
-                const blob = new Blob([resumeContent], { type: 'text/plain' });
-                const url = URL.createObjectURL(blob);
-                
-                // Create temporary link
-                const tempLink = document.createElement('a');
-                tempLink.href = url;
-                tempLink.download = 'Arun_Singh_Thakur_Resume.txt';
-                tempLink.style.display = 'none';
-                
-                document.body.appendChild(tempLink);
-                
-                // Try to trigger download
-                try {
-                    tempLink.click();
-                } catch (e) {
-                    // Final fallback: show in alert
-                    alert('Please enable pop-ups or copy this text:\n\n' + resumeContent.substring(0, 500) + '...\n\n(Full resume will be shown on the next screen)');
-                    alert(resumeContent);
-                }
-                
-                // Cleanup
-                setTimeout(() => {
-                    document.body.removeChild(tempLink);
-                    URL.revokeObjectURL(url);
-                }, 100);
-            }
+            // Create a temporary link element
+            const link = document.createElement('a');
+            link.href = pdfPath;
+            link.download = 'Arun_Singh_Thakur_Resume.pdf';
+            link.target = '_blank'; // Open in new tab as fallback
+            link.style.display = 'none';
+            
+            document.body.appendChild(link);
+            
+            // Trigger the download
+            link.click();
+            
+            // Cleanup
+            setTimeout(() => {
+                document.body.removeChild(link);
+            }, 100);
         }
 
         // Update active nav on scroll
