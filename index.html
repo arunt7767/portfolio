@@ -1005,7 +1005,7 @@
             });
         });
 
-        // Download resume function - Mobile compatible
+        // Download resume function - Mobile compatible with reliable fallback
         function downloadResume() {
             const resumeContent = `ARUN SINGH THAKUR
 AI ENGINEER
@@ -1053,66 +1053,88 @@ PHILOSOPHY
 "zinda ho toh zinda nazar aana zaroori hai"
 If you are alive, it is important to look alive.`;
 
-            try {
-                // Create blob
-                const blob = new Blob([resumeContent], { type: 'text/plain;charset=utf-8' });
+            // Simple approach: open in new window with pre-formatted text
+            // This works reliably on all mobile browsers
+            const newWindow = window.open('', '_blank');
+            
+            if (newWindow) {
+                newWindow.document.write(`
+                    <!DOCTYPE html>
+                    <html>
+                    <head>
+                        <meta charset="UTF-8">
+                        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                        <title>Arun Singh Thakur - Resume</title>
+                        <style>
+                            body {
+                                font-family: 'Courier New', monospace;
+                                padding: 20px;
+                                max-width: 800px;
+                                margin: 0 auto;
+                                background: #fff;
+                                color: #000;
+                                line-height: 1.6;
+                            }
+                            pre {
+                                white-space: pre-wrap;
+                                word-wrap: break-word;
+                            }
+                            .download-btn {
+                                position: fixed;
+                                bottom: 20px;
+                                right: 20px;
+                                background: #000;
+                                color: #fff;
+                                padding: 12px 24px;
+                                border: none;
+                                border-radius: 25px;
+                                font-size: 14px;
+                                cursor: pointer;
+                                box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+                                z-index: 1000;
+                            }
+                            .download-btn:active {
+                                transform: scale(0.95);
+                            }
+                            @media print {
+                                .download-btn { display: none; }
+                            }
+                        </style>
+                    </head>
+                    <body>
+                        <button class="download-btn" onclick="window.print()">📄 Save as PDF</button>
+                        <pre>${resumeContent}</pre>
+                    </body>
+                    </html>
+                `);
+                newWindow.document.close();
+            } else {
+                // If popup blocked, try alternative method
+                const blob = new Blob([resumeContent], { type: 'text/plain' });
+                const url = URL.createObjectURL(blob);
                 
-                // Check if mobile device
-                const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+                // Create temporary link
+                const tempLink = document.createElement('a');
+                tempLink.href = url;
+                tempLink.download = 'Arun_Singh_Thakur_Resume.txt';
+                tempLink.style.display = 'none';
                 
-                if (isMobile) {
-                    // For mobile devices, use a more compatible method
-                    const reader = new FileReader();
-                    reader.onload = function(e) {
-                        const link = document.createElement('a');
-                        link.href = e.target.result;
-                        link.download = 'Arun_Singh_Thakur_Resume.txt';
-                        link.style.display = 'none';
-                        
-                        document.body.appendChild(link);
-                        
-                        // Trigger click
-                        if (typeof link.click === 'function') {
-                            link.click();
-                        } else {
-                            // Fallback for older mobile browsers
-                            const evt = document.createEvent('MouseEvents');
-                            evt.initMouseEvent('click', true, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
-                            link.dispatchEvent(evt);
-                        }
-                        
-                        // Cleanup
-                        setTimeout(() => {
-                            document.body.removeChild(link);
-                        }, 100);
-                    };
-                    reader.readAsDataURL(blob);
-                } else {
-                    // Desktop method
-                    const url = URL.createObjectURL(blob);
-                    const a = document.createElement('a');
-                    a.href = url;
-                    a.download = 'Arun_Singh_Thakur_Resume.txt';
-                    a.style.display = 'none';
-                    
-                    document.body.appendChild(a);
-                    a.click();
-                    
-                    setTimeout(() => {
-                        document.body.removeChild(a);
-                        URL.revokeObjectURL(url);
-                    }, 100);
+                document.body.appendChild(tempLink);
+                
+                // Try to trigger download
+                try {
+                    tempLink.click();
+                } catch (e) {
+                    // Final fallback: show in alert
+                    alert('Please enable pop-ups or copy this text:\n\n' + resumeContent.substring(0, 500) + '...\n\n(Full resume will be shown on the next screen)');
+                    alert(resumeContent);
                 }
-            } catch (error) {
-                console.error('Download failed:', error);
-                // Fallback: open in new window
-                const newWindow = window.open('', '_blank');
-                if (newWindow) {
-                    newWindow.document.write('<pre>' + resumeContent + '</pre>');
-                    newWindow.document.title = 'Arun Singh Thakur - Resume';
-                } else {
-                    alert('Please allow pop-ups to download the resume, or copy the text:\n\n' + resumeContent);
-                }
+                
+                // Cleanup
+                setTimeout(() => {
+                    document.body.removeChild(tempLink);
+                    URL.revokeObjectURL(url);
+                }, 100);
             }
         }
 
