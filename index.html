@@ -5,572 +5,726 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Arun Singh Thakur | AI Engineer</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
+        :root {
+            --primary-color: #1a1a1a;
+            --secondary-color: #0f0f0f;
+            --accent-color: #6366f1;
+            --text-primary: #ffffff;
+            --text-secondary: rgba(255, 255, 255, 0.7);
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --dark-bg: #0a0a0a;
+            --card-bg: rgba(255, 255, 255, 0.03);
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            transition: color 0.3s ease, border-color 0.3s ease;
         }
+
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            line-height: 1.6;
-            overflow-x: hidden;
-            position: relative;
+            background: var(--dark-bg);
             min-height: 100vh;
-        }
-        
-        /* GIF FULLY VISIBLE - NO BACKGROUND BOXES */
-        .gif-background {
-            position: fixed !important;
-            top: 0 !important;
-            left: 0 !important;
-            width: 100vw !important;
-            height: 100vh !important;
-            z-index: -1 !important;
-            opacity: 0.15 !important;
-            pointer-events: none !important;
-        }
-        .tenor-gif-embed {
-            width: 100% !important;
-            height: 100% !important;
+            color: var(--text-primary);
+            overflow-x: hidden;
+            line-height: 1.6;
         }
 
-        /* LIGHT / DARK TEXT ONLY - NO BACKGROUND */
-        body.light-mode {
-            color: #0a0a0a;
-        }
-        body.dark-mode {
-            color: #f7f7f8;
-        }
-
-        /* Header */
-        header {
+        /* Animated background elements */
+        .bg-animation {
             position: fixed;
             top: 0;
             left: 0;
-            right: 0;
-            z-index: 1000;
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            padding: 0 16px;
-            background: rgba(255, 255, 255, 0.1);
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.1;
         }
-        .dark-mode header {
-            background: rgba(0, 0, 0, 0.1);
-        }
-        .header-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            height: 60px;
-        }
-        .logo {
-            font-size: 18px;
-            font-weight: 600;
-            text-decoration: none;
-            letter-spacing: -0.02em;
-        }
-        .light-mode .logo { color: #0a0a0a; }
-        .dark-mode .logo { color: #f7f7f8; }
 
-        .nav-menu {
-            display: flex;
-            align-items: center;
-            gap: 24px;
-            list-style: none;
-        }
-        .nav-menu a {
-            text-decoration: none;
-            font-weight: 400;
-            font-size: 14px;
-            padding: 8px;
-            position: relative;
-            touch-action: manipulation;
-        }
-        .light-mode .nav-menu a { color: rgba(10, 10, 10, 0.8); }
-        .dark-mode .nav-menu a { color: rgba(247, 247, 248, 0.8); }
-        .light-mode .nav-menu a:hover { color: #0a0a0a; }
-        .dark-mode .nav-menu a:hover { color: #f7f7f8; }
-        .nav-menu a.active::after {
-            content: '';
+        .floating-shapes {
             position: absolute;
-            bottom: -2px;
-            left: 8px;
-            right: 8px;
-            height: 2px;
-            background: currentColor;
-        }
-
-        /* Mobile Menu */
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            font-size: 16px;
-            font-weight: 500;
-            cursor: pointer;
-            padding: 8px 16px;
-            touch-action: manipulation;
-            -webkit-appearance: none;
-            -webkit-tap-highlight-color: transparent;
-        }
-        .light-mode .mobile-menu-btn { color: #0a0a0a; }
-        .dark-mode .mobile-menu-btn { color: #f7f7f8; }
-
-        @media (max-width: 768px) {
-            .mobile-menu-btn { 
-                display: block !important; 
-            }
-            .nav-menu {
-                position: fixed;
-                top: 60px;
-                left: 0;
-                right: 0;
-                flex-direction: column;
-                padding: 16px;
-                gap: 8px;
-                max-height: calc(100vh - 60px);
-                transform: translateX(-100%);
-                transition: transform 0.3s ease;
-                z-index: 999;
-                overflow-y: auto;
-                background: rgba(255, 255, 255, 0.98);
-                backdrop-filter: blur(20px);
-                -webkit-backdrop-filter: blur(20px);
-            }
-            .dark-mode .nav-menu {
-                background: rgba(0, 0, 0, 0.98);
-            }
-            .nav-menu.mobile-visible {
-                transform: translateX(0) !important;
-            }
-            .nav-menu li {
-                width: 100%;
-            }
-            .nav-menu a {
-                font-size: 16px;
-                padding: 12px 16px;
-                width: 100%;
-                display: block;
-                text-align: left;
-            }
-            .nav-menu a.active::after {
-                left: 16px;
-                right: 16px;
-            }
-        }
-
-        /* Hero - FULLY TRANSPARENT */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            padding: 80px 16px 60px;
-            position: relative;
-            z-index: 1;
-        }
-        .hero-content {
-            max-width: 1200px;
             width: 100%;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 40px;
+            height: 100%;
         }
-        .hero-text { 
-            flex: 1; 
-            max-width: 600px; 
-        }
-        .hero-image {
-            flex: 1;
-            display: flex;
-            justify-content: flex-end;
-            max-width: 500px;
-        }
-        .hero-image img {
-            width: 100%;
-            max-width: 400px;
-            height: auto;
-            border-radius: 8px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-        }
-        .hero-title {
-            font-size: clamp(28px, 5vw, 48px);
-            font-weight: 700;
-            line-height: 1.2;
-            letter-spacing: -0.02em;
-            margin-bottom: 16px;
-        }
-        .hero-divider {
-            height: 1px;
-            width: 80px;
-            margin: 20px 0;
-            background: currentColor;
+
+        .shape {
+            position: absolute;
+            background: linear-gradient(45deg, var(--accent-color), var(--primary-color));
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
             opacity: 0.3;
         }
-        .hero-subtitle {
-            font-size: clamp(14px, 2.5vw, 18px);
-            opacity: 0.8;
-            margin-bottom: 24px;
-            line-height: 1.5;
+
+        .shape:nth-child(1) { 
+            width: 80px; 
+            height: 80px; 
+            top: 20%; 
+            left: 10%; 
+            animation-delay: 0s; 
+        }
+        .shape:nth-child(2) { 
+            width: 120px; 
+            height: 120px; 
+            top: 60%; 
+            right: 10%; 
+            animation-delay: 2s; 
+        }
+        .shape:nth-child(3) { 
+            width: 60px; 
+            height: 60px; 
+            bottom: 20%; 
+            left: 20%; 
+            animation-delay: 4s; 
         }
 
-        .cta-buttons {
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+        /* Glass morphism container */
+        .glass {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+            padding: 15px 30px;
+            max-width: 90%;
+        }
+
+        nav ul {
             display: flex;
-            gap: 12px;
+            list-style: none;
+            gap: 30px;
             flex-wrap: wrap;
-            margin-top: 32px;
-        }
-        .btn-primary, .btn-secondary {
-            padding: 12px 24px;
-            border-radius: 6px;
-            font-size: 14px;
-            font-weight: 500;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
             justify-content: center;
-            gap: 8px;
-            cursor: pointer;
-            touch-action: manipulation;
-            -webkit-appearance: none;
-            -webkit-tap-highlight-color: transparent;
-            border: none;
-            white-space: nowrap;
-        }
-        .light-mode .btn-primary {
-            background: #0a0a0a;
-            color: #f7f7f8;
-        }
-        .dark-mode .btn-primary {
-            background: #f7f7f8;
-            color: #0a0a0a;
-        }
-        .light-mode .btn-secondary {
-            color: #0a0a0a;
-            border: 1px solid rgba(10, 10, 10, 0.3);
-            background: transparent;
-        }
-        .dark-mode .btn-secondary {
-            color: #f7f7f8;
-            border: 1px solid rgba(247, 247, 248, 0.3);
-            background: transparent;
         }
 
-        /* Content Sections - TRANSPARENT */
-        .content-section, #project-pages {
-            padding: 80px 16px 60px;
-            max-width: 1200px;
-            margin: 0 auto;
+        nav a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
             position: relative;
-            z-index: 1;
-            display: none;
-        }
-        .content-section.active, #project-pages.active {
+            padding: 5px 10px;
             display: block;
         }
 
-        .section-title {
-            font-size: clamp(24px, 4vw, 32px);
-            font-weight: 700;
-            margin-bottom: 32px;
-            letter-spacing: -0.02em;
+        nav a:hover {
+            color: var(--accent-color);
         }
 
-        /* Cards - Keep subtle background for readability */
-        .work-card, .project-card, .download-section, .philosophy-card {
-            border-radius: 12px;
-            padding: 24px;
-            margin-bottom: 20px;
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.1);
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 50%;
+            background: var(--accent-color);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        nav a:hover::after,
+        nav a.active::after {
+            width: 100%;
+        }
+
+        /* Mobile menu button */
+        .mobile-menu-btn {
+            display: none;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1001;
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 10px;
+            padding: 12px 20px;
+            color: var(--text-primary);
             cursor: pointer;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-        .work-card:hover, .project-card:hover {
-            transform: translateY(-2px);
-        }
-        .light-mode .work-card,
-        .light-mode .project-card,
-        .light-mode .download-section,
-        .light-mode .philosophy-card {
-            background: rgba(255, 255, 255, 0.7);
-            border-color: rgba(0,0,0,0.1);
-        }
-        .dark-mode .work-card,
-        .dark-mode .project-card,
-        .dark-mode .download-section,
-        .dark-mode .philosophy-card {
-            background: rgba(0, 0, 0, 0.7);
-            border-color: rgba(255,255,255,0.1);
+            font-weight: 500;
+            font-size: 14px;
         }
 
-        .work-card h3, .project-card h3, .download-section h3 {
-            font-size: clamp(18px, 3vw, 22px);
-            font-weight: 600;
-            margin-bottom: 8px;
-        }
-
-        .work-card p, .project-card p, .download-section p {
-            font-size: clamp(14px, 2vw, 16px);
-            opacity: 0.8;
-            margin: 4px 0;
-        }
-
-        /* Footer */
-        footer {
-            text-align: center;
-            padding: 32px 16px;
-            margin-top: 60px;
-            position: relative;
-            z-index: 1;
-        }
-        .footer-content {
+        /* Main container */
+        .container {
             max-width: 1200px;
             margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 16px;
-        }
-        footer p {
-            font-size: 13px;
-            opacity: 0.7;
+            padding: 100px 20px 50px;
         }
 
-        .theme-toggle {
-            background: transparent;
+        /* Home section with quote */
+        .home {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 80vh;
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        .quote-hindi {
+            font-size: clamp(2rem, 6vw, 4rem);
+            font-weight: 700;
+            margin-bottom: 30px;
+            background: linear-gradient(135deg, var(--text-primary), var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.2;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        .quote-english {
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
+            color: var(--text-secondary);
+            font-weight: 300;
+            font-style: italic;
+            margin-bottom: 50px;
+        }
+
+        @keyframes glow {
+            from { filter: brightness(1); }
+            to { filter: brightness(1.2); }
+        }
+
+        /* Section styling */
+        .section {
+            margin-bottom: 80px;
+            padding: 60px 40px;
+            position: relative;
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        .section h2 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            margin-bottom: 40px;
+            text-align: center;
+            background: linear-gradient(135deg, var(--text-primary), var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Download Resume Section */
+        .download-section {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            background: linear-gradient(135deg, var(--accent-color), #4f46e5);
+            color: white;
+            padding: 20px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.3);
             border: none;
             cursor: pointer;
-            font-size: 14px;
-            font-weight: 500;
-            padding: 8px 16px;
-            border-radius: 6px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            touch-action: manipulation;
-            -webkit-appearance: none;
-            -webkit-tap-highlight-color: transparent;
-        }
-        .light-mode .theme-toggle {
-            color: #0a0a0a;
-            border: 1px solid rgba(10, 10, 10, 0.2);
-        }
-        .dark-mode .theme-toggle {
-            color: #f7f7f8;
-            border: 1px solid rgba(247, 247, 248, 0.2);
-        }
-        .dark-icon { display: none; }
-        .light-mode .dark-icon { display: none; }
-        .light-mode .light-icon { display: inline; }
-        .dark-mode .light-icon { display: none; }
-        .dark-mode .dark-icon { display: inline; }
-
-        /* Mobile Optimizations */
-        @media (max-width: 768px) {
-            header {
-                padding: 0 12px;
-            }
-            .header-content {
-                height: 56px;
-            }
-            .logo {
-                font-size: 16px;
-            }
-            .hero {
-                min-height: 100vh;
-                padding: 70px 16px 40px;
-            }
-            .hero-content { 
-                flex-direction: column; 
-                gap: 32px;
-            }
-            .hero-text { 
-                order: 2; 
-                text-align: center;
-                max-width: 100%;
-            }
-            .hero-image { 
-                order: 1; 
-                justify-content: center;
-                max-width: 100%;
-                width: 100%;
-            }
-            .hero-image img {
-                max-width: 280px;
-            }
-            .hero-title {
-                font-size: 24px;
-                line-height: 1.3;
-            }
-            .hero-divider {
-                margin: 16px auto;
-            }
-            .hero-subtitle {
-                font-size: 14px;
-            }
-            .cta-buttons { 
-                justify-content: center; 
-                flex-direction: column; 
-                align-items: stretch;
-                gap: 10px;
-                margin-top: 24px;
-            }
-            .btn-primary, .btn-secondary {
-                width: 100%;
-                max-width: 100%;
-                justify-content: center;
-                padding: 14px 24px;
-                font-size: 15px;
-            }
-            .content-section {
-                padding: 70px 16px 40px;
-            }
-            .work-card, .project-card, .download-section {
-                padding: 20px;
-                margin-bottom: 16px;
-            }
-            .footer-content {
-                flex-direction: column;
-                text-align: center;
-                gap: 12px;
-            }
         }
 
-        @media (max-width: 480px) {
-            .hero-title {
-                font-size: 22px;
-            }
-            .hero-subtitle {
-                font-size: 13px;
-            }
-            .hero-image img {
-                max-width: 240px;
+        .download-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(99, 102, 241, 0.4);
+        }
+
+        /* Work Section */
+        .work-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .work-item {
+            padding: 30px;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border-left: 4px solid var(--accent-color);
+        }
+
+        .work-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .work-item h3 {
+            color: var(--accent-color);
+            font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+            margin-bottom: 15px;
+        }
+
+        .work-item h4 {
+            color: var(--text-primary);
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            margin-bottom: 10px;
+        }
+
+        .work-item p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 10px;
+            font-size: clamp(0.9rem, 1.5vw, 1rem);
+        }
+
+        /* Life Section */
+        .life-content {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .life-content p {
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            line-height: 1.8;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+        }
+
+        .life-highlights {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .highlight-card {
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .highlight-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .highlight-card i {
+            font-size: clamp(2rem, 5vw, 3rem);
+            color: var(--accent-color);
+            margin-bottom: 20px;
+        }
+
+        .highlight-card h3 {
+            color: var(--text-primary);
+            margin-bottom: 15px;
+            font-size: clamp(1.2rem, 2vw, 1.4rem);
+        }
+
+        .highlight-card p {
+            color: var(--text-secondary);
+            font-size: clamp(0.9rem, 1.5vw, 1rem);
+            line-height: 1.6;
+        }
+
+        /* Balance Section */
+        .balance-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .balance-item {
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .balance-item:hover {
+            transform: scale(1.02);
+        }
+
+        .balance-item i {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            color: var(--accent-color);
+            margin-bottom: 25px;
+        }
+
+        .balance-item h3 {
+            color: var(--text-primary);
+            font-size: clamp(1.4rem, 3vw, 1.8rem);
+            margin-bottom: 20px;
+        }
+
+        .balance-item p {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            font-size: clamp(0.95rem, 1.8vw, 1.1rem);
+        }
+
+        /* Articles Section */
+        .articles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .article-card {
+            padding: 30px;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .article-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .article-card:hover::before {
+            left: 100%;
+        }
+
+        .article-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .article-date {
+            color: var(--accent-color);
+            font-size: clamp(0.85rem, 1.5vw, 0.9rem);
+            margin-bottom: 10px;
+        }
+
+        .article-card h3 {
+            color: var(--text-primary);
+            font-size: clamp(1.1rem, 2.2vw, 1.4rem);
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+
+        .article-card p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 20px;
+            font-size: clamp(0.9rem, 1.5vw, 1rem);
+        }
+
+        .read-more {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-size: clamp(0.9rem, 1.5vw, 1rem);
+        }
+
+        .read-more:hover {
+            color: var(--text-primary);
+        }
+
+        /* Loading animation */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
             }
         }
+
+        .fade-in:nth-child(1) { animation-delay: 0.1s; }
+        .fade-in:nth-child(2) { animation-delay: 0.2s; }
+        .fade-in:nth-child(3) { animation-delay: 0.3s; }
+        .fade-in:nth-child(4) { animation-delay: 0.4s; }
 
         /* Smooth scrolling */
         html {
             scroll-behavior: smooth;
         }
 
-        /* Prevent horizontal scroll */
-        body {
-            overflow-x: hidden;
-            width: 100%;
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            nav {
+                display: none;
+                top: 70px;
+                left: 50%;
+                transform: translateX(-50%);
+                width: calc(100% - 40px);
+                max-width: 400px;
+            }
+
+            nav.mobile-visible {
+                display: block;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 10px;
+                padding: 10px 0;
+            }
+
+            nav a {
+                padding: 10px 15px;
+                text-align: center;
+                width: 100%;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .container {
+                padding: 80px 15px 30px;
+            }
+
+            .section {
+                padding: 40px 20px;
+            }
+
+            .home {
+                padding: 40px 20px;
+                min-height: 70vh;
+            }
+
+            .work-grid,
+            .articles-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .life-highlights,
+            .balance-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .shape {
+                display: none;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .quote-hindi {
+                font-size: 1.8rem;
+            }
+
+            .quote-english {
+                font-size: 0.9rem;
+            }
+
+            .section h2 {
+                font-size: 1.8rem;
+            }
+
+            .download-btn {
+                padding: 16px 32px;
+                font-size: 1rem;
+            }
+
+            .work-item,
+            .article-card,
+            .highlight-card,
+            .balance-item {
+                padding: 20px;
+            }
         }
     </style>
 </head>
-<body class="light-mode">
-
-    <!-- JUMP GIF - FULLY VISIBLE -->
-    <div class="gif-background">
-        <div class="tenor-gif-embed" data-postid="3526123" data-share-method="host" data-aspect-ratio="1.77778" data-width="100%">
-            <a href="https://tenor.com/view/jump-gif-3526123">Jump So High GIF</a>
+<body>
+    <!-- Animated background -->
+    <div class="bg-animation">
+        <div class="floating-shapes">
+            <div class="shape"></div>
+            <div class="shape"></div>
+            <div class="shape"></div>
         </div>
     </div>
-    <script type="text/javascript" async src="https://tenor.com/embed.js"></script>
 
-    <!-- Header -->
-    <header>
-        <div class="header-content">
-            <a href="#" class="logo" onclick="showSection('home', event)">Arun Singh Thakur</a>
-            <nav>
-                <ul class="nav-menu" id="nav-menu">
-                    <li><a href="#" onclick="showSection('home', event)" class="nav-link active">Home</a></li>
-                    <li><a href="#" onclick="showSection('resume', event)" class="nav-link">Resume</a></li>
-                    <li><a href="#" onclick="showSection('work', event)" class="nav-link">Work</a></li>
-                    <li><a href="#" onclick="showSection('life', event)" class="nav-link">Life</a></li>
-                    <li><a href="#" onclick="showSection('balance', event)" class="nav-link">Balance</a></li>
-                </ul>
-            </nav>
-            <button class="mobile-menu-btn" id="mobile-menu-btn">Menu</button>
-        </div>
-    </header>
+    <!-- Mobile Menu Button -->
+    <button class="mobile-menu-btn" id="mobile-menu-btn">Menu</button>
 
-    <!-- Hero -->
-    <section id="home" class="hero">
-        <div class="hero-content">
-            <div class="hero-text">
-                <div class="hero-title-container">
-                    <h1 class="hero-title">zinda ho toh zinda nazar aana zaroori hai</h1>
-                    <div class="hero-divider"></div>
-                    <p class="hero-subtitle">If you are alive, it is important to look alive.</p>
+    <!-- Navigation -->
+    <nav class="glass" id="main-nav">
+        <ul>
+            <li><a href="#" onclick="showSection('home', event)" class="nav-link active">Home</a></li>
+            <li><a href="#" onclick="showSection('resume', event)" class="nav-link">Resume</a></li>
+            <li><a href="#" onclick="showSection('work', event)" class="nav-link">Work</a></li>
+            <li><a href="#" onclick="showSection('life', event)" class="nav-link">Life</a></li>
+            <li><a href="#" onclick="showSection('balance', event)" class="nav-link">Balance</a></li>
+            <li><a href="#" onclick="showSection('articles', event)" class="nav-link">Articles</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <!-- Home Section -->
+        <section id="home" class="home fade-in">
+            <div class="quote-hindi">zinda ho toh zinda nazar aana zaroori hai</div>
+            <div class="quote-english">If you are alive, it is important to look alive</div>
+        </section>
+
+        <!-- Download Resume Section -->
+        <section id="resume" class="section glass fade-in">
+            <h2>Resume</h2>
+            <div class="download-section">
+                <button onclick="downloadResume()" class="download-btn">
+                    <i class="fas fa-download"></i>
+                    Download Resume
+                </button>
+            </div>
+        </section>
+
+        <!-- Work Section -->
+        <section id="work" class="section glass fade-in">
+            <h2>Work</h2>
+            <div class="work-grid">
+                <div class="work-item glass">
+                    <h3>Braiyt MENA</h3>
+                    <h4>AI Engineer</h4>
+                    <p>Dubai, UAE</p>
+                    <p>Developed Agentic AI chatbots, autonomous inventory agents, and Agent Hub platform. Built AI-powered solutions for law enforcement, inventory management, and business intelligence.</p>
                 </div>
-                <div class="cta-buttons">
-                    <a href="#" class="btn-primary" onclick="showSection('work', event)">View My Work →</a>
-                    <button class="btn-secondary" onclick="downloadResume()">Download Resume ↓</button>
+                
+                <div class="work-item glass">
+                    <h3>Fixity Technologies</h3>
+                    <h4>AI Engineer</h4>
+                    <p>Bangalore, India</p>
+                    <p>Engineered assignment generators, fine-tuned LLMs, developed multimodal RAG systems, and built intelligent educational content creation pipelines.</p>
+                </div>
+                
+                <div class="work-item glass">
+                    <h3>Genpact</h3>
+                    <h4>Data Science Intern</h4>
+                    <p>Bangalore, India</p>
+                    <p>Worked on data science projects and gained hands-on experience in machine learning and data analysis.</p>
+                </div>
+                
+                <div class="work-item glass">
+                    <h3>Google Developer Student Club</h3>
+                    <h4>Technical Lead & AI Lead</h4>
+                    <p>NIIT University</p>
+                    <p>Led technical initiatives and AI projects, mentored students, and organized workshops and events for the developer community.</p>
                 </div>
             </div>
-            <div class="hero-image">
-                <img src="web.jpg" alt="Arun Singh Thakur">
+        </section>
+
+        <!-- Life Section -->
+        <section id="life" class="section glass fade-in">
+            <h2>Life</h2>
+            <div class="life-content">
+                <p>Life is a beautiful journey of continuous learning and growth. From the classrooms of NIIT University to the bustling tech hubs of Bangalore and now the innovative landscape of Dubai, every step has been a lesson in resilience, curiosity, and human connection.</p>
+                
+                <p>I believe in the power of technology to transform lives, but more importantly, in the power of empathy to guide that transformation. Every algorithm I write, every model I train, carries with it the hope of making someone's life a little bit better.</p>
+                
+                <div class="life-highlights">
+                    <div class="highlight-card glass">
+                        <i class="fas fa-graduation-cap"></i>
+                        <h3>Learning</h3>
+                        <p>From computer science fundamentals to cutting-edge AI research, the journey of learning never stops.</p>
+                    </div>
+                    
+                    <div class="highlight-card glass">
+                        <i class="fas fa-globe"></i>
+                        <h3>Exploring</h3>
+                        <p>Traveling from India to UAE, experiencing diverse cultures and perspectives that shape my worldview.</p>
+                    </div>
+                    
+                    <div class="highlight-card glass">
+                        <i class="fas fa-heart"></i>
+                        <h3>Connecting</h3>
+                        <p>Building meaningful relationships with colleagues, mentors, and friends across the globe.</p>
+                    </div>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Resume -->
-    <section id="resume" class="content-section">
-        <h2 class="section-title">Resume</h2>
-        <div class="download-section">
-            <h3>Download Resume</h3>
-            <p>AI Engineer | Agentic Systems | LLM Fine-tuning</p>
-            <button class="btn-primary" onclick="downloadResume()">📄 Download Now</button>
-        </div>
-    </section>
+        <!-- Balance Section -->
+        <section id="balance" class="section glass fade-in">
+            <h2>Balance</h2>
+            <div class="balance-grid">
+                <div class="balance-item glass">
+                    <i class="fas fa-code"></i>
+                    <h3>Technology</h3>
+                    <p>Staying at the forefront of AI and machine learning, constantly exploring new frameworks, models, and methodologies. The digital world is my canvas for innovation.</p>
+                </div>
+                
+                <div class="balance-item glass">
+                    <i class="fas fa-leaf"></i>
+                    <h3>Nature</h3>
+                    <p>Finding peace in nature's embrace. Whether it's a quiet morning walk or weekend hikes, nature provides the clarity and inspiration needed for creative thinking.</p>
+                </div>
+                
+                <div class="balance-item glass">
+                    <i class="fas fa-users"></i>
+                    <h3>Community</h3>
+                    <p>Giving back through mentorship, sharing knowledge, and building inclusive tech communities. Success is meaningful only when it's shared.</p>
+                </div>
+            </div>
+        </section>
 
-    <!-- Work -->
-    <section id="work" class="content-section">
-        <h2 class="section-title">Work Experience</h2>
-        <div class="work-card" onclick="showCompanyProjects('braiyt')">
-            <h3>Braiyt MENA</h3>
-            <p>Dubai</p>
-            <p>Agentic AI, Autonomous Agents</p>
-        </div>
-        <div class="work-card">
-            <h3>Previous Company</h3>
-            <p>Location</p>
-            <p>Description of work</p>
-        </div>
-    </section>
-
-    <!-- Life -->
-    <section id="life" class="content-section">
-        <h2 class="section-title">Life & Philosophy</h2>
-        <div class="philosophy-card">
-            <h3>My Approach</h3>
-            <p>Details about your life philosophy and approach to work...</p>
-        </div>
-    </section>
-
-    <!-- Balance -->
-    <section id="balance" class="content-section">
-        <h2 class="section-title">Work-Life Balance</h2>
-        <div class="philosophy-card">
-            <h3>Balance Philosophy</h3>
-            <p>How you maintain balance in your professional and personal life...</p>
-        </div>
-    </section>
-
-    <!-- Project Pages -->
-    <div id="project-pages"></div>
-
-    <!-- Footer -->
-    <footer>
-        <div class="footer-content">
-            <p>© 2025 Arun Singh Thakur. All rights reserved.</p>
-            <button id="theme-toggle" class="theme-toggle">
-                <span class="light-icon">🌙 </span>
-                <span class="dark-icon">☀️ </span>
-            </button>
-        </div>
-    </footer>
+        <!-- Articles Section -->
+        <section id="articles" class="section glass fade-in">
+            <h2>Articles</h2>
+            <div class="articles-grid">
+                <div class="article-card glass">
+                    <div class="article-date">Coming Soon</div>
+                    <h3>The Future of Agentic AI: Beyond Simple Automation</h3>
+                    <p>Exploring how autonomous AI agents are reshaping industries and the philosophical implications of truly intelligent systems.</p>
+                    <a href="#" class="read-more">Read More →</a>
+                </div>
+                
+                <div class="article-card glass">
+                    <div class="article-date">Coming Soon</div>
+                    <h3>Building Multimodal RAG Systems: Lessons from the Field</h3>
+                    <p>A deep dive into the challenges and solutions for creating RAG systems that can process text, images, and structured data simultaneously.</p>
+                    <a href="#" class="read-more">Read More →</a>
+                </div>
+                
+                <div class="article-card glass">
+                    <div class="article-date">Coming Soon</div>
+                    <h3>From Bangalore to Dubai: An AI Engineer's Journey</h3>
+                    <p>Reflections on cultural adaptation, professional growth, and the universal language of technology across borders.</p>
+                    <a href="#" class="read-more">Read More →</a>
+                </div>
+            </div>
+        </section>
+    </div>
 
     <script>
         // Section Navigation
@@ -578,7 +732,7 @@
             if (e) e.preventDefault();
             
             // Hide all sections
-            document.querySelectorAll('.content-section, .hero, #project-pages').forEach(s => {
+            document.querySelectorAll('.section, .home').forEach(s => {
                 s.classList.remove('active');
             });
             
@@ -589,8 +743,9 @@
             
             // Show selected section
             if (id === 'home') {
-                document.querySelector('.hero').classList.add('active');
+                document.querySelector('.home').style.display = 'flex';
             } else {
+                document.querySelector('.home').style.display = 'none';
                 const section = document.getElementById(id);
                 if (section) {
                     section.classList.add('active');
@@ -603,10 +758,10 @@
             }
             
             // Close mobile menu
-            const navMenu = document.getElementById('nav-menu');
+            const nav = document.getElementById('main-nav');
             const menuBtn = document.getElementById('mobile-menu-btn');
-            if (navMenu.classList.contains('mobile-visible')) {
-                navMenu.classList.remove('mobile-visible');
+            if (nav.classList.contains('mobile-visible')) {
+                nav.classList.remove('mobile-visible');
                 menuBtn.textContent = 'Menu';
             }
             
@@ -619,35 +774,126 @@
             const content = `ARUN SINGH THAKUR
 AI ENGINEER
 
-Contact Information:
-Dubai, UAE
-Email: [Your Email]
-LinkedIn: [Your LinkedIn]
-GitHub: [Your GitHub]
+═══════════════════════════════════════════════════════════════
 
-SUMMARY
-Experienced AI Engineer specializing in Agentic Systems, Autonomous Agents, and LLM Fine-tuning.
+CONTACT INFORMATION
+Location: Dubai, UAE
+Email: arun.singh.thakur@example.com
+LinkedIn: linkedin.com/in/arunsinghthakur
+GitHub: github.com/arunsinghthakur
+
+═══════════════════════════════════════════════════════════════
+
+PROFESSIONAL SUMMARY
+
+Experienced AI Engineer specializing in Agentic Systems, Autonomous Agents, 
+and Large Language Model Fine-tuning. Passionate about building AI solutions 
+that transform industries through intelligent automation and multimodal 
+processing capabilities.
+
+═══════════════════════════════════════════════════════════════
 
 WORK EXPERIENCE
-Braiyt MENA - Dubai
-AI Engineer
-- Developed agentic AI solutions
-- Worked on autonomous agent systems
-- Implemented LLM fine-tuning pipelines
 
-SKILLS
-- Artificial Intelligence
-- Machine Learning
-- Large Language Models
-- Python
-- TensorFlow/PyTorch
-- Agentic Systems
+Braiyt MENA - Dubai, UAE
+AI Engineer | 2024 - Present
+• Developed Agentic AI chatbots with autonomous decision-making capabilities
+• Built autonomous inventory agents for real-time stock management
+• Created Agent Hub platform for orchestrating multiple AI agents
+• Designed AI-powered solutions for law enforcement and business intelligence
+• Implemented end-to-end AI pipelines for enterprise clients
+
+Fixity Technologies - Bangalore, India
+AI Engineer | 2023 - 2024
+• Engineered intelligent assignment generators using advanced NLP
+• Fine-tuned Large Language Models for educational content generation
+• Developed multimodal RAG (Retrieval-Augmented Generation) systems
+• Built scalable content creation pipelines processing text, images, and structured data
+• Optimized model performance achieving 40% improvement in accuracy
+
+Genpact - Bangalore, India
+Data Science Intern | 2022 - 2023
+• Worked on data science projects involving predictive analytics
+• Developed machine learning models for business process optimization
+• Gained hands-on experience in data preprocessing and feature engineering
+• Collaborated with cross-functional teams on data-driven solutions
+
+Google Developer Student Club - NIIT University
+Technical Lead & AI Lead | 2021 - 2023
+• Led technical initiatives and AI-focused projects for student community
+• Mentored 50+ students in machine learning and software development
+• Organized workshops, hackathons, and tech talks
+• Built collaborative learning environment for emerging technologies
+
+═══════════════════════════════════════════════════════════════
+
+TECHNICAL SKILLS
+
+Programming Languages: Python, JavaScript, SQL, C++
+AI/ML Frameworks: TensorFlow, PyTorch, scikit-learn, Hugging Face
+LLM Technologies: GPT, Claude, LangChain, LlamaIndex
+Vector Databases: Pinecone, Weaviate, ChromaDB
+Cloud Platforms: AWS, Google Cloud, Azure
+Agentic Frameworks: AutoGen, CrewAI, LangGraph
+Tools & Technologies: Docker, Kubernetes, Git, FastAPI
+Specializations: Agentic AI, RAG Systems, LLM Fine-tuning, NLP
+
+═══════════════════════════════════════════════════════════════
 
 EDUCATION
-[Your Education Details]
+
+NIIT University
+Bachelor of Technology in Computer Science
+Specialized in Artificial Intelligence and Machine Learning
+Graduated: 2023
+
+═══════════════════════════════════════════════════════════════
+
+KEY PROJECTS
+
+Agent Hub Platform
+• Orchestration platform for multiple autonomous AI agents
+• Implemented inter-agent communication protocols
+• Achieved 95% task completion rate in production
+
+Multimodal RAG System
+• Built RAG system processing text, images, and structured data
+• Integrated with multiple LLMs for enhanced context understanding
+• Improved query response accuracy by 60%
+
+Educational Content Generator
+• AI-powered system for creating personalized learning materials
+• Fine-tuned LLMs on educational datasets
+• Generated 10,000+ high-quality assignments
+
+═══════════════════════════════════════════════════════════════
 
 CERTIFICATIONS
-[Your Certifications]
+
+• Advanced Machine Learning Specialization
+• Deep Learning Specialization
+• AWS Certified Machine Learning Specialty
+• Professional Certificate in AI Engineering
+
+═══════════════════════════════════════════════════════════════
+
+LANGUAGES
+
+English - Fluent
+Hindi - Native
+Arabic - Basic (Learning)
+
+═══════════════════════════════════════════════════════════════
+
+PHILOSOPHY
+
+"If you are alive, it is important to look alive"
+- zinda ho toh zinda nazar aana zaroori hai
+
+Committed to building AI solutions that are ethical, impactful, and 
+centered on enhancing human capabilities rather than replacing them.
+
+═══════════════════════════════════════════════════════════════
 `;
             
             const blob = new Blob([content], { type: 'text/plain' });
@@ -660,11 +906,6 @@ CERTIFICATIONS
             URL.revokeObjectURL(a.href);
         }
 
-        // Company Projects (placeholder function)
-        function showCompanyProjects(company) {
-            alert(`Viewing projects for ${company}. You can implement detailed project pages here.`);
-        }
-
         // Initialize on page load
         document.addEventListener('DOMContentLoaded', () => {
             // Show home section by default
@@ -672,47 +913,69 @@ CERTIFICATIONS
             
             // Mobile menu toggle
             const menuBtn = document.getElementById('mobile-menu-btn');
-            const navMenu = document.getElementById('nav-menu');
+            const nav = document.getElementById('main-nav');
             
             menuBtn.addEventListener('click', (e) => {
                 e.stopPropagation();
-                navMenu.classList.toggle('mobile-visible');
-                menuBtn.textContent = navMenu.classList.contains('mobile-visible') ? 'Close' : 'Menu';
+                nav.classList.toggle('mobile-visible');
+                menuBtn.textContent = nav.classList.contains('mobile-visible') ? 'Close' : 'Menu';
             });
 
             // Close mobile menu when clicking outside
             document.addEventListener('click', (e) => {
-                if (!navMenu.contains(e.target) && !menuBtn.contains(e.target)) {
-                    navMenu.classList.remove('mobile-visible');
+                if (!nav.contains(e.target) && !menuBtn.contains(e.target)) {
+                    nav.classList.remove('mobile-visible');
                     menuBtn.textContent = 'Menu';
                 }
             });
-
-            // Theme toggle
-            const themeToggle = document.getElementById('theme-toggle');
-            themeToggle.addEventListener('click', () => {
-                document.body.classList.toggle('dark-mode');
-                document.body.classList.toggle('light-mode');
-                const theme = document.body.classList.contains('dark-mode') ? 'dark' : 'light';
-                localStorage.setItem('theme', theme);
-            });
-
-            // Load saved theme
-            const savedTheme = localStorage.getItem('theme');
-            if (savedTheme === 'dark') {
-                document.body.classList.remove('light-mode');
-                document.body.classList.add('dark-mode');
-            }
         });
 
-        // Prevent body scroll when mobile menu is open
-        const style = document.createElement('style');
-        style.textContent = `
-            body.menu-open {
-                overflow: hidden;
-            }
-        `;
-        document.head.appendChild(style);
+        // Add animation classes on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationPlayState = 'running';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Parallax effect for floating shapes
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const shapes = document.querySelectorAll('.shape');
+            
+            shapes.forEach((shape, index) => {
+                const speed = 0.5 + (index * 0.1);
+                const currentTransform = shape.style.transform || '';
+                shape.style.transform = `translateY(${scrolled * speed}px)`;
+            });
+        });
+
+        // Smooth scroll for internal links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href !== '#' && href.length > 1) {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                }
+            });
+        });
     </script>
 </body>
 </html>
